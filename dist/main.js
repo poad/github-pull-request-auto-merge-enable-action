@@ -18,12 +18,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(require("@actions/core"));
-const client_1 = __importDefault(require("./client"));
+const client_1 = __importStar(require("./client"));
 const run = async () => {
     const errHandler = (error) => {
         core.error(error);
@@ -35,10 +32,12 @@ const run = async () => {
         const pullRequestId = core.getInput('pull_request_id');
         const owner = core.getInput('owner');
         const repo = core.getInput('repository');
+        const mergeMethod = core.getInput('merge_method');
         core.info(`owner: ${owner}`);
         core.info(`repo: ${repo}`);
         core.info(`pullRequestNumber: ${pullRequestNumber}`);
         core.info(`pullRequestId: ${pullRequestId}`);
+        core.info(`mergeMethod: ${mergeMethod}`);
         if (pullRequestNumber === 0 && pullRequestId === undefined) {
             errHandler(new Error("pull_request_number or pull_request_id must be specified"));
         }
@@ -50,7 +49,10 @@ const run = async () => {
         }) : pullRequestId;
         core.info(`target pull request id: ${id}`);
         if (id !== undefined) {
-            await client.enableAutoMerge(id);
+            await client.enableAutoMerge({
+                pullRequestId: id,
+                mergeMethod: mergeMethod !== undefined ? client_1.MergeMethod.valueOf(mergeMethod) : undefined
+            });
         }
     }
     catch (error) {

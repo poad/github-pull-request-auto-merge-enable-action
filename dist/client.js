@@ -1,6 +1,26 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.MergeMethod = void 0;
 const graphql_1 = require("@octokit/graphql");
+var MergeMethod;
+(function (MergeMethod) {
+    MergeMethod["MERGE"] = "MERGE";
+    MergeMethod["REBASE"] = "REBASE";
+    MergeMethod["SQUASH"] = "SQUASH";
+})(MergeMethod = exports.MergeMethod || (exports.MergeMethod = {}));
+// eslint-disable-next-line @typescript-eslint/no-namespace
+(function (MergeMethod) {
+    const reverseMap = new Map();
+    Object.keys(MergeMethod).forEach((s) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const e = MergeMethod[s];
+        reverseMap.set(e.toString(), e);
+    });
+    function valueOf(str) {
+        return reverseMap.get(str);
+    }
+    MergeMethod.valueOf = valueOf;
+})(MergeMethod = exports.MergeMethod || (exports.MergeMethod = {}));
 class GitHubClient {
     token;
     constructor(token) {
@@ -23,11 +43,12 @@ class GitHubClient {
         });
         return data.repository !== undefined && data.repository.pullRequest !== undefined ? data.repository.pullRequest.id : undefined;
     }
-    async enableAutoMerge(pullRequestId) {
+    async enableAutoMerge(param) {
         const query = `
       mutation {
         enablePullRequestAutoMerge(input: {
-          pullRequestId: "${pullRequestId}",
+          pullRequestId: "${param.pullRequestId}",
+          ${param.mergeMethod !== undefined ? `mergeMethod: '${param.mergeMethod}'` : ""}
           clientMutationId : null
         }) {
           clientMutationId

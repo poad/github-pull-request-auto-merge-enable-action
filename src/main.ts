@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-import GitHubClient from './client';
+import GitHubClient, { MergeMethod } from './client';
 
 const run = async (): Promise<void> => {
     const errHandler = (error: Error) => {
@@ -12,11 +12,13 @@ const run = async (): Promise<void> => {
         const pullRequestId = core.getInput('pull_request_id');
         const owner: string = core.getInput('owner');
         const repo: string = core.getInput('repository');
+        const mergeMethod: string = core.getInput('merge_method');
 
         core.info(`owner: ${owner}`);
         core.info(`repo: ${repo}`);
         core.info(`pullRequestNumber: ${pullRequestNumber}`)
         core.info(`pullRequestId: ${pullRequestId}`)
+        core.info(`mergeMethod: ${mergeMethod}`)
 
         if (pullRequestNumber === 0 && pullRequestId === undefined) {
             errHandler(new Error("pull_request_number or pull_request_id must be specified"))
@@ -32,7 +34,10 @@ const run = async (): Promise<void> => {
         core.info(`target pull request id: ${id}`);
 
         if (id !== undefined) {
-            await client.enableAutoMerge(id)
+            await client.enableAutoMerge({
+                pullRequestId: id,
+                mergeMethod: mergeMethod !== undefined ? MergeMethod.valueOf(mergeMethod) : undefined
+            })
         }
     } catch (error) {
         errHandler(error);

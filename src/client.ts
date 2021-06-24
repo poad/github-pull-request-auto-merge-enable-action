@@ -1,14 +1,39 @@
 import { graphql } from "@octokit/graphql";
 
-interface FindPullRequestIdParam {
+export enum MergeMethod {
+  MERGE = "MERGE",
+  REBASE = "REBASE",
+  SQUASH= "SQUASH",
+}
+
+// eslint-disable-next-line @typescript-eslint/no-namespace
+export namespace MergeMethod {
+  const reverseMap = new Map<string, MergeMethod>();
+  Object.keys(MergeMethod).forEach((s: string) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const e = (<any>MergeMethod)[s];
+    reverseMap.set(e.toString(), e);
+  });
+  export function valueOf(str: string): MergeMethod | undefined {
+    return reverseMap.get(str);
+  }
+}
+
+export interface FindPullRequestIdParam {
   owner: string;
   repo: string;
   number: number;
 }
 
+export interface EnableAutoMergeParam {
+  pullRequestId: string;
+  mergeMethod?: MergeMethod,
+}
+
+
 interface IGitHubClient {
   findPullRequestId(params: FindPullRequestIdParam): Promise<string | undefined>;
-  enableAutoMerge(pullRequestId: string): Promise<void>;
+  enableAutoMerge(param: EnableAutoMergeParam): Promise<void>;
 }
 
 class GitHubClient implements IGitHubClient {
@@ -38,11 +63,12 @@ class GitHubClient implements IGitHubClient {
     return data.repository !== undefined && data.repository.pullRequest !== undefined ? data.repository.pullRequest.id : undefined;
   }
 
-  async enableAutoMerge(pullRequestId: string): Promise<void> {
+  async enableAutoMerge(param: EnableAutoMergeParam): Promise<void> {
     const query = `
       mutation {
         enablePullRequestAutoMerge(input: {
-          pullRequestId: "${pullRequestId}",
+          pullRequestId: "${param.pullRequestId}",
+          ${param.mergeMethod !== undefined ? `mergeMethod: '${param.mergeMethod}'` : ""}
           clientMutationId : null
         }) {
           clientMutationId
