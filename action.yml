@@ -12,11 +12,14 @@ inputs:
   github_token:
     required: true
   owner:
-    description: owner
+    description: repository owner
     required: true
   repository:
     description: target repository
     required: true
+  merge_method:
+    description: merge method. see [GitHub API Docs](https://docs.github.com/en/graphql/reference/enums#pullrequestmergemethod)
+    required: false
 runs:
   using: 'node12'
   main: 'dist/main.js'

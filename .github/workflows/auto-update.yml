@@ -39,8 +39,7 @@ jobs:
           echo "CHANGE_STATE=no_changed" >> $GITHUB_ENV
           exit 0
         fi
-        git add *
-        git add -f node_modules
+        git add -f package.json yarn.lock node_modules dist
         git commit -m "Auto update at ${TIMESTAMP}"
         echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
         echo "TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
