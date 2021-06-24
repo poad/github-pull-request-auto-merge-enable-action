@@ -109,25 +109,25 @@ jobs:
           repository: ${{ github.event.repository.name }}
           owner: ${{ github.repository_owner }}
 
-      # - name: Extract response
-      #   env:
-      #     RESULT: ${{ steps.create-pull-request.outputs.result }}
-      #   run: |
-      #     PULL_REQUEST_HTML_URL=$(echo ${RESULT} | jq -r .data.html_url)
-      #     echo "PULL_REQUEST_HTML_URL=${PULL_REQUEST_HTML_URL}" >> $GITHUB_ENV
-      #     PULL_REQUEST_NUMBER=$(echo ${RESULT} | jq -r .data.number)
-      #     echo "PULL_REQUEST_NUMBER=${PULL_REQUEST_NUMBER}" >> $GITHUB_ENV
+      - name: Extract response
+        env:
+          RESULT: ${{ steps.create-pull-request.outputs.result }}
+        run: |
+          PULL_REQUEST_HTML_URL=$(echo ${RESULT} | jq -r .data.html_url)
+          echo "PULL_REQUEST_HTML_URL=${PULL_REQUEST_HTML_URL}" >> $GITHUB_ENV
+          PULL_REQUEST_NUMBER=$(echo ${RESULT} | jq -r .data.number)
+          echo "PULL_REQUEST_NUMBER=${PULL_REQUEST_NUMBER}" >> $GITHUB_ENV
 
-      # - name: enable auto merge test
-      #   env:
-      #     RESULT: ${{ steps.create-pull-request.outputs.result }}
-      #     GH_TOKEN: ${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}
-      #     repo_name : ${{ github.event.repository.name }}
-      #     repo_owner: ${{ github.event.repository.owner.name }}
-      #     pull_request_number: ${{ env.PULL_REQUEST_NUMBER }}
-      #   uses: ./
-      #   with:
-      #     pull_request_number: ${ pull_request_number }
-      #     github_token: ${ GH_TOKEN }
-      #     repository: ${repo_name}
-      #     owner: ${repo_owner}
+      - name: enable auto merge test
+        env:
+          RESULT: ${{ steps.create-pull-request.outputs.result }}
+          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}
+          repo_name : ${{ github.event.repository.name }}
+          repo_owner: ${{ github.event.repository.owner.name }}
+          pull_request_number: ${{ env.PULL_REQUEST_NUMBER }}
+        uses: ./
+        with:
+          pull_request_number: ${ pull_request_number }
+          github_token: ${ GH_TOKEN }
+          repository: ${repo_name}
+          owner: ${repo_owner}

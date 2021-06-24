@@ -32,22 +32,35 @@ const run = () => {
     try {
         const token = core.getInput('github_token');
         const pullRequestNumber = Number(core.getInput('pull_request_number'));
+        const pullRequestId = core.getInput('pull_request_id');
         const owner = core.getInput('owner');
         const repo = core.getInput('repository');
         core.info(`owner: ${owner}`);
         core.info(`repo: ${repo}`);
         core.info(`pullRequestNumber: ${pullRequestNumber}`);
+        core.info(`pullRequestId: ${pullRequestId}`);
+        if (pullRequestNumber === undefined && pullRequestId === undefined) {
+            errHandler({
+                message: "pull_request_number or pull_request_id must be specified"
+            });
+        }
         const client = new client_1.default(token);
-        Promise.resolve(client.findPullRequestId({
-            owner,
-            repo: repo,
-            number: pullRequestNumber
-        }).then(id => {
-            if (id !== undefined) {
-                client.enableAutoMerge(id);
-            }
-        })
-            .catch(errHandler)).catch(reason => { throw reason; });
+        if (pullRequestNumber !== undefined) {
+            Promise.resolve(client.findPullRequestId({
+                owner,
+                repo: repo,
+                number: pullRequestNumber
+            }).then(id => {
+                if (id !== undefined) {
+                    client.enableAutoMerge(id);
+                }
+            })
+                .catch(errHandler)).catch(reason => { throw reason; });
+        }
+        else {
+            Promise.resolve(client.enableAutoMerge(pullRequestId))
+                .catch(reason => { throw reason; });
+        }
     }
     catch (error) {
         errHandler(error);
