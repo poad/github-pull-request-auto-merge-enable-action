@@ -12,6 +12,8 @@ on:
   schedule:
     - cron: '29 8 * * 6'
 
+  workflow_dispatch:
+
 jobs:
   njsscan:
     runs-on: ubuntu-latest

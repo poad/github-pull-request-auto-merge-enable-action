@@ -22,7 +22,7 @@ class GitHubClient {
                 authorization: `token ${this.token}`,
             },
         });
-        return data.repository?.pullRequest?.id;
+        return data.repository !== undefined && data.repository.pullRequest !== undefined ? data.repository.pullRequest.id : undefined;
     }
     async enableAutoMerge(pullRequestId) {
         await graphql_1.graphql(`
