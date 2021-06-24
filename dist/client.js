@@ -48,7 +48,7 @@ class GitHubClient {
       mutation {
         enablePullRequestAutoMerge(input: {
           pullRequestId: "${param.pullRequestId}",
-          ${param.mergeMethod !== undefined ? `mergeMethod: '${param.mergeMethod}'` : ""}
+          ${param.mergeMethod !== undefined ? `mergeMethod: ${param.mergeMethod.toString()}` : ""}
           clientMutationId : null
         }) {
           clientMutationId
