@@ -1,0 +1,133 @@
+name: CI
+
+on:
+  pull_request:
+    branches: 
+      - 'main'
+      - '!test-base-*'
+
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+    
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Build and lint
+        run: |
+          yarn install
+          yarn build
+          yarn test
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Build and lint
+        run: |
+          yarn install
+          yarn lint
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Git config
+        run: |
+          git config --local user.email "ken-yo@mbr.nifty.com"
+          git config --local user.name "Kenji Saito"
+
+      - name: Create base branch
+        run: |
+          BASE_BRANCH_NAME="test-base-$(date "+%Y%m%d-%H%M%S")"
+          git switch -c "${BASE_BRANCH_NAME}"
+          touch test.txt
+          git add test.txt
+          git commit -m "Test $(date)"
+          echo "BASE_BRANCH_NAME=${BASE_BRANCH_NAME}" >> $GITHUB_ENV
+
+      - name: Push Base
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}
+          branch: ${{ env.BASE_BRANCH_NAME }}
+
+      - name: Create head branch
+        run: |
+          BRANCH_NAME="test-$(date "+%Y%m%d-%H%M%S")"
+          git switch -c "${BRANCH_NAME}"
+          touch test1.txt
+          git add test1.txt
+          git commit -m "Test $(date)"
+          echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
+          echo "TIMESTAMP=$(date)" >> $GITHUB_ENV
+
+      - name: Push Changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}
+          branch: ${{ env.BRANCH_NAME }}
+
+      - name: Create pull request
+        id: create-pull-request
+        uses: poad/github-pull-requester@1.0.0
+        with:
+          github_token: ${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}
+          # github_token: ${{ secrets.GITHUB_TOKEN }}
+          head_branch: ${{ env.BRANCH_NAME }}
+          base_branch: ${{ env.BASE_BRANCH_NAME }}
+          title: ${{ format('Test for {0}', env.TIMESTAMP) }}
+          body: ${{ format('Test for {0}', env.TIMESTAMP) }}
+          repository: ${{ github.event.repository.name }}
+          owner: ${{ github.repository_owner }}
+
+      # - name: Extract response
+      #   env:
+      #     RESULT: ${{ steps.create-pull-request.outputs.result }}
+      #   run: |
+      #     PULL_REQUEST_HTML_URL=$(echo ${RESULT} | jq -r .data.html_url)
+      #     echo "PULL_REQUEST_HTML_URL=${PULL_REQUEST_HTML_URL}" >> $GITHUB_ENV
+      #     PULL_REQUEST_NUMBER=$(echo ${RESULT} | jq -r .data.number)
+      #     echo "PULL_REQUEST_NUMBER=${PULL_REQUEST_NUMBER}" >> $GITHUB_ENV
+
+      # - name: enable auto merge test
+      #   env:
+      #     RESULT: ${{ steps.create-pull-request.outputs.result }}
+      #     GH_TOKEN: ${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}
+      #     repo_name : ${{ github.event.repository.name }}
+      #     repo_owner: ${{ github.event.repository.owner.name }}
+      #     pull_request_number: ${{ env.PULL_REQUEST_NUMBER }}
+      #   uses: ./
+      #   with:
+      #     pull_request_number: ${ pull_request_number }
+      #     github_token: ${ GH_TOKEN }
+      #     repository: ${repo_name}
+      #     owner: ${repo_owner}
