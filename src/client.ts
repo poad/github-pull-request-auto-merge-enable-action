@@ -36,7 +36,7 @@ class GitHubClient implements IGitHubClient {
               },
             }
           );
-          return data.repository?.pullRequest?.id;
+          return data.repository !== undefined && data.repository.pullRequest !== undefined ? data.repository.pullRequest.id : undefined;
     }
     async enableAutoMerge(pullRequestId: string): Promise<void> {
         await graphql(
