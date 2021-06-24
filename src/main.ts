@@ -1,9 +1,9 @@
 import * as core from '@actions/core'
 import GitHubClient from './client';
 
-const run = (): void => {
+const run = async (): Promise<void> => {
     const errHandler = (error: Error) => {
-        core.error(error.message);
+        core.error(error);
         core.setFailed(error.message)
     };
     try {
@@ -19,30 +19,30 @@ const run = (): void => {
         core.info(`pullRequestId: ${pullRequestId}`)
 
         if (pullRequestNumber === undefined && pullRequestId === undefined) {
-            errHandler({
-                message: "pull_request_number or pull_request_id must be specified"
-            } as Error)
+            errHandler(new Error("pull_request_number or pull_request_id must be specified"))
         }
 
         const client = new GitHubClient(token);
         if (pullRequestNumber !== undefined) {
-            Promise.resolve(client.findPullRequestId({
+            const id = await client.findPullRequestId({
                 owner,
                 repo: repo,
                 number: pullRequestNumber
-            }).then(id => {
-                if (id !== undefined) {
-                    client.enableAutoMerge(id)
-                }
-            })
-                .catch(errHandler)).catch(reason => { throw reason; });
+            });
+            if (id !== undefined) {
+                await client.enableAutoMerge(id)
+            }
         } else {
-            Promise.resolve(client.enableAutoMerge(pullRequestId))
-                .catch(reason => { throw reason; });
+            await client.enableAutoMerge(pullRequestId);
         }
     } catch (error) {
         errHandler(error);
     }
 };
 
-run();
+Promise.resolve(run()).catch((error: Error) => {
+    if (error.stack !== undefined) {
+        core.error(error.stack);
+    }
+    core.setFailed(error)
+});
