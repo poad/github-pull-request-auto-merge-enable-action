@@ -75,16 +75,19 @@ jobs:
 
     - name: Send result with Pull Request
       if: success() && env.CHANGE_STATE == 'changed'
-      uses: ./.github/actions/slack_notificator
+      uses: slackapi/slack-github-action@v1.15.0
       with:
-        webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
-        text: ${{ format('{0} {1}\nPull Request <{2}>', github.workflow, job.status, env.PULL_REQUEST_HTML_URL) }}
+        payload: "{\"text\":\"${{ format('{0} {1}\nPull Request <{2}>', github.workflow, job.status, env.PULL_REQUEST_HTML_URL) }}\"}"
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
     - name: Send result without Pull Request
       if: success() && env.CHANGE_STATE != 'changed'
-      uses: ./.github/actions/slack_notificator
+      uses: slackapi/slack-github-action@v1.15.0
       with:
-        webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        payload: "{\"text\":\"${{ format('{0} {1}', github.workflow, job.status) }}\"}"
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         text: ${{ format('{0} {1}', github.workflow, job.status) }}
 
     - name: Pull request auto merge enabler
