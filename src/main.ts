@@ -3,7 +3,7 @@ import GitHubClient from './client';
 
 const run = (): void => {
     const errHandler = (error: Error) => {
-        core.error(error.message);
+        core.error(error);
         core.setFailed(error.message)
     };
     try {
