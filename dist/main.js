@@ -24,33 +24,41 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(require("@actions/core"));
 const client_1 = __importDefault(require("./client"));
-const run = () => {
+const run = async () => {
     const errHandler = (error) => {
-        core.error(error.message);
+        core.error(error);
         core.setFailed(error.message);
     };
     try {
         const token = core.getInput('github_token');
         const pullRequestNumber = Number(core.getInput('pull_request_number'));
+        const pullRequestId = core.getInput('pull_request_id');
         const owner = core.getInput('owner');
         const repo = core.getInput('repository');
         core.info(`owner: ${owner}`);
         core.info(`repo: ${repo}`);
         core.info(`pullRequestNumber: ${pullRequestNumber}`);
+        core.info(`pullRequestId: ${pullRequestId}`);
+        if (pullRequestNumber === undefined && pullRequestId === undefined) {
+            errHandler(new Error("pull_request_number or pull_request_id must be specified"));
+        }
         const client = new client_1.default(token);
-        Promise.resolve(client.findPullRequestId({
+        const id = pullRequestNumber !== undefined ? await client.findPullRequestId({
             owner,
             repo: repo,
             number: pullRequestNumber
-        }).then(id => {
-            if (id !== undefined) {
-                client.enableAutoMerge(id);
-            }
-        })
-            .catch(errHandler)).catch(reason => { throw reason; });
+        }) : pullRequestId;
+        if (id !== undefined) {
+            await client.enableAutoMerge(id);
+        }
     }
     catch (error) {
         errHandler(error);
     }
 };
-run();
+Promise.resolve(run()).catch((error) => {
+    if (error.stack !== undefined) {
+        core.error(error.stack);
+    }
+    core.setFailed(error);
+});
