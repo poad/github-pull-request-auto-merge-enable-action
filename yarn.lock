@@ -4,7 +4,7 @@
 
 "@actions/core@^1.4.0":
   version "1.4.0"
-  resolved "https://registry.npmjs.org/@actions/core/-/core-1.4.0.tgz"
+  resolved "https://registry.yarnpkg.com/@actions/core/-/core-1.4.0.tgz#cf2e6ee317e314b03886adfeb20e448d50d6e524"
   integrity sha512-CGx2ilGq5i7zSLgiiGUtBCxhRRxibJYU6Fim0Q1Wg2aQL2LTnF27zbqZOrxfvFQ55eSBW0L8uVStgtKMpa0Qlg==
 
 "@babel/code-frame@7.12.11":
@@ -555,7 +555,7 @@
 
 "@octokit/core@^3.5.1":
   version "3.5.1"
-  resolved "https://registry.npmjs.org/@octokit/core/-/core-3.5.1.tgz"
+  resolved "https://registry.yarnpkg.com/@octokit/core/-/core-3.5.1.tgz#8601ceeb1ec0e1b1b8217b960a413ed8e947809b"
   integrity sha512-omncwpLVxMP+GLpLPgeGJBF6IWJFjXDS5flY5VbppePYX9XehevbDykRH9PdCdvqt9TS5AOTiDide7h0qrkHjw==
   dependencies:
     "@octokit/auth-token" "^2.4.4"
@@ -591,7 +591,7 @@
 
 "@octokit/plugin-request-log@^1.0.4":
   version "1.0.4"
-  resolved "https://registry.npmjs.org/@octokit/plugin-request-log/-/plugin-request-log-1.0.4.tgz"
+  resolved "https://registry.yarnpkg.com/@octokit/plugin-request-log/-/plugin-request-log-1.0.4.tgz#5e50ed7083a613816b1e4a28aeec5fb7f1462e85"
   integrity sha512-mLUsMkgP7K/cnFEw07kWqXGF5LKrOkD+lhCrKvPHXWDywAwuDUeDwWBpc69XK3pNX0uKiVt8g5z96PJ6z9xCFA==
 
 "@octokit/request-error@^2.0.5", "@octokit/request-error@^2.1.0":
@@ -702,7 +702,7 @@
 
 "@types/jest@^26.0.23":
   version "26.0.23"
-  resolved "https://registry.npmjs.org/@types/jest/-/jest-26.0.23.tgz"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.23.tgz#a1b7eab3c503b80451d019efb588ec63522ee4e7"
   integrity sha512-ZHLmWMJ9jJ9PTiT58juykZpL7KjwJywFN3Rr2pTSkyQfydf/rk22yS7W8p5DaVUMQ2BQC7oYiU3FjbTM/mYrOA==
   dependencies:
     jest-diff "^26.0.0"
@@ -754,7 +754,7 @@
 
 "@typescript-eslint/eslint-plugin@^4.28.0":
   version "4.28.0"
-  resolved "https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-4.28.0.tgz"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-4.28.0.tgz#1a66f03b264844387beb7dc85e1f1d403bd1803f"
   integrity sha512-KcF6p3zWhf1f8xO84tuBailV5cN92vhS+VT7UJsPzGBm9VnQqfI9AsiMUFUCYHTYPg1uCCo+HyiDnpDuvkAMfQ==
   dependencies:
     "@typescript-eslint/experimental-utils" "4.28.0"
@@ -779,7 +779,7 @@
 
 "@typescript-eslint/parser@^4.28.0":
   version "4.28.0"
-  resolved "https://registry.npmjs.org/@typescript-eslint/parser/-/parser-4.28.0.tgz"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-4.28.0.tgz#2404c16751a28616ef3abab77c8e51d680a12caa"
   integrity sha512-7x4D22oPY8fDaOCvkuXtYYTQ6mTMmkivwEzS+7iml9F9VkHGbbZ3x4fHRwxAb5KeuSkLqfnYjs46tGx2Nour4A==
   dependencies:
     "@typescript-eslint/scope-manager" "4.28.0"
@@ -1450,7 +1450,7 @@ escodegen@^2.0.0:
 
 eslint-config-airbnb-base@^14.2.1:
   version "14.2.1"
-  resolved "https://registry.npmjs.org/eslint-config-airbnb-base/-/eslint-config-airbnb-base-14.2.1.tgz"
+  resolved "https://registry.yarnpkg.com/eslint-config-airbnb-base/-/eslint-config-airbnb-base-14.2.1.tgz#8a2eb38455dc5a312550193b319cdaeef042cd1e"
   integrity sha512-GOrQyDtVEc1Xy20U7vsB2yAoB4nBlfH5HZJeatRXHleO+OS5Ot+MWij4Dpltw4/DyIkqUfqz1epfhVR5XWWQPA==
   dependencies:
     confusing-browser-globals "^1.0.10"
@@ -1475,7 +1475,7 @@ eslint-module-utils@^2.6.1:
 
 eslint-plugin-import@^2.23.4:
   version "2.23.4"
-  resolved "https://registry.npmjs.org/eslint-plugin-import/-/eslint-plugin-import-2.23.4.tgz"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.23.4.tgz#8dceb1ed6b73e46e50ec9a5bb2411b645e7d3d97"
   integrity sha512-6/wP8zZRsnQFiR3iaPFgh5ImVRM1WN5NUWfTIRqwOdeiGJlBcSk82o1FEVq8yXmy4lkIzTo7YhHCIxlU/2HyEQ==
   dependencies:
     array-includes "^3.1.3"
@@ -1528,7 +1528,7 @@ eslint-visitor-keys@^2.0.0:
 
 eslint@^7.29.0:
   version "7.29.0"
-  resolved "https://registry.npmjs.org/eslint/-/eslint-7.29.0.tgz"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.29.0.tgz#ee2a7648f2e729485e4d0bd6383ec1deabc8b3c0"
   integrity sha512-82G/JToB9qIy/ArBzIWG9xvvwL3R86AlCjtGw+A29OMZDqhTybz/MByORSukGxeI+YPCR4coYyITKk8BFH9nDA==
   dependencies:
     "@babel/code-frame" "7.12.11"
@@ -2127,7 +2127,7 @@ jest-changed-files@^27.0.2:
 
 jest-circus@^27.0.5:
   version "27.0.5"
-  resolved "https://registry.npmjs.org/jest-circus/-/jest-circus-27.0.5.tgz"
+  resolved "https://registry.yarnpkg.com/jest-circus/-/jest-circus-27.0.5.tgz#b5e327f1d6857c8485126f8e364aefa4378debaa"
   integrity sha512-p5rO90o1RTh8LPOG6l0Fc9qgp5YGv+8M5CFixhMh7gGHtGSobD1AxX9cjFZujILgY8t30QZ7WVvxlnuG31r8TA==
   dependencies:
     "@jest/environment" "^27.0.5"
@@ -2533,7 +2533,7 @@ jest-worker@^27.0.2:
 
 jest@^27.0.5:
   version "27.0.5"
-  resolved "https://registry.npmjs.org/jest/-/jest-27.0.5.tgz"
+  resolved "https://registry.yarnpkg.com/jest/-/jest-27.0.5.tgz#141825e105514a834cc8d6e44670509e8d74c5f2"
   integrity sha512-4NlVMS29gE+JOZvgmSAsz3eOjkSsHqjTajlIsah/4MVSmKvf3zFP/TvgcLoWe2UVHiE9KF741sReqhF0p4mqbQ==
   dependencies:
     "@jest/core" "^27.0.5"
@@ -2801,7 +2801,7 @@ natural-compare@^1.4.0:
 
 nock@^13.1.0:
   version "13.1.0"
-  resolved "https://registry.npmjs.org/nock/-/nock-13.1.0.tgz"
+  resolved "https://registry.yarnpkg.com/nock/-/nock-13.1.0.tgz#41c8ce8b35ab7d618c4cbf40de1d5bce319979ba"
   integrity sha512-3N3DUY8XYrxxzWazQ+nSBpiaJ3q6gcpNh4gXovC/QBxrsvNp4tq+wsLHF6mJ3nrn3lPLn7KCJqKxy/9aD+0fdw==
   dependencies:
     debug "^4.1.0"
@@ -3513,7 +3513,7 @@ tr46@^2.1.0:
 
 ts-jest@^27.0.3:
   version "27.0.3"
-  resolved "https://registry.npmjs.org/ts-jest/-/ts-jest-27.0.3.tgz"
+  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-27.0.3.tgz#808492f022296cde19390bb6ad627c8126bf93f8"
   integrity sha512-U5rdMjnYam9Ucw+h0QvtNDbc5+88nxt7tbIvqaZUhFrfG4+SkWhMXjejCLVGcpILTPuV+H3W/GZDZrnZFpPeXw==
   dependencies:
     bs-logger "0.x"
@@ -3587,7 +3587,7 @@ typedarray-to-buffer@^3.1.5:
 
 typescript@^4.3.4:
   version "4.3.4"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-4.3.4.tgz"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.3.4.tgz#3f85b986945bcf31071decdd96cf8bfa65f9dcbc"
   integrity sha512-uauPG7XZn9F/mo+7MrsRjyvbxFpzemRjKEZXS4AK83oP2KKOJPvb+9cO/gmnv8arWZvhnjVOXz7B49m1l0e9Ew==
 
 unbox-primitive@^1.0.1:
