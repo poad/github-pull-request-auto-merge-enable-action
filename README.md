@@ -4,7 +4,7 @@
 ![CI](https://github.com/poad/github-pull-request-auto-merge-enable-action/workflows/CI/badge.svg)
 [![GitHub release](https://img.shields.io/github/release/poad/github-pull-request-auto-merge-enable-action.svg)](https://GitHub.com/poad/github-pull-request-auto-merge-enable-action/releases/)
 
-Enables auto merge to Pull Request by [octokit/rest.js](https://github.com/octokit/graphql.js/).
+Enables auto merge to Pull Request by [octokit/graphql.js](https://github.com/octokit/graphql.js/).
 
 ## Useage
 
