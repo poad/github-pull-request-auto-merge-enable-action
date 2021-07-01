@@ -91,7 +91,7 @@ jobs:
       if: success() && env.CHANGE_STATE != 'changed'
       uses: slackapi/slack-github-action@v1.15.0
       with:
-        payload: "{\"text\":\"${{ format('{0} {1}', github.workflow, job.status) }}\"}"
+        payload: "{\"text\":${{ toJSON(format('{0} {1}', github.workflow, job.status)) }}}"
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         text: ${{ format('{0} {1}', github.workflow, job.status) }}
