@@ -78,12 +78,13 @@ jobs:
         echo "PULL_REQUEST_HTML_URL=${PULL_REQUEST_HTML_URL}" >> $GITHUB_ENV
         PULL_REQUEST_ID=$(echo ${RESULT} | jq -r .data.node_id)
         echo "PULL_REQUEST_ID=${PULL_REQUEST_ID}" >> $GITHUB_ENV
+        echo "SLACKK_PAYLOAD={\"text\":\"${{ format('{0} {1}\nPull Request <{2}>', github.workflow, job.status, env.PULL_REQUEST_HTML_URL) }}\"}" >> $GITHUB_ENV
 
     - name: Send result with Pull Request
       if: success() && env.CHANGE_STATE == 'changed'
       uses: slackapi/slack-github-action@v1.15.0
       with:
-        payload: "{\"text\":\"${{ format('{0} {1}\nPull Request <{2}>', github.workflow, job.status, env.PULL_REQUEST_HTML_URL) }}\"}"
+        payload: ${{ env.SLACKK_PAYLOAD }}
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
