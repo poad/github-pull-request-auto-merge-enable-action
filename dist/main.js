@@ -23,8 +23,9 @@ const core = __importStar(require("@actions/core"));
 const client_1 = __importStar(require("./client"));
 const run = async () => {
     const errHandler = (error) => {
-        core.error(error);
-        core.setFailed(error.message);
+        const e = error instanceof Error ? error : JSON.stringify(error);
+        core.error(e);
+        core.setFailed(e);
     };
     try {
         const token = core.getInput('github_token');
