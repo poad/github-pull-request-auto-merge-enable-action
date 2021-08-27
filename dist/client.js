@@ -36,7 +36,7 @@ class GitHubClient {
       }
     }
     `;
-        const { data } = await graphql_1.graphql(query, {
+        const { data } = await (0, graphql_1.graphql)(query, {
             headers: {
                 authorization: `token ${this.token}`,
             },
@@ -55,7 +55,7 @@ class GitHubClient {
         }
       }
       `;
-        await graphql_1.graphql(query, {
+        await (0, graphql_1.graphql)(query, {
             headers: {
                 authorization: `token ${this.token}`,
             },
