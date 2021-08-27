@@ -2,9 +2,10 @@ import * as core from '@actions/core'
 import GitHubClient, { MergeMethod } from './client';
 
 const run = async (): Promise<void> => {
-    const errHandler = (error: Error) => {
-        core.error(error);
-        core.setFailed(error.message)
+    const errHandler = (error: unknown) => {
+        const e = error instanceof Error ? error : JSON.stringify(error)
+        core.error(e);
+        core.setFailed(e)
     };
     try {
         const token: string = core.getInput('github_token');
