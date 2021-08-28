@@ -600,10 +600,19 @@
     is-plain-object "^5.0.0"
     universal-user-agent "^6.0.0"
 
-"@octokit/graphql@^4.5.8", "@octokit/graphql@^4.6.4":
+"@octokit/graphql@^4.5.8":
   version "4.6.4"
   resolved "https://registry.npmjs.org/@octokit/graphql/-/graphql-4.6.4.tgz"
   integrity sha512-SWTdXsVheRmlotWNjKzPOb6Js6tjSqA2a8z9+glDJng0Aqjzti8MEWOtuT8ZSu6wHnci7LZNuarE87+WJBG4vg==
+  dependencies:
+    "@octokit/request" "^5.6.0"
+    "@octokit/types" "^6.0.3"
+    universal-user-agent "^6.0.0"
+
+"@octokit/graphql@^4.7.0":
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/@octokit/graphql/-/graphql-4.7.0.tgz#cbe12edc2bc61e9eaa5f9e5d092644c92b6fcb74"
+  integrity sha512-diY0qMPyQjfu4rDu3kDhJ9qIZadIm4IISO3RJSv9ajYUWJUCO0AykbgzLcg1xclxtXgzY583u3gAv66M6zz5SA==
   dependencies:
     "@octokit/request" "^5.6.0"
     "@octokit/types" "^6.0.3"
@@ -748,10 +757,10 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-15.12.4.tgz"
   integrity sha512-zrNj1+yqYF4WskCMOHwN+w9iuD12+dGm0rQ35HLl9/Ouuq52cEtd0CH9qMgrdNmi5ejC1/V7vKEXYubB+65DkA==
 
-"@types/node@^16.7.3":
-  version "16.7.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.7.3.tgz#8eef3b12df245e6275f083dba37730f29700a75a"
-  integrity sha512-S6gm2sm9xIRWTxD7Ttj8N1ZrYfqdqZEU38Nwnrhd6krk7zf8vdgMgzz8hpAX9CfmXaJfP+Vqy2EhJpVavNEocg==
+"@types/node@^16.7.4":
+  version "16.7.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.7.4.tgz#68a9384694af63ceab8848e95d76d9a3519e84b6"
+  integrity sha512-25QXpDsTiDnl2rZGUenagVMwO46way8dOUdvoC3R3p+6TrbpxeJBo/v87BEG1IHI31Jhaa8lPeSHcqwxsVBeYQ==
 
 "@types/prettier@^2.1.5":
   version "2.3.0"

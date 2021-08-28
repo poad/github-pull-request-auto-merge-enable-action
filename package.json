@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",
-    "@types/node": "^16.7.3",
+    "@types/node": "^16.7.4",
     "@typescript-eslint/eslint-plugin": "^4.29.3",
     "@typescript-eslint/parser": "^4.29.3",
     "eslint": "^7.32.0",
@@ -27,7 +27,7 @@
   "dependencies": {
     "@actions/core": "^1.5.0",
     "@octokit/core": "^3.5.1",
-    "@octokit/graphql": "^4.6.4",
+    "@octokit/graphql": "^4.7.0",
     "@octokit/plugin-request-log": "^1.0.4"
   },
   "peerDependencies": {
