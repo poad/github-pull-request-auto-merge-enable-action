@@ -21,10 +21,10 @@ const run = async (): Promise<void> => {
         const mergeMethod: string = core.getInput('merge_method');
 
         core.info(`owner: ${owner}`);
-        core.info(`repo: ${repo}`);
-        core.info(`pullRequestNumber: ${pullRequestNumber}`)
-        core.info(`pullRequestId: ${pullRequestId}`)
-        core.info(`mergeMethod: ${mergeMethod}`)
+        core.info(`repository: ${repo}`);
+        core.info(`pull_request_number: ${pullRequestNumber}`)
+        core.info(`pull_request_id: ${pullRequestId}`)
+        core.info(`merge_method: ${mergeMethod}`)
 
         if (pullRequestNumber === 0 && pullRequestId === undefined) {
             errHandler(new Error("pull_request_number or pull_request_id must be specified"))
