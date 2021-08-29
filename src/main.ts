@@ -46,8 +46,6 @@ const run = async (): Promise<void> => {
 };
 
 Promise.resolve(run()).catch((error: Error) => {
-    if (error.stack !== undefined) {
-        core.error(error.stack);
-    }
+    core.error(error);
     core.setFailed(error)
 });
