@@ -69,3 +69,4 @@ Promise.resolve(run()).catch((error) => {
     core.error(error);
     core.setFailed(error);
 });
+//# sourceMappingURL=main.js.map

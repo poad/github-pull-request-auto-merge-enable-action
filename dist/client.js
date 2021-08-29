@@ -63,3 +63,4 @@ class GitHubClient {
     }
 }
 exports.default = GitHubClient;
+//# sourceMappingURL=client.js.map
