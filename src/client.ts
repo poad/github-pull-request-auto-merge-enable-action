@@ -1,4 +1,5 @@
 import { graphql } from "@octokit/graphql";
+import * as core from '@actions/core'
 
 export enum MergeMethod {
   MERGE = "MERGE",
@@ -60,6 +61,9 @@ class GitHubClient implements IGitHubClient {
         },
       }
     );
+
+    core.debug(JSON.stringify(data));
+
     return data.repository !== undefined && data.repository.pullRequest !== undefined ? data.repository.pullRequest.id : undefined;
   }
 
