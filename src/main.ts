@@ -3,6 +3,11 @@ import GitHubClient, { MergeMethod } from './client';
 
 const run = async (): Promise<void> => {
     const errHandler = (error: unknown) => {
+        if (error instanceof Error) {
+            core.error(error);
+            core.setFailed(error);
+            return;
+        }
         const e = error instanceof Error ? error : JSON.stringify(error)
         core.error(e);
         core.setFailed(e)

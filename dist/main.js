@@ -23,6 +23,11 @@ const core = __importStar(require("@actions/core"));
 const client_1 = __importStar(require("./client"));
 const run = async () => {
     const errHandler = (error) => {
+        if (error instanceof Error) {
+            core.error(error);
+            core.setFailed(error);
+            return;
+        }
         const e = error instanceof Error ? error : JSON.stringify(error);
         core.error(e);
         core.setFailed(e);
@@ -61,8 +66,6 @@ const run = async () => {
     }
 };
 Promise.resolve(run()).catch((error) => {
-    if (error.stack !== undefined) {
-        core.error(error.stack);
-    }
+    core.error(error);
     core.setFailed(error);
 });

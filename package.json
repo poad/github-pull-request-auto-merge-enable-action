@@ -5,9 +5,9 @@
   "author": "Kenji Saito <ken-yo@mbr.nifty.com>",
   "license": "MIT",
   "scripts": {
-    "build": "yarn clean && yarn lint --fix && tsc",
+    "build": "yarn clean && tsc",
     "lint": "eslint src/**/*.ts src/*.ts",
-    "test": "yarn build && yarn install && NODE_ENV=test node --experimental-vm-modules --unhandled-rejections=strict --experimental-modules node_modules/.bin/jest --coverage --passWithNoTests --detectOpenHandles",
+    "test": "NODE_ENV=test jest --coverage --passWithNoTests --detectOpenHandles",
     "clean": "rm -rf dist"
   },
   "devDependencies": {
