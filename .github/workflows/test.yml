@@ -145,7 +145,7 @@ jobs:
           owner: ${{ github.event.repository.owner.name }}
 
       - name: enable auto merge test (for Pull request)
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && github.actor != 'dependabot[bot]'
         env:
           GITHUB: $${{  toJSON(github) }}
         uses: ./
