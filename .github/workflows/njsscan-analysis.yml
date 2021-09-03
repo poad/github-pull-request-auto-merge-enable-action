@@ -15,6 +15,7 @@ on:
 jobs:
   njsscan:
     runs-on: ubuntu-latest
+    if: (github.actor != 'dependabot[bot]' && github.event_name == 'push')
     name: njsscan code scanning
     steps:
     - name: Checkout the code

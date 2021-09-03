@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -42,7 +42,6 @@ var MergeMethod;
     MergeMethod.valueOf = valueOf;
 })(MergeMethod = exports.MergeMethod || (exports.MergeMethod = {}));
 class GitHubClient {
-    token;
     constructor(token) {
         this.token = token;
     }
@@ -56,7 +55,7 @@ class GitHubClient {
       }
     }
     `;
-        const { data } = await (0, graphql_1.graphql)(query, {
+        const { data } = await graphql_1.graphql(query, {
             headers: {
                 authorization: `token ${this.token}`,
             },
@@ -76,7 +75,7 @@ class GitHubClient {
         }
       }
       `;
-        await (0, graphql_1.graphql)(query, {
+        await graphql_1.graphql(query, {
             headers: {
                 authorization: `token ${this.token}`,
             },
