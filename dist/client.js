@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -50,35 +50,46 @@ class GitHubClient {
     query {
       repository(owner: "${params.owner}", name: "${params.repo}") {
         pullRequest(number: ${params.number}) {
-          id
+          id,
+          state
         }
       }
     }
     `;
-        const { data } = await graphql_1.graphql(query, {
+        const { data } = await (0, graphql_1.graphql)(query, {
             headers: {
-                authorization: `token ${this.token}`,
-            },
+                authorization: `token ${this.token}`
+            }
         });
         core.debug(JSON.stringify(data));
-        return data.repository !== undefined && data.repository.pullRequest !== undefined ? data.repository.pullRequest.id : undefined;
+        const repository = data.repository;
+        const pullRequest = repository !== undefined ? repository.pullRequest : undefined;
+        const { id, state } = pullRequest !== undefined
+            ? pullRequest
+            : { id: undefined, state: undefined };
+        if (id === undefined || state === undefined) {
+            return undefined;
+        }
+        return { id, state };
     }
     async enableAutoMerge(param) {
         const query = `
       mutation {
         enablePullRequestAutoMerge(input: {
           pullRequestId: "${param.pullRequestId}",
-          ${param.mergeMethod !== undefined ? `mergeMethod: ${param.mergeMethod.toString()}` : ""}
+          ${param.mergeMethod !== undefined
+            ? `mergeMethod: ${param.mergeMethod.toString()}`
+            : ''}
           clientMutationId : null
         }) {
           clientMutationId
         }
       }
       `;
-        await graphql_1.graphql(query, {
+        await (0, graphql_1.graphql)(query, {
             headers: {
-                authorization: `token ${this.token}`,
-            },
+                authorization: `token ${this.token}`
+            }
         });
     }
 }
