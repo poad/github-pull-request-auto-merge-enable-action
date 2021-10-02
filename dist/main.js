@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -45,19 +45,29 @@ const run = async () => {
         core.info(`pull_request_id: ${pullRequestId}`);
         core.info(`merge_method: ${mergeMethod}`);
         if (pullRequestNumber === 0 && pullRequestId === undefined) {
-            errHandler(new Error("pull_request_number or pull_request_id must be specified"));
+            errHandler(new Error('pull_request_number or pull_request_id must be specified'));
         }
         const client = new client_1.default(token);
-        const id = pullRequestNumber !== 0 ? await client.findPullRequestId({
-            owner,
-            repo: repo,
-            number: pullRequestNumber
-        }) : pullRequestId;
+        const resp = pullRequestId === undefined
+            ? await client.findPullRequestId({
+                owner,
+                repo: repo,
+                number: pullRequestNumber
+            })
+            : { id: pullRequestId, state: undefined };
+        const state = resp !== undefined ? resp.state : undefined;
+        if (state !== 'OPEN') {
+            core.warning(`target pull request state: ${state}`);
+            return;
+        }
+        const id = resp !== undefined ? resp.id : undefined;
         core.info(`target pull request id: ${id}`);
         if (id !== undefined) {
             await client.enableAutoMerge({
                 pullRequestId: id,
-                mergeMethod: mergeMethod !== undefined ? client_1.MergeMethod.valueOf(mergeMethod) : undefined
+                mergeMethod: mergeMethod !== undefined
+                    ? client_1.MergeMethod.valueOf(mergeMethod)
+                    : undefined
             });
         }
     }
