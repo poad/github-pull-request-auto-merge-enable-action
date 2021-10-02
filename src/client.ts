@@ -26,6 +26,19 @@ export interface FindPullRequestIdParam {
   number: number;
 }
 
+export interface IPullRequestResponse {
+  data: {
+    repository: {
+      pullRequest: IPullRequest
+    }
+  },
+}
+
+export interface IPullRequest {
+  id: string,
+  state: 'OPEN' | 'CLOSED' | 'MERGED' | undefined,
+}
+
 export interface EnableAutoMergeParam {
   pullRequestId: string;
   mergeMethod?: MergeMethod,
@@ -33,7 +46,7 @@ export interface EnableAutoMergeParam {
 
 
 interface IGitHubClient {
-  findPullRequestId(params: FindPullRequestIdParam): Promise<string | undefined>;
+  findPullRequestId(params: FindPullRequestIdParam): Promise<IPullRequest | undefined>;
   enableAutoMerge(param: EnableAutoMergeParam): Promise<void>;
 }
 
@@ -43,17 +56,18 @@ class GitHubClient implements IGitHubClient {
   constructor(token: string) {
     this.token = token;
   }
-  async findPullRequestId(params: FindPullRequestIdParam): Promise<string | undefined> {
+  async findPullRequestId(params: FindPullRequestIdParam): Promise<IPullRequest | undefined> {
     const query = `
     query {
       repository(owner: "${params.owner}", name: "${params.repo}") {
         pullRequest(number: ${params.number}) {
-          id
+          id,
+          state
         }
       }
     }
     `;
-    const { data } = await graphql(
+    const { data } = await graphql<IPullRequestResponse>(
       query,
       {
         headers: {
@@ -64,7 +78,11 @@ class GitHubClient implements IGitHubClient {
 
     core.debug(JSON.stringify(data));
 
-    return data.repository !== undefined && data.repository.pullRequest !== undefined ? data.repository.pullRequest.id : undefined;
+    if (data.repository?.pullRequest?.id === undefined || data.repository?.pullRequest?.state === undefined) {
+      return undefined;
+    }
+
+    return data.repository.pullRequest;
   }
 
   async enableAutoMerge(param: EnableAutoMergeParam): Promise<void> {

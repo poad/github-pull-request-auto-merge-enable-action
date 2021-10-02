@@ -31,11 +31,18 @@ const run = async (): Promise<void> => {
         }
 
         const client = new GitHubClient(token);
-        const id = pullRequestNumber !== 0 ? await client.findPullRequestId({
+        const resp = pullRequestId === undefined ? await client.findPullRequestId({
             owner,
             repo: repo,
             number: pullRequestNumber
-        }) : pullRequestId;
+        }) : { id: pullRequestId, state: undefined };
+
+        if (resp?.state !== 'OPEN') {
+            core.warning(`target pull request state: ${resp?.state}`);
+            return;
+        }
+
+        const id = resp?.id;
 
         core.info(`target pull request id: ${id}`);
 
