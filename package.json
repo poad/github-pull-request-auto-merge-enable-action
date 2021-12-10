@@ -16,7 +16,7 @@
     "all": "yarn build && yarn format && yarn lint --fix && yarn test"
   },
   "devDependencies": {
-    "@swc/cli": "^0.1.52",
+    "@swc/cli": "^0.1.53",
     "@swc/core": "^1.2.118",
     "@swc/helpers": "^0.3.2",
     "@swc/jest": "^0.2.12",
