@@ -18,7 +18,7 @@
   "devDependencies": {
     "@swc/cli": "^0.1.53",
     "@swc/helpers": "^0.3.2",
-    "@swc/jest": "^0.2.12",
+    "@swc/jest": "^0.2.14",
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.12",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
