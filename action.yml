@@ -21,5 +21,5 @@ inputs:
     description: merge method. see [GitHub API Docs](https://docs.github.com/en/graphql/reference/enums#pullrequestmergemethod)
     required: false
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/main.js'
