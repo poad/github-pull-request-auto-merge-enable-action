@@ -2583,11 +2583,11 @@ jest-snapshot@^27.5.0:
     semver "^7.3.2"
 
 jest-util@^27.0.0, jest-util@^27.5.0:
-  version "27.5.0"
-  resolved "https://registry.yarnpkg.com/jest-util/-/jest-util-27.5.0.tgz#0b9540d91b0de65d288f235fa9899e6eeeab8d35"
-  integrity sha512-FUUqOx0gAzJy3ytatT1Ss372M1kmhczn8x7aE0++11oPGW1FyD/5NjYBI8w1KOXFm6IVjtaZm2szfJJL+CHs0g==
+  version "27.5.1"
+  resolved "https://registry.yarnpkg.com/jest-util/-/jest-util-27.5.1.tgz#3ba9771e8e31a0b85da48fe0b0891fb86c01c2f9"
+  integrity sha512-Kv2o/8jNvX1MQ0KGtw480E/w4fBCDOnH6+6DmeKi6LZUIlKA5kwY0YNdlzaWTiVgxqAqik11QyxDOKk543aKXw==
   dependencies:
-    "@jest/types" "^27.5.0"
+    "@jest/types" "^27.5.1"
     "@types/node" "*"
     chalk "^4.0.0"
     ci-info "^3.2.0"
