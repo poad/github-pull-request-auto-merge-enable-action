@@ -116,4 +116,5 @@ node_modules
 !node_modules/wrappy
 
 .DS_Store
-.DS_Store
+
+coverage
