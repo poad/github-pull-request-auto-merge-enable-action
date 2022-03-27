@@ -24,7 +24,7 @@
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
     "@vercel/ncc": "^0.33.3",
-    "eslint": "^8.11.0",
+    "eslint": "^8.12.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
     "jest": "^27.5.1",
@@ -51,8 +51,8 @@
   "exports": {
     ".": {
       "node": "./dist/main.js",
-      "default": "./dist/main.js",
-      "require": "./dist/main.cjs"
+      "require": "./dist/main.cjs",
+      "default": "./dist/main.js"
     }
   }
 }
