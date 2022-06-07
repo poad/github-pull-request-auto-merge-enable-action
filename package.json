@@ -11,7 +11,7 @@
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
     "lint": "eslint src/**/*.ts",
-    "test": "NODE_ENV=test jest --coverage --passWithNoTests --detectOpenHandles",
+    "test": "NODE_ENV=test node --experimental-vm-modules --unhandled-rejections=strict node_modules/.bin/jest --coverage --passWithNoTests --detectOpenHandles",
     "package": "ncc build --source-map --license licenses.txt -m -q",
     "clean": "rm -rf dist",
     "dev": "node --loader ts-node/esm src/main.ts",
@@ -57,13 +57,70 @@
     }
   },
   "jest": {
+    "preset": "ts-jest/presets/default-esm",
+    "clearMocks": true,
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json",
+      "node"
+    ],
+    "testMatch": [
+      "**/tests/*.test.ts"
+    ],
     "transform": {
-      "^.+\\.(t|j)sx?$": [
-        "@swc/jest"
+      "^.+\\.m?(t|j)sx?$": [
+        "ts-jest/legacy",
+        {
+          "jsc": {
+            "parser": {
+              "syntax": "typescript",
+              "tsx": false,
+              "decorators": true,
+              "dynamicImport": true
+            },
+            "minify": {
+              "compress": {
+                "unused": false
+              },
+              "mangle": false
+            },
+            "target": "es2021",
+            "transform": {
+              "optimizer": {
+                "jsonify": {
+                  "minCost": 0
+                }
+              }
+            }
+          },
+          "minify": false,
+          "sourceMaps": true,
+          "inlineSourcesContent": true,
+          "module": {
+            "type": "commonjs",
+            "strict": true,
+            "strictMode": true,
+            "lazy": true,
+            "noInterop": false
+          }
+        }
       ]
     },
     "extensionsToTreatAsEsm": [
       ".ts"
-    ]
+    ],
+    "modulePaths": [
+      "<rootDir>/src",
+      "<rootDir>/dist",
+      "<rootDir>/node_modules"
+    ],
+    "globals": {
+      "ts-jest": {
+        "useESM": true,
+        "tsconfig": "tsconfig.json"
+      }
+    },
+    "verbose": true
   }
 }
