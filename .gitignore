@@ -117,4 +117,4 @@ node_modules
 
 .DS_Store
 
-coverage
+coverage.DS_Store
