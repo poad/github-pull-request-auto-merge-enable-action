@@ -67,22 +67,14 @@ class GitHubClient {
             }
         });
         core.debug(JSON.stringify(data));
-        const repository = data.repository;
-        const pullRequest = repository !== undefined ? repository.pullRequest : undefined;
-        const { id, state } = pullRequest !== undefined
-            ? pullRequest
-            : { id: undefined, state: undefined };
-        if (id === undefined || state === undefined) {
-            return undefined;
-        }
-        return { id, state };
+        return data.repository?.pullRequest;
     }
     async enableAutoMerge(param) {
         const query = `
       mutation {
         enablePullRequestAutoMerge(input: {
           pullRequestId: "${param.pullRequestId}",
-          ${param.mergeMethod !== undefined
+          ${param.mergeMethod
             ? `mergeMethod: ${param.mergeMethod.toString()}`
             : ''}
           clientMutationId : null

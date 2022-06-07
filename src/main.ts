@@ -26,37 +26,36 @@ const run = async (): Promise<void> => {
     core.info(`pull_request_id: ${pullRequestId}`)
     core.info(`merge_method: ${mergeMethod}`)
 
-    if (pullRequestNumber === 0 && pullRequestId === undefined) {
+    if (pullRequestNumber === 0 && !pullRequestId) {
       errHandler(
         new Error('pull_request_number or pull_request_id must be specified')
       )
     }
 
     const client = new GitHubClient(token)
-    const resp =
-      pullRequestId === undefined
+    const resp = !pullRequestId
         ? await client.findPullRequestId({
             owner,
             repo: repo,
             number: pullRequestNumber
           })
-        : {id: pullRequestId, state: undefined}
+        : {id: pullRequestId}
 
-    const state = resp !== undefined ? resp.state : undefined
+    const state = resp?.state
     if (state !== 'OPEN') {
       core.warning(`target pull request state: ${state}`)
       return
     }
 
-    const id = resp !== undefined ? resp.id : undefined
+    const id = resp?.id
 
     core.info(`target pull request id: ${id}`)
 
-    if (id !== undefined) {
+    if (id) {
       await client.enableAutoMerge({
         pullRequestId: id,
         mergeMethod:
-          mergeMethod !== undefined
+          mergeMethod
             ? MergeMethod.valueOf(mergeMethod)
             : undefined
       })

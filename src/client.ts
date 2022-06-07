@@ -36,7 +36,7 @@ export interface IPullRequestResponse {
 
 export interface IPullRequest {
   id: string
-  state: 'OPEN' | 'CLOSED' | 'MERGED' | undefined
+  state?: 'OPEN' | 'CLOSED' | 'MERGED'
 }
 
 export interface EnableAutoMergeParam {
@@ -78,18 +78,7 @@ class GitHubClient implements IGitHubClient {
 
     core.debug(JSON.stringify(data))
 
-    const repository = data.repository
-    const pullRequest =
-      repository !== undefined ? repository.pullRequest : undefined
-    const {id, state} =
-      pullRequest !== undefined
-        ? pullRequest
-        : {id: undefined, state: undefined}
-    if (id === undefined || state === undefined) {
-      return undefined
-    }
-
-    return {id, state}
+    return data.repository?.pullRequest
   }
 
   async enableAutoMerge(param: EnableAutoMergeParam): Promise<void> {
@@ -98,7 +87,7 @@ class GitHubClient implements IGitHubClient {
         enablePullRequestAutoMerge(input: {
           pullRequestId: "${param.pullRequestId}",
           ${
-            param.mergeMethod !== undefined
+            param.mergeMethod
               ? `mergeMethod: ${param.mergeMethod.toString()}`
               : ''
           }
