@@ -121,7 +121,7 @@ jobs:
       - name: Create pull request
         if: github.event_name != 'pull_request'
         id: create-pull-request
-        uses: poad/github-pull-requester@1.0.0
+        uses: poad/github-pull-requester@v1.0.1
         with:
           github_token: ${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}
           head_branch: ${{ env.BRANCH_NAME }}
