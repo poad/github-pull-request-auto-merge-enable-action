@@ -5,7 +5,7 @@
   "author": "Kenji Saito <ken-yo@mbr.nifty.com>",
   "license": "MIT",
   "main": "./dist/main.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "build": "tsc",
     "format": "prettier --write **/*.ts",
@@ -57,7 +57,7 @@
     }
   },
   "jest": {
-    "preset": "ts-jest/presets/default-esm",
+    "preset": "ts-jest",
     "clearMocks": true,
     "moduleFileExtensions": [
       "ts",
@@ -117,7 +117,7 @@
     ],
     "globals": {
       "ts-jest": {
-        "useESM": true,
+        "useESM": false,
         "tsconfig": "tsconfig.json"
       }
     },
