@@ -144,6 +144,8 @@ jobs:
 
       - name: enable auto merge test (for Not Pull request)
         if: github.event_name != 'pull_request'
+        env: 
+          GITHUB: $${{  toJSON(github) }}
         uses: ./
         with:
           pull_request_number: ${{ env.PULL_REQUEST_NUMBER }}
@@ -153,7 +155,7 @@ jobs:
 
       - name: enable auto merge test (for Pull request)
         if: github.event_name == 'pull_request' && github.actor != 'dependabot[bot]'
-        env:
+        env: 
           GITHUB: $${{  toJSON(github) }}
         uses: ./
         with:
@@ -162,3 +164,11 @@ jobs:
           repository:  ${{ github.event.repository.name }}
           owner: ${{ github.repository_owner }}
           merge_method: SQUASH
+
+      - name: Close Pull Request
+        uses: peter-evans/close-pull@v2
+        if: ${{ always() }}
+        with:
+          pull-request-number: ${{ env.PULL_REQUEST_NUMBER }}
+          comment: Auto-closing pull request
+          delete-branch: true
