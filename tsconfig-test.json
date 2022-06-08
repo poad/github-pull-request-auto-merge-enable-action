@@ -1,0 +1,9 @@
+{
+  "extends": ".",
+  "ts-node": {
+    "transpileOnly": true,
+    "transpiler": "ts-node/transpilers/swc-experimental"
+  },
+  "include": ["__tests__"],
+  "exclude": ["node_modules"]
+}

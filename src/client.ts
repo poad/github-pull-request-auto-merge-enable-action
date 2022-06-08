@@ -1,5 +1,6 @@
 import {graphql} from '@octokit/graphql'
 import * as core from '@actions/core'
+import 'source-map-support/register'
 
 export enum MergeMethod {
   MERGE = 'MERGE',
