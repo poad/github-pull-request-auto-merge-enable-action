@@ -1,5 +1,6 @@
 import {graphql} from '@octokit/graphql'
 import * as core from '@actions/core'
+import 'source-map-support/register'
 
 export enum MergeMethod {
   MERGE = 'MERGE',
@@ -28,8 +29,8 @@ export interface FindPullRequestIdParam {
 
 export interface IPullRequestResponse {
   data: {
-    repository: {
-      pullRequest: IPullRequest
+    repository?: {
+      pullRequest?: IPullRequest
     }
   }
 }
@@ -58,16 +59,21 @@ class GitHubClient implements IGitHubClient {
     this.token = token
   }
   async findPullRequestId(
-    params: FindPullRequestIdParam
+    { owner, repo, number}: FindPullRequestIdParam
   ): Promise<IPullRequest | undefined> {
     const query = `
-    query {
-      repository(owner: "${params.owner}", name: "${params.repo}") {
-        pullRequest(number: ${params.number}) {
+    query ($owner: String!, $repo: String!, $number: number!, ) {
+      repository(owner: "$owner", name: "$repo") {
+        pullRequest(number: $number) {
           id,
           state
         }
       }
+    },
+    variables: {
+      "$owner": "${owner}",
+      "$repo": "${repo}",
+      "$number": ${number},
     }
     `
     const {data} = await graphql<IPullRequestResponse>(query, {
@@ -81,20 +87,23 @@ class GitHubClient implements IGitHubClient {
     return data.repository?.pullRequest
   }
 
-  async enableAutoMerge(param: EnableAutoMergeParam): Promise<void> {
+  async enableAutoMerge({ pullRequestId, mergeMethod }: EnableAutoMergeParam): Promise<void> {
     const query = `
-      mutation {
+      mutation ($pullRequestId: String!) {
         enablePullRequestAutoMerge(input: {
-          pullRequestId: "${param.pullRequestId}",
+          pullRequestId: "$pullRequestId",
           ${
-            param.mergeMethod
-              ? `mergeMethod: ${param.mergeMethod.toString()}`
+            mergeMethod
+              ? `mergeMethod: ${mergeMethod.toString()}`
               : ''
           }
           clientMutationId : null
         }) {
           clientMutationId
         }
+      },
+      variables: {
+        "$pullRequestId": "${pullRequestId}"
       }
       `
     await graphql(query, {

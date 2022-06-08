@@ -26,6 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MergeMethod = void 0;
 const graphql_1 = require("@octokit/graphql");
 const core = __importStar(require("@actions/core"));
+require("source-map-support/register");
 var MergeMethod;
 (function (MergeMethod) {
     MergeMethod["MERGE"] = "MERGE";
@@ -50,15 +51,20 @@ class GitHubClient {
     constructor(token) {
         this.token = token;
     }
-    async findPullRequestId(params) {
+    async findPullRequestId({ owner, repo, number }) {
         const query = `
-    query {
-      repository(owner: "${params.owner}", name: "${params.repo}") {
-        pullRequest(number: ${params.number}) {
+    query ($owner: String!, $repo: String!, $number: number!, ) {
+      repository(owner: "$owner", name: "$repo") {
+        pullRequest(number: $number) {
           id,
           state
         }
       }
+    },
+    variables: {
+      "$owner": "${owner}",
+      "$repo": "${repo}",
+      "$number": ${number},
     }
     `;
         const { data } = await (0, graphql_1.graphql)(query, {
@@ -69,18 +75,21 @@ class GitHubClient {
         core.debug(JSON.stringify(data));
         return data.repository?.pullRequest;
     }
-    async enableAutoMerge(param) {
+    async enableAutoMerge({ pullRequestId, mergeMethod }) {
         const query = `
-      mutation {
+      mutation ($pullRequestId: String!) {
         enablePullRequestAutoMerge(input: {
-          pullRequestId: "${param.pullRequestId}",
-          ${param.mergeMethod
-            ? `mergeMethod: ${param.mergeMethod.toString()}`
+          pullRequestId: "$pullRequestId",
+          ${mergeMethod
+            ? `mergeMethod: ${mergeMethod.toString()}`
             : ''}
           clientMutationId : null
         }) {
           clientMutationId
         }
+      },
+      variables: {
+        "$pullRequestId": "${pullRequestId}"
       }
       `;
         await (0, graphql_1.graphql)(query, {
@@ -91,4 +100,4 @@ class GitHubClient {
     }
 }
 exports.default = GitHubClient;
-//# sourceMappingURL=client.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xpZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vc3JjL2NsaWVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLDhDQUF3QztBQUN4QyxvREFBcUM7QUFDckMsdUNBQW9DO0FBRXBDLElBQVksV0FJWDtBQUpELFdBQVksV0FBVztJQUNyQiw4QkFBZSxDQUFBO0lBQ2YsZ0NBQWlCLENBQUE7SUFDakIsZ0NBQWlCLENBQUE7QUFDbkIsQ0FBQyxFQUpXLFdBQVcsR0FBWCxtQkFBVyxLQUFYLG1CQUFXLFFBSXRCO0FBRUQsMkRBQTJEO0FBQzNELFdBQWlCLFdBQVc7SUFDMUIsTUFBTSxVQUFVLEdBQUcsSUFBSSxHQUFHLEVBQXVCLENBQUE7SUFDakQsTUFBTSxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFTLEVBQUUsRUFBRTtRQUM3Qyw4REFBOEQ7UUFDOUQsTUFBTSxDQUFDLEdBQVMsV0FBWSxDQUFDLENBQUMsQ0FBQyxDQUFBO1FBQy9CLFVBQVUsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLFFBQVEsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFBO0lBQ2pDLENBQUMsQ0FBQyxDQUFBO0lBQ0YsU0FBZ0IsT0FBTyxDQUFDLEdBQVc7UUFDakMsT0FBTyxVQUFVLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxDQUFBO0lBQzVCLENBQUM7SUFGZSxtQkFBTyxVQUV0QixDQUFBO0FBQ0gsQ0FBQyxFQVZnQixXQUFXLEdBQVgsbUJBQVcsS0FBWCxtQkFBVyxRQVUzQjtBQWlDRCxNQUFNLFlBQVk7SUFDUixLQUFLLENBQVE7SUFFckIsWUFBWSxLQUFhO1FBQ3ZCLElBQUksQ0FBQyxLQUFLLEdBQUcsS0FBSyxDQUFBO0lBQ3BCLENBQUM7SUFDRCxLQUFLLENBQUMsaUJBQWlCLENBQ3JCLEVBQUUsS0FBSyxFQUFFLElBQUksRUFBRSxNQUFNLEVBQXlCO1FBRTlDLE1BQU0sS0FBSyxHQUFHOzs7Ozs7Ozs7O21CQVVDLEtBQUs7a0JBQ04sSUFBSTttQkFDSCxNQUFNOztLQUVwQixDQUFBO1FBQ0QsTUFBTSxFQUFDLElBQUksRUFBQyxHQUFHLE1BQU0sSUFBQSxpQkFBTyxFQUF1QixLQUFLLEVBQUU7WUFDeEQsT0FBTyxFQUFFO2dCQUNQLGFBQWEsRUFBRSxTQUFTLElBQUksQ0FBQyxLQUFLLEVBQUU7YUFDckM7U0FDRixDQUFDLENBQUE7UUFFRixJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQTtRQUVoQyxPQUFPLElBQUksQ0FBQyxVQUFVLEVBQUUsV0FBVyxDQUFBO0lBQ3JDLENBQUM7SUFFRCxLQUFLLENBQUMsZUFBZSxDQUFDLEVBQUUsYUFBYSxFQUFFLFdBQVcsRUFBd0I7UUFDeEUsTUFBTSxLQUFLLEdBQUc7Ozs7WUFLTixXQUFXO1lBQ1QsQ0FBQyxDQUFDLGdCQUFnQixXQUFXLENBQUMsUUFBUSxFQUFFLEVBQUU7WUFDMUMsQ0FBQyxDQUFDLEVBQ047Ozs7Ozs7NkJBT21CLGFBQWE7O09BRW5DLENBQUE7UUFDSCxNQUFNLElBQUEsaUJBQU8sRUFBQyxLQUFLLEVBQUU7WUFDbkIsT0FBTyxFQUFFO2dCQUNQLGFBQWEsRUFBRSxTQUFTLElBQUksQ0FBQyxLQUFLLEVBQUU7YUFDckM7U0FDRixDQUFDLENBQUE7SUFDSixDQUFDO0NBQ0Y7QUFFRCxrQkFBZSxZQUFZLENBQUEifQ==
