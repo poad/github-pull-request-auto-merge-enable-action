@@ -11,8 +11,9 @@
     "rootDir": "./src",
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "declaration": false,
     "forceConsistentCasingInFileNames": true,
-    "sourceMap": true
+    "inlineSourceMap": true
   },
   "exclude": ["node_modules", "**/*.test.ts"]
 }

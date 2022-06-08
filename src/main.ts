@@ -1,5 +1,6 @@
 import * as core from '@actions/core'
 import GitHubClient, {MergeMethod} from './client'
+import 'source-map-support/register'
 
 const run = async (): Promise<void> => {
   const errHandler = (error: unknown) => {
@@ -52,13 +53,14 @@ const run = async (): Promise<void> => {
     core.info(`target pull request id: ${id}`)
 
     if (id) {
-      await client.enableAutoMerge({
-        pullRequestId: id,
-        mergeMethod:
-          mergeMethod
-            ? MergeMethod.valueOf(mergeMethod)
-            : undefined
-      })
+      await client.enableAutoMerge(
+        mergeMethod
+          ? {
+          pullRequestId: id,
+            mergeMethod: MergeMethod.valueOf(mergeMethod)
+          }
+          : { pullRequestId: id }
+      )
     }
   } catch (error) {
     errHandler(error)
