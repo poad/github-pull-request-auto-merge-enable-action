@@ -36,7 +36,7 @@ export interface IPullRequestResponse {
 }
 
 export interface IPullRequest {
-  id: string
+  id?: string
   state?: 'OPEN' | 'CLOSED' | 'MERGED'
 }
 
