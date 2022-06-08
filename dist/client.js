@@ -26,6 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MergeMethod = void 0;
 const graphql_1 = require("@octokit/graphql");
 const core = __importStar(require("@actions/core"));
+require("source-map-support/register");
 var MergeMethod;
 (function (MergeMethod) {
     MergeMethod["MERGE"] = "MERGE";
@@ -50,11 +51,11 @@ class GitHubClient {
     constructor(token) {
         this.token = token;
     }
-    async findPullRequestId(params) {
+    async findPullRequestId({ owner, repo, number }) {
         const query = `
     query {
-      repository(owner: "${params.owner}", name: "${params.repo}") {
-        pullRequest(number: ${params.number}) {
+      repository(owner: "${owner}", name: "${repo}") {
+        pullRequest(number: ${number}) {
           id,
           state
         }
@@ -67,15 +68,15 @@ class GitHubClient {
             }
         });
         core.debug(JSON.stringify(data));
-        return data.repository?.pullRequest;
+        return data?.repository?.pullRequest;
     }
-    async enableAutoMerge(param) {
+    async enableAutoMerge({ pullRequestId, mergeMethod }) {
         const query = `
-      mutation {
+      mutation  {
         enablePullRequestAutoMerge(input: {
-          pullRequestId: "${param.pullRequestId}",
-          ${param.mergeMethod
-            ? `mergeMethod: ${param.mergeMethod.toString()}`
+          pullRequestId: "${pullRequestId}",
+          ${mergeMethod
+            ? `mergeMethod: ${mergeMethod.toString()}`
             : ''}
           clientMutationId : null
         }) {
@@ -91,4 +92,4 @@ class GitHubClient {
     }
 }
 exports.default = GitHubClient;
-//# sourceMappingURL=client.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xpZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vc3JjL2NsaWVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLDhDQUF3QztBQUN4QyxvREFBcUM7QUFDckMsdUNBQW9DO0FBRXBDLElBQVksV0FJWDtBQUpELFdBQVksV0FBVztJQUNyQiw4QkFBZSxDQUFBO0lBQ2YsZ0NBQWlCLENBQUE7SUFDakIsZ0NBQWlCLENBQUE7QUFDbkIsQ0FBQyxFQUpXLFdBQVcsR0FBWCxtQkFBVyxLQUFYLG1CQUFXLFFBSXRCO0FBRUQsMkRBQTJEO0FBQzNELFdBQWlCLFdBQVc7SUFDMUIsTUFBTSxVQUFVLEdBQUcsSUFBSSxHQUFHLEVBQXVCLENBQUE7SUFDakQsTUFBTSxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFTLEVBQUUsRUFBRTtRQUM3Qyw4REFBOEQ7UUFDOUQsTUFBTSxDQUFDLEdBQVMsV0FBWSxDQUFDLENBQUMsQ0FBQyxDQUFBO1FBQy9CLFVBQVUsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLFFBQVEsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFBO0lBQ2pDLENBQUMsQ0FBQyxDQUFBO0lBQ0YsU0FBZ0IsT0FBTyxDQUFDLEdBQVc7UUFDakMsT0FBTyxVQUFVLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxDQUFBO0lBQzVCLENBQUM7SUFGZSxtQkFBTyxVQUV0QixDQUFBO0FBQ0gsQ0FBQyxFQVZnQixXQUFXLEdBQVgsbUJBQVcsS0FBWCxtQkFBVyxRQVUzQjtBQWlDRCxNQUFNLFlBQVk7SUFDUixLQUFLLENBQVE7SUFFckIsWUFBWSxLQUFhO1FBQ3ZCLElBQUksQ0FBQyxLQUFLLEdBQUcsS0FBSyxDQUFBO0lBQ3BCLENBQUM7SUFDRCxLQUFLLENBQUMsaUJBQWlCLENBQ3JCLEVBQUUsS0FBSyxFQUFFLElBQUksRUFBRSxNQUFNLEVBQXlCO1FBRTlDLE1BQU0sS0FBSyxHQUFHOzsyQkFFUyxLQUFLLGFBQWEsSUFBSTs4QkFDbkIsTUFBTTs7Ozs7O0tBTS9CLENBQUE7UUFDRCxNQUFNLEVBQUMsSUFBSSxFQUFDLEdBQUcsTUFBTSxJQUFBLGlCQUFPLEVBQXVCLEtBQUssRUFBRTtZQUN4RCxPQUFPLEVBQUU7Z0JBQ1AsYUFBYSxFQUFFLFNBQVMsSUFBSSxDQUFDLEtBQUssRUFBRTthQUNyQztTQUNGLENBQUMsQ0FBQTtRQUVGLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFBO1FBRWhDLE9BQU8sSUFBSSxFQUFFLFVBQVUsRUFBRSxXQUFXLENBQUE7SUFDdEMsQ0FBQztJQUVELEtBQUssQ0FBQyxlQUFlLENBQUMsRUFBRSxhQUFhLEVBQUUsV0FBVyxFQUF3QjtRQUN4RSxNQUFNLEtBQUssR0FBRzs7OzRCQUdVLGFBQWE7WUFFN0IsV0FBVztZQUNULENBQUMsQ0FBQyxnQkFBZ0IsV0FBVyxDQUFDLFFBQVEsRUFBRSxFQUFFO1lBQzFDLENBQUMsQ0FBQyxFQUNOOzs7Ozs7T0FNSCxDQUFBO1FBQ0gsTUFBTSxJQUFBLGlCQUFPLEVBQUMsS0FBSyxFQUFFO1lBQ25CLE9BQU8sRUFBRTtnQkFDUCxhQUFhLEVBQUUsU0FBUyxJQUFJLENBQUMsS0FBSyxFQUFFO2FBQ3JDO1NBQ0YsQ0FBQyxDQUFBO0lBQ0osQ0FBQztDQUNGO0FBRUQsa0JBQWUsWUFBWSxDQUFBIn0=
