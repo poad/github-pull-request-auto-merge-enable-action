@@ -11,13 +11,17 @@
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
     "lint": "eslint src/**/*.ts",
-    "test": "NODE_ENV=test node --experimental-vm-modules --unhandled-rejections=strict node_modules/.bin/jest --coverage --passWithNoTests --detectOpenHandles",
-    "package": "ncc build --source-map --license licenses.txt -m -q",
+    "test": "NODE_ENV=test jest --coverage --silent=false --passWithNoTests --detectOpenHandles",
+    "pack": "ncc build -s --license licenses.txt -m -q",
     "clean": "rm -rf dist",
+    "prepublish": "yarn clean",
+    "prepack": "yarn build",
+    "package": "yarn pack",
     "dev": "node --loader ts-node/esm src/main.ts",
-    "all": "yarn build && yarn package && yarn format && yarn lint --fix && yarn test"
+    "all": "yarn build && yarn pack && yarn format && yarn lint --fix && yarn test"
   },
   "devDependencies": {
+    "@jest/globals": "*",
     "@swc/cli": "*",
     "@swc/helpers": "*",
     "@swc/jest": "*",
@@ -29,6 +33,7 @@
     "eslint": "*",
     "eslint-config-airbnb-base": "*",
     "eslint-plugin-import": "*",
+    "fetch-mock": "*",
     "jest": "*",
     "jest-circus": "*",
     "prettier": "*",
@@ -41,13 +46,15 @@
     "@octokit/core": "*",
     "@octokit/graphql": "*",
     "@octokit/plugin-request-log": "*",
-    "regenerator-runtime": "*"
+    "regenerator-runtime": "*",
+    "source-map-support": "*"
   },
   "peerDependencies": {
     "@actions/core": "*",
     "@octokit/core": "*",
     "@octokit/graphql": "*",
-    "@octokit/plugin-request-log": "*"
+    "@octokit/plugin-request-log": "*",
+    "source-map-support": "*"
   },
   "exports": {
     ".": {
@@ -66,45 +73,12 @@
       "node"
     ],
     "testMatch": [
-      "**/tests/*.test.ts"
+      "**/__tests__/*.test.ts",
+      "**/__tests__/*.test.cts"
     ],
     "transform": {
       "^.+\\.m?(t|j)sx?$": [
-        "ts-jest/legacy",
-        {
-          "jsc": {
-            "parser": {
-              "syntax": "typescript",
-              "tsx": false,
-              "decorators": true,
-              "dynamicImport": true
-            },
-            "minify": {
-              "compress": {
-                "unused": false
-              },
-              "mangle": false
-            },
-            "target": "es2021",
-            "transform": {
-              "optimizer": {
-                "jsonify": {
-                  "minCost": 0
-                }
-              }
-            }
-          },
-          "minify": false,
-          "sourceMaps": true,
-          "inlineSourcesContent": true,
-          "module": {
-            "type": "commonjs",
-            "strict": true,
-            "strictMode": true,
-            "lazy": true,
-            "noInterop": false
-          }
-        }
+        "ts-jest/legacy"
       ]
     },
     "extensionsToTreatAsEsm": [
@@ -118,7 +92,7 @@
     "globals": {
       "ts-jest": {
         "useESM": false,
-        "tsconfig": "tsconfig.json"
+        "tsconfig": "tsconfig-test.json"
       }
     },
     "verbose": true
