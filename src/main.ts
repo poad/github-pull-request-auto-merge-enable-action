@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-import GitHubClient, {MergeMethod} from './client'
+import GitHubClient, {IPullRequest, MergeMethod} from './client'
 import 'source-map-support/register'
 
 const run = async (): Promise<void> => {
@@ -35,20 +35,18 @@ const run = async (): Promise<void> => {
 
     const client = new GitHubClient(token)
     const resp = !pullRequestId
-        ? await client.findPullRequestId({
+        ? (await client.findPullRequestId({
             owner,
             repo: repo,
             number: pullRequestNumber
-          })
+          }))
         : {id: pullRequestId}
 
-    const state = resp?.state
+    const { id, state } = resp || {} as IPullRequest
     if (state !== 'OPEN') {
       core.warning(`target pull request state: ${state}`)
       return
     }
-
-    const id = resp?.id
 
     core.info(`target pull request id: ${id}`)
 
