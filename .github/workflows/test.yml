@@ -151,7 +151,7 @@ jobs:
           pull_request_number: ${{ env.PULL_REQUEST_NUMBER }}
           github_token: ${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}
           repository:  ${{ github.event.repository.name }}
-          owner: ${{ github.event.repository.owner.name }}
+          owner: ${{ github.repository_owner }}
 
       - name: enable auto merge test (for Pull request)
         if: github.event_name == 'pull_request' && github.actor != 'dependabot[bot]'
