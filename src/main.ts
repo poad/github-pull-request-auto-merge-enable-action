@@ -66,6 +66,6 @@ const run = async (): Promise<void> => {
 }
 
 Promise.resolve(run()).catch((error: Error) => {
-  core.error(error)
+  core.error(error.stack ? error.stack?.toString() : error)
   core.setFailed(error)
 })
