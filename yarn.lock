@@ -411,17 +411,7 @@
   dependencies:
     "@jest/types" "^27.5.1"
 
-"@jest/environment@^28.1.1":
-  version "28.1.1"
-  resolved "https://registry.yarnpkg.com/@jest/environment/-/environment-28.1.1.tgz#c4cbf85283278d768f816ebd1a258ea6f9e39d4f"
-  integrity sha512-9auVQ2GzQ7nrU+lAr8KyY838YahElTX9HVjbQPPS2XjlxQ+na18G113OoBhyBGBtD6ZnO/SrUy5WR8EzOj1/Uw==
-  dependencies:
-    "@jest/fake-timers" "^28.1.1"
-    "@jest/types" "^28.1.1"
-    "@types/node" "*"
-    jest-mock "^28.1.1"
-
-"@jest/environment@^28.1.2":
+"@jest/environment@^28.1.1", "@jest/environment@^28.1.2":
   version "28.1.2"
   resolved "https://registry.yarnpkg.com/@jest/environment/-/environment-28.1.2.tgz#94a052c0c5f9f8c8e6d13ea6da78dbc5d7d9b85b"
   integrity sha512-I0CR1RUMmOzd0tRpz10oUfaChBWs+/Hrvn5xYhMEF/ZqrDaaeHwS8yDBqEWCrEnkH2g+WE/6g90oBv3nKpcm8Q==
@@ -437,14 +427,6 @@
   integrity sha512-n/ghlvdhCdMI/hTcnn4qV57kQuV9OTsZzH1TTCVARANKhl6hXJqLKUkwX69ftMGpsbpt96SsDD8n8LD2d9+FRw==
   dependencies:
     jest-get-type "^28.0.2"
-
-"@jest/expect@^28.1.1":
-  version "28.1.1"
-  resolved "https://registry.yarnpkg.com/@jest/expect/-/expect-28.1.1.tgz#ea4fcc8504b45835029221c0dc357c622a761326"
-  integrity sha512-/+tQprrFoT6lfkMj4mW/mUIfAmmk/+iQPmg7mLDIFOf2lyf7EBHaS+x3RbeR0VZVMe55IvX7QRoT/2aK3AuUXg==
-  dependencies:
-    expect "^28.1.1"
-    jest-snapshot "^28.1.1"
 
 "@jest/expect@^28.1.2":
   version "28.1.2"
@@ -478,16 +460,7 @@
     jest-mock "^28.1.1"
     jest-util "^28.1.1"
 
-"@jest/globals@*", "@jest/globals@^28.1.1":
-  version "28.1.1"
-  resolved "https://registry.yarnpkg.com/@jest/globals/-/globals-28.1.1.tgz#c0a7977f85e26279cc090d9adcdf82b8a34c4061"
-  integrity sha512-dEgl/6v7ToB4vXItdvcltJBgny0xBE6xy6IYQrPJAJggdEinGxCDMivNv7sFzPcTITGquXD6UJwYxfJ/5ZwDSg==
-  dependencies:
-    "@jest/environment" "^28.1.1"
-    "@jest/expect" "^28.1.1"
-    "@jest/types" "^28.1.1"
-
-"@jest/globals@^28.1.2":
+"@jest/globals@*", "@jest/globals@^28.1.1", "@jest/globals@^28.1.2":
   version "28.1.2"
   resolved "https://registry.yarnpkg.com/@jest/globals/-/globals-28.1.2.tgz#92fab296e337c7309c25e4202fb724f62249d83f"
   integrity sha512-cz0lkJVDOtDaYhvT3Fv2U1B6FtBnV+OpEyJCzTHM1fdoTsU4QNLAt/H4RkiwEUU+dL4g/MFsoTuHeT2pvbo4Hg==
