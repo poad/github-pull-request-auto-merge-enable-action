@@ -61,6 +61,10 @@
       "default": "./dist/main.js"
     }
   },
+  "resolutions": {
+    "@types/yargs-parser": "^13",
+    "yargs-parser": "^13"
+  },
   "jest": {
     "preset": "ts-jest",
     "clearMocks": true,
