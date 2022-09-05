@@ -2567,17 +2567,17 @@ jest-matcher-utils@^29.0.2:
     pretty-format "^29.0.2"
 
 jest-message-util@^29.0.1:
-  version "29.0.1"
-  resolved "https://registry.yarnpkg.com/jest-message-util/-/jest-message-util-29.0.1.tgz#85c4b5b90296c228da158e168eaa5b079f2ab879"
-  integrity sha512-wRMAQt3HrLpxSubdnzOo68QoTfQ+NLXFzU0Heb18ZUzO2S9GgaXNEdQ4rpd0fI9dq2NXkpCk1IUWSqzYKji64A==
+  version "29.0.2"
+  resolved "https://registry.yarnpkg.com/jest-message-util/-/jest-message-util-29.0.2.tgz#b2781dfb6a2d1c63830d9684c5148ae3155c6154"
+  integrity sha512-kcJAgms3ckJV0wUoLsAM40xAhY+pb9FVSZwicjFU9PFkaTNmqh9xd99/CzKse48wPM1ANUQKmp03/DpkY+lGrA==
   dependencies:
     "@babel/code-frame" "^7.12.13"
-    "@jest/types" "^29.0.1"
+    "@jest/types" "^29.0.2"
     "@types/stack-utils" "^2.0.0"
     chalk "^4.0.0"
     graceful-fs "^4.2.9"
     micromatch "^4.0.4"
-    pretty-format "^29.0.1"
+    pretty-format "^29.0.2"
     slash "^3.0.0"
     stack-utils "^2.0.3"
 
