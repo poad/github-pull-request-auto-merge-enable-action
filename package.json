@@ -54,6 +54,10 @@
     "@octokit/plugin-request-log": "*",
     "source-map-support": "*"
   },
+  "resolutions": {
+    "semver-regex": ">=3.1.3",
+    "got": ">=11.8.5"
+  },
   "exports": {
     ".": {
       "node": "./dist/main.js",
