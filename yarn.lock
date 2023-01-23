@@ -686,12 +686,12 @@
     universal-user-agent "^6.0.0"
 
 "@octokit/graphql@*", "@octokit/graphql@^5.0.0":
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/@octokit/graphql/-/graphql-5.0.4.tgz#519dd5c05123868276f3ae4e50ad565ed7dff8c8"
-  integrity sha512-amO1M5QUQgYQo09aStR/XO7KAl13xpigcy/kI8/N1PnZYSS69fgte+xA4+c2DISKqUZfsh0wwjc2FaCt99L41A==
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/@octokit/graphql/-/graphql-5.0.5.tgz#a4cb3ea73f83b861893a6370ee82abb36e81afd2"
+  integrity sha512-Qwfvh3xdqKtIznjX9lz2D458r7dJPP8l6r4GQkIdWQouZwHQK0mVT88uwiU2bdTU2OtT1uOlKpRciUWldpG0yQ==
   dependencies:
     "@octokit/request" "^6.0.0"
-    "@octokit/types" "^8.0.0"
+    "@octokit/types" "^9.0.0"
     universal-user-agent "^6.0.0"
 
 "@octokit/openapi-types@^16.0.0":
@@ -729,6 +729,13 @@
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/@octokit/types/-/types-8.2.0.tgz#de82a04bcb74b42128c12fcfb3d4606b9756f9d9"
   integrity sha512-v40LBJjw973X7sP6CuldlXDwIdgmVhry3Jq4jveVJgN1XBhqpCEDYTyDeXW/YS0bBGN3CRvTvON5IvZpaxcu0g==
+  dependencies:
+    "@octokit/openapi-types" "^16.0.0"
+
+"@octokit/types@^9.0.0":
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-9.0.0.tgz#6050db04ddf4188ec92d60e4da1a2ce0633ff635"
+  integrity sha512-LUewfj94xCMH2rbD5YJ+6AQ4AVjFYTgpp6rboWM5T7N3IsIF65SBEOVcYMGAEzO/kKNiNaW4LoWtoThOhH06gw==
   dependencies:
     "@octokit/openapi-types" "^16.0.0"
 
