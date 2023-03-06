@@ -44,6 +44,7 @@
     "@octokit/core": "*",
     "@octokit/graphql": "*",
     "@octokit/plugin-request-log": "*",
+    "got": ">=11.8.5",
     "regenerator-runtime": "*",
     "source-map-support": "*"
   },
