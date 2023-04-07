@@ -166,7 +166,7 @@ jobs:
           merge_method: SQUASH
 
       - name: Close Pull Request
-        uses: peter-evans/close-pull@v2
+        uses: peter-evans/close-pull@v3
         if: ${{ always() }}
         with:
           pull-request-number: ${{ env.PULL_REQUEST_NUMBER }}
