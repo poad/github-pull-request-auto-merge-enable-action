@@ -728,10 +728,10 @@
     "@octokit/types" "^9.0.0"
     universal-user-agent "^6.0.0"
 
-"@octokit/openapi-types@^16.0.0":
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-16.0.0.tgz#d92838a6cd9fb4639ca875ddb3437f1045cc625e"
-  integrity sha512-JbFWOqTJVLHZSUUoF4FzAZKYtqdxWu9Z5m2QQnOyEa04fOFljvyh7D3GYKbfuaSWisqehImiVIMG4eyJeP5VEA==
+"@octokit/openapi-types@^16.1.0":
+  version "16.1.0"
+  resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-16.1.0.tgz#c0a65a89bb67389dbe2dd7960cc8a86e42d5f4d5"
+  integrity sha512-+m6+376kp4gZAYtg64aXGHK2qM2LtIiZctqtbTnETdUaD7OSuX7zDV5kciqw1QIN13lg9jWz039OF7NZUdYEeQ==
 
 "@octokit/plugin-request-log@*":
   version "1.0.4"
@@ -760,11 +760,11 @@
     universal-user-agent "^6.0.0"
 
 "@octokit/types@^9.0.0":
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-9.0.0.tgz#6050db04ddf4188ec92d60e4da1a2ce0633ff635"
-  integrity sha512-LUewfj94xCMH2rbD5YJ+6AQ4AVjFYTgpp6rboWM5T7N3IsIF65SBEOVcYMGAEzO/kKNiNaW4LoWtoThOhH06gw==
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-9.1.0.tgz#c81f85c00b1b1b499f262097838f126612665068"
+  integrity sha512-MPKlN20dSKZ2JGV8KHNO4Y9z6xs74p5sQ2a5++5/uVme44K/5UEntIpai2n1WIrVtMlafYLdfN27BiBs2taY6g==
   dependencies:
-    "@octokit/openapi-types" "^16.0.0"
+    "@octokit/openapi-types" "^16.1.0"
 
 "@sinclair/typebox@^0.25.16":
   version "0.25.24"
@@ -932,9 +932,9 @@
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
 "@types/node@*":
-  version "18.15.11"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.15.11.tgz#b3b790f09cb1696cffcec605de025b088fa4225f"
-  integrity sha512-E5Kwq2n4SbMzQOn6wnmBjuK9ouqlURrcZDVfbo9ftDDTFt3nk7ZKK4GMOzoYgnpQJKcxwQw+lGaBvvlMo0qN/Q==
+  version "18.15.12"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.15.12.tgz#833756634e78c829e1254db006468dadbb0c696b"
+  integrity sha512-Wha1UwsB3CYdqUm2PPzh/1gujGCNtWVUYF0mB00fJFoR4gTyWTDPjSm+zBF787Ahw8vSGgBja90MkgFwvB86Dg==
 
 "@types/prettier@^2.1.5":
   version "2.7.2"
