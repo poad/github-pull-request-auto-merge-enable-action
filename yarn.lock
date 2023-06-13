@@ -732,9 +732,9 @@
   integrity sha512-V8GImKs3TeQRxRtXFpG2wl19V7444NIOTDF24AWuIbmNaNYOQMWRbjcGDXV5B+0n887fgDcuMNOmlul+k+oJtw==
 
 "@octokit/plugin-request-log@*":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@octokit/plugin-request-log/-/plugin-request-log-2.0.1.tgz#1b5b66e3b01733a431eb32a9fab03ceaccbfccd4"
-  integrity sha512-CpLitRgvXn09pEyEd4A25oxLqIqltBfbHnEiHjcwT3+LPCG2qEz/pD88IzQd/9B0ZHlKeOApTs1tgOjmwsYamw==
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@octokit/plugin-request-log/-/plugin-request-log-3.0.0.tgz#c71805b4b41c005ab235b8af75b6c6103039b460"
+  integrity sha512-34dKj2Pm54/fRHmF+yjgzmpOlPUYZuyX+FftZyLsgG09Hhl4lJMFyTZZIRbvk/h/KFG3rn2LjCSw6jF5GxUlwg==
 
 "@octokit/request-error@^3.0.0":
   version "3.0.3"
