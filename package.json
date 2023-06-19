@@ -16,7 +16,7 @@
     "clean": "rm -rf dist",
     "package": "ncc build -s --license licenses.txt -m -q",
     "dev": "node --loader ts-node/esm src/main.ts",
-    "all": "yarn build && yarn package && yarn format && yarn lint --fix && yarn test"
+    "all": "pnpm build && pnpm package && pnpm format && pnpm lint --fix && pnpm test"
   },
   "devDependencies": {
     "@jest/globals": "^29.5.0",
@@ -47,18 +47,6 @@
     "got": "^13.0.0",
     "regenerator-runtime": "^0.13.11",
     "source-map-support": "^0.5.21"
-  },
-  "peerDependencies": {
-    "@actions/core": "*",
-    "@octokit/core": "*",
-    "@octokit/graphql": "*",
-    "@octokit/plugin-request-log": "*",
-    "source-map-support": "*"
-  },
-  "resolutions": {
-    "semver-regex": ">=3.1.3",
-    "got": ">=11.8.5",
-    "json5": ">=2.2.2"
   },
   "exports": {
     ".": {
