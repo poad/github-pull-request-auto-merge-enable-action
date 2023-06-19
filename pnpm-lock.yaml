@@ -23,7 +23,7 @@ dependencies:
     specifier: ^3.0.0
     version: 3.0.0(@octokit/core@4.2.4)
   got:
-    specifier: '>=11.8.5'
+    specifier: ^13.0.0
     version: 13.0.0
   regenerator-runtime:
     specifier: ^0.13.11
