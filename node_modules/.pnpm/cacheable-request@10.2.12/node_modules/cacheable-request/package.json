@@ -1,6 +1,6 @@
 {
 	"name": "cacheable-request",
-	"version": "10.2.11",
+	"version": "10.2.12",
 	"description": "Wrap native HTTP requests with RFC compliant cache support",
 	"license": "MIT",
 	"repository": "jaredwray/cacheable-request",
@@ -37,7 +37,7 @@
 	},
 	"dependencies": {
 		"@types/http-cache-semantics": "^4.0.1",
-		"get-stream": "^7.0.0",
+		"get-stream": "^6.0.1",
 		"http-cache-semantics": "^4.1.1",
 		"keyv": "^4.5.2",
 		"mimic-response": "^4.0.0",
