@@ -35,14 +35,14 @@ const run = async (): Promise<void> => {
 
     const client = new GitHubClient(token)
     const resp = !pullRequestId
-        ? (await client.findPullRequestId({
-            owner,
-            repo: repo,
-            number: pullRequestNumber
-          }))
-        : {id: pullRequestId}
+      ? await client.findPullRequestId({
+          owner,
+          repo: repo,
+          number: pullRequestNumber
+        })
+      : {id: pullRequestId}
 
-    const { id, state } = resp || {} as IPullRequest
+    const {id, state} = resp || ({} as IPullRequest)
     if (state !== 'OPEN') {
       core.warning(`target pull request state: ${state}`)
       return
@@ -54,10 +54,10 @@ const run = async (): Promise<void> => {
       await client.enableAutoMerge(
         mergeMethod
           ? {
-          pullRequestId: id,
-            mergeMethod: MergeMethod.valueOf(mergeMethod)
-          }
-          : { pullRequestId: id }
+              pullRequestId: id,
+              mergeMethod: MergeMethod.valueOf(mergeMethod)
+            }
+          : {pullRequestId: id}
       )
     }
   } catch (error) {

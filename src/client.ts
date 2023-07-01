@@ -1,5 +1,6 @@
 import {graphql} from '@octokit/graphql'
 import * as core from '@actions/core'
+import fetch from 'node-fetch'
 import 'source-map-support/register'
 
 export enum MergeMethod {
@@ -58,9 +59,11 @@ class GitHubClient implements IGitHubClient {
   constructor(token: string) {
     this.token = token
   }
-  async findPullRequestId(
-    { owner, repo, number}: FindPullRequestIdParam
-  ): Promise<IPullRequest | undefined> {
+  async findPullRequestId({
+    owner,
+    repo,
+    number
+  }: FindPullRequestIdParam): Promise<IPullRequest | undefined> {
     const query = `
     query {
       repository(owner: "${owner}", name: "${repo}") {
@@ -74,6 +77,9 @@ class GitHubClient implements IGitHubClient {
     const {data} = await graphql<IPullRequestResponse>(query, {
       headers: {
         authorization: `token ${this.token}`
+      },
+      request: {
+        fetch
       }
     })
 
@@ -82,16 +88,15 @@ class GitHubClient implements IGitHubClient {
     return data?.repository?.pullRequest
   }
 
-  async enableAutoMerge({ pullRequestId, mergeMethod }: EnableAutoMergeParam): Promise<void> {
+  async enableAutoMerge({
+    pullRequestId,
+    mergeMethod
+  }: EnableAutoMergeParam): Promise<void> {
     const query = `
       mutation  {
         enablePullRequestAutoMerge(input: {
           pullRequestId: "${pullRequestId}",
-          ${
-            mergeMethod
-              ? `mergeMethod: ${mergeMethod.toString()}`
-              : ''
-          }
+          ${mergeMethod ? `mergeMethod: ${mergeMethod.toString()}` : ''}
           clientMutationId : null
         }) {
           clientMutationId
@@ -101,6 +106,9 @@ class GitHubClient implements IGitHubClient {
     await graphql(query, {
       headers: {
         authorization: `token ${this.token}`
+      },
+      request: {
+        fetch
       }
     })
   }
