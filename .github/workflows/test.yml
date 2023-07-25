@@ -27,7 +27,7 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 8.6.6
+          version: 8.6.10
           run_install: |
             - recursive: true
               args: [--no-frozen-lockfile, --strict-peer-dependencies]
@@ -58,7 +58,7 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 8.6.2
+          version: 8.6.10
           run_install: |
             - recursive: true
               args: [--no-frozen-lockfile, --strict-peer-dependencies]
@@ -84,12 +84,11 @@ jobs:
         with:
           fetch-depth: 0
 
-
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 8.6.2
+          version: 8.6.10
           run_install: |
             - recursive: true
               args: [--no-frozen-lockfile, --strict-peer-dependencies]
@@ -173,18 +172,6 @@ jobs:
           github_token: ${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}
           repository:  ${{ github.event.repository.name }}
           owner: ${{ github.repository_owner }}
-
-      - name: enable auto merge test (for Pull request)
-        if: github.event_name == 'pull_request' && github.actor != 'dependabot[bot]'
-        env: 
-          GITHUB: $${{  toJSON(github) }}
-        uses: ./
-        with:
-          pull_request_id: ${{ github.event.pull_request.node_id }}
-          github_token: ${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}
-          repository:  ${{ github.event.repository.name }}
-          owner: ${{ github.repository_owner }}
-          merge_method: SQUASH
 
       - name: Close Pull Request
         uses: peter-evans/close-pull@v3
