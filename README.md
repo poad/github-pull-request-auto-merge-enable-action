@@ -10,7 +10,7 @@ Enables auto merge to Pull Request by [octokit/graphql.js](https://github.com/oc
 
 ```$yaml
 - name: Enables auto merge to Pull Request
-  uses: poad/github-pull-request-auto-merge-enable-action@v1.0.0
+  uses: poad/github-pull-request-auto-merge-enable-action@v1.0.3
   with:
       pull_request_id: { node_id of GitHub Pull Request }
       pull_request_number: { number of GitHub Pull Request }
