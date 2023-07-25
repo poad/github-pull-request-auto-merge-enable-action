@@ -16,7 +16,6 @@ const run = async (): Promise<void> => {
   try {
     const token: string = core.getInput('github_token')
     const pullRequestNumber = Number(core.getInput('pull_request_number'))
-    const pullRequestId = core.getInput('pull_request_id')
     const owner: string = core.getInput('owner')
     const repo: string = core.getInput('repository')
     const mergeMethod: string = core.getInput('merge_method')
@@ -24,23 +23,20 @@ const run = async (): Promise<void> => {
     core.info(`owner: ${owner}`)
     core.info(`repository: ${repo}`)
     core.info(`pull_request_number: ${pullRequestNumber}`)
-    core.info(`pull_request_id: ${pullRequestId}`)
     core.info(`merge_method: ${mergeMethod}`)
 
-    if (pullRequestNumber === 0 && !pullRequestId) {
+    if (pullRequestNumber === 0) {
       errHandler(
         new Error('pull_request_number or pull_request_id must be specified')
       )
     }
 
     const client = new GitHubClient(token)
-    const resp = !pullRequestId
-      ? await client.findPullRequestId({
+    const resp = await client.findPullRequestId({
           owner,
           repo: repo,
           number: pullRequestNumber
         })
-      : {id: pullRequestId}
 
     const {id, state} = resp || ({} as IPullRequest)
     if (state !== 'OPEN') {

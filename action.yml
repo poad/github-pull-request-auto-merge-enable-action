@@ -7,8 +7,6 @@ branding:
 inputs:
   pull_request_number:
     description: number of Pull Request
-  pull_request_id:
-    description: ID of Pull Request
   github_token:
     required: true
   owner:
