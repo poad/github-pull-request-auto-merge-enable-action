@@ -68,13 +68,13 @@ class GitHubClient implements IGitHubClient {
     query {
       repository(owner: "${owner}", name: "${repo}") {
         pullRequest(number: ${number}) {
-          id,
+          id
           state
         }
       }
     }
     `
-    const {data} = await graphql<IPullRequestResponse>(query, {
+    const response = await graphql<IPullRequestResponse>(query, {
       headers: {
         authorization: `token ${this.token}`
       },
@@ -82,6 +82,10 @@ class GitHubClient implements IGitHubClient {
         fetch
       }
     })
+
+    core.debug(`response: ${response ? JSON.stringify(response) : undefined}`)
+
+    const { data } = response
 
     core.debug(JSON.stringify(data))
 
