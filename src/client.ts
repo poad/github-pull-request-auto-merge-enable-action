@@ -29,10 +29,8 @@ export interface FindPullRequestIdParam {
 }
 
 export interface IPullRequestResponse {
-  data: {
-    repository?: {
-      pullRequest?: IPullRequest
-    }
+  repository?: {
+    pullRequest?: IPullRequest
   }
 }
 
@@ -68,13 +66,13 @@ class GitHubClient implements IGitHubClient {
     query {
       repository(owner: "${owner}", name: "${repo}") {
         pullRequest(number: ${number}) {
-          id,
+          id
           state
         }
       }
     }
     `
-    const {data} = await graphql<IPullRequestResponse>(query, {
+    const response = await graphql<IPullRequestResponse>(query, {
       headers: {
         authorization: `token ${this.token}`
       },
@@ -83,9 +81,9 @@ class GitHubClient implements IGitHubClient {
       }
     })
 
-    core.debug(JSON.stringify(data))
+    core.debug(`response: ${response ? JSON.stringify(response) : undefined}`)
 
-    return data?.repository?.pullRequest
+    return response.repository?.pullRequest
   }
 
   async enableAutoMerge({
