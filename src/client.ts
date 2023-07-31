@@ -29,10 +29,8 @@ export interface FindPullRequestIdParam {
 }
 
 export interface IPullRequestResponse {
-  data: {
-    repository?: {
-      pullRequest?: IPullRequest
-    }
+  repository?: {
+    pullRequest?: IPullRequest
   }
 }
 
@@ -85,11 +83,7 @@ class GitHubClient implements IGitHubClient {
 
     core.debug(`response: ${response ? JSON.stringify(response) : undefined}`)
 
-    const { data } = response
-
-    core.debug(JSON.stringify(data))
-
-    return data?.repository?.pullRequest
+    return response.repository?.pullRequest
   }
 
   async enableAutoMerge({
