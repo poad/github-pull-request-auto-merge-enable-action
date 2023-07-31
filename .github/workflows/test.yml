@@ -12,66 +12,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x, 20.x]
-    
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        id: pnpm-install
-        with:
-          version: 8.6.10
-          run_install: |
-            - recursive: true
-              args: [--no-frozen-lockfile, --strict-peer-dependencies]
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-
-      - name: Build and lint
-        run: |
-          pnpm build
-          pnpm package
-          pnpm test
-
-  lint:
-    strategy:
-      matrix:
-        node-version: [16.x]
-    
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        id: pnpm-install
-        with:
-          version: 8.6.10
-          run_install: |
-            - recursive: true
-              args: [--no-frozen-lockfile, --strict-peer-dependencies]
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-
-      - name: Build and lint
-        run: pnpm lint
-
   test:
     strategy:
       matrix:
@@ -88,7 +28,7 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 8.6.10
+          version: 8.6.11
           run_install: |
             - recursive: true
               args: [--no-frozen-lockfile, --strict-peer-dependencies]
