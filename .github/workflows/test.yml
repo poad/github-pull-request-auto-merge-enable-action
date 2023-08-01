@@ -11,11 +11,11 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  pull-requests: write
+  contents: write
+      
 jobs:
-  permissions:
-    pull-requests: write
-    contents: write
-  
   test:
     strategy:
       matrix:
