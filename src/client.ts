@@ -101,6 +101,8 @@ class GitHubClient implements IGitHubClient {
         }
       }
       `
+
+    core.debug(`execute graphql mutation ${query}`)
     await graphql(query, {
       headers: {
         authorization: `token ${this.token}`
