@@ -95,7 +95,6 @@ class GitHubClient implements IGitHubClient {
         enablePullRequestAutoMerge(input: {
           pullRequestId: "${pullRequestId}",
           ${mergeMethod ? `mergeMethod: ${mergeMethod.toString()}` : ''}
-          clientMutationId : null
         }) {
           clientMutationId
         }
