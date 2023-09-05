@@ -1,7 +1,7 @@
 name: CI (test)
 
 on:
-  pull_request_target:
+  pull_request:
     branches: 
       - 'main'
       - '!test-base-*'
@@ -19,7 +19,7 @@ jobs:
   test:
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [20.x]
     
     runs-on: ubuntu-latest
 
@@ -32,7 +32,6 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 8.6.11
           run_install: |
             - recursive: true
               args: [--no-frozen-lockfile, --strict-peer-dependencies]
@@ -49,7 +48,6 @@ jobs:
           git config --local user.name "Kenji Saito"
 
       - name: Create base branch
-        if: github.event_name != 'pull_request'
         run: |
           BASE_BRANCH_NAME="test-base-$(date "+%Y%m%d-%H%M%S")"
           git switch -c "${BASE_BRANCH_NAME}"
@@ -59,14 +57,12 @@ jobs:
           echo "BASE_BRANCH_NAME=${BASE_BRANCH_NAME}" >> $GITHUB_ENV
 
       - name: Push Base
-        if: github.event_name != 'pull_request'
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}
           branch: ${{ env.BASE_BRANCH_NAME }}
 
       - name: Create head branch
-        if: github.event_name != 'pull_request'
         run: |
           BRANCH_NAME="test-$(date "+%Y%m%d-%H%M%S")"
           git switch -c "${BRANCH_NAME}"
@@ -77,14 +73,12 @@ jobs:
           echo "TIMESTAMP=$(date)" >> $GITHUB_ENV
 
       - name: Push Changes
-        if: github.event_name != 'pull_request'
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}
           branch: ${{ env.BRANCH_NAME }}
 
       - name: Create pull request
-        if: github.event_name != 'pull_request'
         id: create-pull-request
         uses: poad/github-pull-requester@v1.1.2
         with:
@@ -97,7 +91,6 @@ jobs:
           owner: ${{ github.repository_owner }}
 
       - name: Extract response
-        if: github.event_name != 'pull_request'
         env:
           RESULT: ${{ steps.create-pull-request.outputs.result }}
         run: |
@@ -107,7 +100,6 @@ jobs:
           echo "PULL_REQUEST_NUMBER=${PULL_REQUEST_NUMBER}" >> $GITHUB_ENV
 
       - name: enable auto merge test (for Pull request target)
-        if: github.event_name != 'pull_request'
         env: 
           GITHUB: $${{  toJSON(github) }}
         uses: ./
@@ -126,7 +118,7 @@ jobs:
           delete-branch: true
 
       - name: Delete base branch
-        if: github.event_name != 'pull_request'
+        
         env:
           BASE_BRANCH_NAME: ${{ env.BASE_BRANCH_NAME }}
         run: git push --delete origin ${BASE_BRANCH_NAME}
