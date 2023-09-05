@@ -57,10 +57,9 @@ jobs:
           echo "BASE_BRANCH_NAME=${BASE_BRANCH_NAME}" >> $GITHUB_ENV
 
       - name: Push Base
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}
-          branch: ${{ env.BASE_BRANCH_NAME }}
+        env:
+          BASE_BRANCH_NAME: ${{ env.BASE_BRANCH_NAME }}
+        run: git push "https://${{ github.actor }}:${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}@github.com/${{ github.repository }}" "HEAD:${BASE_BRANCH_NAME}" --follow-tags
 
       - name: Create head branch
         run: |
@@ -73,10 +72,9 @@ jobs:
           echo "TIMESTAMP=$(date)" >> $GITHUB_ENV
 
       - name: Push Changes
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}
-          branch: ${{ env.BRANCH_NAME }}
+        env:
+          BRANCH_NAME: ${{ env.BRANCH_NAME }}
+        run: git push "https://${{ github.actor }}:${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}@github.com/${{ github.repository }}" "HEAD:${BRANCH_NAME}" --follow-tags
 
       - name: Create pull request
         id: create-pull-request
@@ -99,15 +97,21 @@ jobs:
           PULL_REQUEST_NUMBER=$(echo ${RESULT} | jq -r .data.number)
           echo "PULL_REQUEST_NUMBER=${PULL_REQUEST_NUMBER}" >> $GITHUB_ENV
 
-      - name: enable auto merge test (for Pull request target)
+      - name: sleep
+        run: sleep 5
+
+      - name: Enable auto merge test (for Pull request target)
         env: 
-          GITHUB: $${{  toJSON(github) }}
+          GITHUB: $${{ toJSON(github) }}
         uses: ./
         with:
           pull_request_number: ${{ env.PULL_REQUEST_NUMBER }}
           github_token: ${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}
           repository:  ${{ github.event.repository.name }}
           owner: ${{ github.repository_owner }}
+
+      - name: sleep
+        run: sleep 5
 
       - name: Close Pull Request
         uses: peter-evans/close-pull@v3
