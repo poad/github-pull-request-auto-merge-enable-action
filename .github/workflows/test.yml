@@ -11,9 +11,7 @@ on:
 
   workflow_dispatch:
 
-permissions:
-  pull-requests: write
-  contents: write
+permissions: write-all
       
 jobs:
   test:
@@ -47,55 +45,65 @@ jobs:
           git config --local user.email "ken-yo@mbr.nifty.com"
           git config --local user.name "Kenji Saito"
 
+      - name: Create common input
+        id: create-input
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "URL=https://${{ github.actor }}:${GITHUB_TOKEN}@github.com/${{ github.repository }}" >> "$GITHUB_OUTPUT"
+
       - name: Create base branch
+        id: create-base-input
         run: |
           BASE_BRANCH_NAME="test-base-$(date "+%Y%m%d-%H%M%S")"
           git switch -c "${BASE_BRANCH_NAME}"
           touch test.txt
           git add test.txt
           git commit -m "Test $(date)"
-          echo "BASE_BRANCH_NAME=${BASE_BRANCH_NAME}" >> $GITHUB_ENV
+          echo "BASE_BRANCH_NAME=${BASE_BRANCH_NAME}" >> "$GITHUB_OUTPUT"
 
       - name: Push Base
         env:
-          BASE_BRANCH_NAME: ${{ env.BASE_BRANCH_NAME }}
-        run: git push "https://${{ github.actor }}:${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}@github.com/${{ github.repository }}" "HEAD:${BASE_BRANCH_NAME}" --follow-tags
+          BASE_BRANCH_NAME: ${{ steps.create-base-input.outputs.BASE_BRANCH_NAME }}
+        run: git push "${{ steps.create-input.outputs.URL }}" "HEAD:${BASE_BRANCH_NAME}" --follow-tags
 
       - name: Create head branch
+        id: create-head-input
         run: |
           BRANCH_NAME="test-$(date "+%Y%m%d-%H%M%S")"
           git switch -c "${BRANCH_NAME}"
           touch test1.txt
           git add test1.txt
           git commit -m "Test $(date)"
-          echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
-          echo "TIMESTAMP=$(date)" >> $GITHUB_ENV
+          echo "BRANCH_NAME=${BRANCH_NAME}" >> "$GITHUB_OUTPUT"
+          echo "TIMESTAMP=$(date)" >> "$GITHUB_OUTPUT"
 
       - name: Push Changes
         env:
-          BRANCH_NAME: ${{ env.BRANCH_NAME }}
-        run: git push "https://${{ github.actor }}:${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}@github.com/${{ github.repository }}" "HEAD:${BRANCH_NAME}" --follow-tags
+          BRANCH_NAME: ${{ steps.create-head-input.outputs.BRANCH_NAME }}
+        run: git push "${{ steps.create-input.outputs.URL }}" "HEAD:${BRANCH_NAME}" --follow-tags
 
       - name: Create pull request
         id: create-pull-request
         uses: poad/github-pull-requester@v1.1.2
         with:
-          github_token: ${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}
-          head_branch: ${{ env.BRANCH_NAME }}
-          base_branch: ${{ env.BASE_BRANCH_NAME }}
-          title: ${{ format('Test for {0}', env.TIMESTAMP) }}
-          body: ${{ format('Test for {0}', env.TIMESTAMP) }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          head_branch: ${{ steps.create-head-input.outputs.BRANCH_NAME }}
+          base_branch: ${{ steps.create-base-input.outputs.BASE_BRANCH_NAME }}
+          title: ${{ format('Test for {0}', steps.create-head-input.outputs.TIMESTAMP) }}
+          body: ${{ format('Test for {0}', steps.create-head-input.outputs.TIMESTAMP) }}
           repository: ${{ github.event.repository.name }}
           owner: ${{ github.repository_owner }}
 
       - name: Extract response
+        id: create-response
         env:
           RESULT: ${{ steps.create-pull-request.outputs.result }}
         run: |
           PULL_REQUEST_HTML_URL=$(echo ${RESULT} | jq -r .data.html_url)
           echo "PULL_REQUEST_HTML_URL=${PULL_REQUEST_HTML_URL}" >> $GITHUB_ENV
           PULL_REQUEST_NUMBER=$(echo ${RESULT} | jq -r .data.number)
-          echo "PULL_REQUEST_NUMBER=${PULL_REQUEST_NUMBER}" >> $GITHUB_ENV
+          echo "PULL_REQUEST_NUMBER=${PULL_REQUEST_NUMBER}" >> "$GITHUB_OUTPUT"
 
       - name: sleep
         run: sleep 5
@@ -105,10 +113,11 @@ jobs:
           GITHUB: $${{ toJSON(github) }}
         uses: ./
         with:
-          pull_request_number: ${{ env.PULL_REQUEST_NUMBER }}
-          github_token: ${{ secrets.PERSONAL_TOKEN_FOR_GITHUB_ACTIONS }}
+          pull_request_number: ${{ steps.create-response.outputs.PULL_REQUEST_NUMBER }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           repository:  ${{ github.event.repository.name }}
           owner: ${{ github.repository_owner }}
+          merge_method: SQUASH
 
       - name: sleep
         run: sleep 5
@@ -117,12 +126,12 @@ jobs:
         uses: peter-evans/close-pull@v3
         if: ${{ always() }}
         with:
-          pull-request-number: ${{ env.PULL_REQUEST_NUMBER }}
+          pull-request-number: ${{ steps.create-response.outputs.PULL_REQUEST_NUMBER }}
           comment: Auto-closing pull request
           delete-branch: true
 
       - name: Delete base branch
         
         env:
-          BASE_BRANCH_NAME: ${{ env.BASE_BRANCH_NAME }}
+          BASE_BRANCH_NAME: ${{ steps.create-base-input.outputs.BASE_BRANCH_NAME }}
         run: git push --delete origin ${BASE_BRANCH_NAME}
