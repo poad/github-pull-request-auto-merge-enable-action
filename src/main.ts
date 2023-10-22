@@ -1,9 +1,17 @@
 import * as core from '@actions/core'
 import GitHubClient, {IPullRequest, MergeMethod} from './client'
 import 'source-map-support/register'
+import {GraphqlResponseError} from '@octokit/graphql'
 
 const run = async (): Promise<void> => {
   const errHandler = (error: unknown) => {
+    if (error instanceof GraphqlResponseError) {
+      core.error(
+        'Unable to enable automerge.Enable branch protection and activate one or more "branch protection rules". See https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/automatically-merging-a-pull-request#enabling-auto-merge and https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/managing-a-branch-protection-rule for more information'
+      )
+      core.setFailed(error)
+      return
+    }
     if (error instanceof Error) {
       core.error(error)
       core.setFailed(error)
@@ -33,10 +41,10 @@ const run = async (): Promise<void> => {
 
     const client = new GitHubClient(token)
     const resp = await client.findPullRequestId({
-          owner,
-          repo: repo,
-          number: pullRequestNumber
-        })
+      owner,
+      repo: repo,
+      number: pullRequestNumber
+    })
 
     const {id, state} = resp || ({} as IPullRequest)
     if (state !== 'OPEN') {

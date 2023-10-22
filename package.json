@@ -8,15 +8,17 @@
   "type": "commonjs",
   "scripts": {
     "build": "tsc",
-    "format": "prettier --write **/*.ts",
-    "format-check": "prettier --check **/*.ts",
-    "lint": "eslint src/**/*.ts",
+    "format:fix": "prettier --write **/*.ts",
+    "format:check": "prettier --check **/*.ts",
+    "eslint:fix": "eslint src/**/*.ts --fix",
+    "eslint:check": "eslint src/**/*.ts",
     "test": "NODE_ENV=test jest --coverage --silent=false --passWithNoTests --detectOpenHandles",
     "pack": "ncc build -s --license licenses.txt -m -q",
     "clean": "rm -rf dist",
     "package": "ncc build -s --license licenses.txt -m -q",
-    "dev": "node --loader ts-node/esm src/main.ts",
-    "all": "pnpm build && pnpm package && pnpm format && pnpm lint --fix && pnpm test"
+    "lint": "pnpm --parallel run /^.*:check$/",
+    "lint-fix": "pnpm run /^.*:fix$/",
+    "all": "pnpm build && pnpm package && pnpm lint-fix && pnpm test"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
