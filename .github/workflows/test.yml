@@ -87,7 +87,7 @@ jobs:
 
       - name: Create pull request
         id: create-pull-request
-        uses: poad/github-pull-requester@v1.1.2
+        uses: poad/github-pull-requester@v2.0.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           head_branch: ${{ steps.create-head-input.outputs.BRANCH_NAME }}
