@@ -1,65 +1,66 @@
-import {graphql} from '@octokit/graphql'
-import * as core from '@actions/core'
-import 'source-map-support/register'
+import * as core from "@actions/core";
+import { graphql } from "@octokit/graphql";
+import "source-map-support/register";
 
 export enum MergeMethod {
-  MERGE = 'MERGE',
-  REBASE = 'REBASE',
-  SQUASH = 'SQUASH'
+  MERGE = "MERGE",
+  REBASE = "REBASE",
+  SQUASH = "SQUASH",
 }
 
-// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace MergeMethod {
-  const reverseMap = new Map<string, MergeMethod>()
+  const reverseMap = new Map<string, MergeMethod>();
+  // biome-ignore lint/complexity/noForEach: reason
   Object.keys(MergeMethod).forEach((s: string) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const e = (<any>MergeMethod)[s]
-    reverseMap.set(e.toString(), e)
-  })
+    // biome-ignore lint/suspicious/noExplicitAny: reason
+    const e = (<any>MergeMethod)[s];
+    reverseMap.set(e.toString(), e);
+  });
+  // biome-ignore lint/suspicious/noShadowRestrictedNames: reason
   export function valueOf(str: string): MergeMethod | undefined {
-    return reverseMap.get(str)
+    return reverseMap.get(str);
   }
 }
 
 export interface FindPullRequestIdParam {
-  owner: string
-  repo: string
-  number: number
+  owner: string;
+  repo: string;
+  number: number;
 }
 
 export interface IPullRequestResponse {
   repository?: {
-    pullRequest?: IPullRequest
-  }
+    pullRequest?: IPullRequest;
+  };
 }
 
 export interface IPullRequest {
-  id?: string
-  state?: 'OPEN' | 'CLOSED' | 'MERGED'
+  id?: string;
+  state?: "OPEN" | "CLOSED" | "MERGED";
 }
 
 export interface EnableAutoMergeParam {
-  pullRequestId: string
-  mergeMethod?: MergeMethod
+  pullRequestId: string;
+  mergeMethod?: MergeMethod;
 }
 
 interface IGitHubClient {
   findPullRequestId(
-    params: FindPullRequestIdParam
-  ): Promise<IPullRequest | undefined>
-  enableAutoMerge(param: EnableAutoMergeParam): Promise<void>
+    params: FindPullRequestIdParam,
+  ): Promise<IPullRequest | undefined>;
+  enableAutoMerge(param: EnableAutoMergeParam): Promise<void>;
 }
 
 class GitHubClient implements IGitHubClient {
-  private token: string
+  private token: string;
 
   constructor(token: string) {
-    this.token = token
+    this.token = token;
   }
   async findPullRequestId({
     owner,
     repo,
-    number
+    number,
   }: FindPullRequestIdParam): Promise<IPullRequest | undefined> {
     const query = `
     query {
@@ -70,46 +71,46 @@ class GitHubClient implements IGitHubClient {
         }
       }
     }
-    `
+    `;
     const response = await graphql<IPullRequestResponse>(query, {
       headers: {
-        authorization: `token ${this.token}`
+        authorization: `token ${this.token}`,
       },
       request: {
-        fetch
-      }
-    })
+        fetch,
+      },
+    });
 
-    core.debug(`response: ${response ? JSON.stringify(response) : undefined}`)
+    core.debug(`response: ${response ? JSON.stringify(response) : undefined}`);
 
-    return response.repository?.pullRequest
+    return response.repository?.pullRequest;
   }
 
   async enableAutoMerge({
     pullRequestId,
-    mergeMethod
+    mergeMethod,
   }: EnableAutoMergeParam): Promise<void> {
     const query = `
       mutation  {
         enablePullRequestAutoMerge(input: {
           pullRequestId: "${pullRequestId}",
-          ${mergeMethod ? `mergeMethod: ${mergeMethod.toString()}` : ''}
+          ${mergeMethod ? `mergeMethod: ${mergeMethod.toString()}` : ""}
         }) {
           clientMutationId
         }
       }
-      `
+      `;
 
-    core.debug(`execute graphql mutation ${query}`)
+    core.debug(`execute graphql mutation ${query}`);
     await graphql(query, {
       headers: {
-        authorization: `token ${this.token}`
+        authorization: `token ${this.token}`,
       },
       request: {
-        fetch
-      }
-    })
+        fetch,
+      },
+    });
   }
 }
 
-export default GitHubClient
+export default GitHubClient;
