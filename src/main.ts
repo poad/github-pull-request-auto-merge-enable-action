@@ -1,7 +1,7 @@
 import * as core from "@actions/core";
 import { GraphqlResponseError } from "@octokit/graphql";
 import "source-map-support/register";
-import GitHubClient, { IPullRequest, MergeMethod } from "./client";
+import GitHubClient, { type IPullRequest, MergeMethod } from "./client";
 
 const run = async (): Promise<void> => {
   const errHandler = (error: unknown) => {
