@@ -1,9 +1,9 @@
 import * as core from "@actions/core";
 import { GraphqlResponseError } from "@octokit/graphql";
 import "source-map-support/register";
-import GitHubClient, { type IPullRequest, MergeMethod } from "./client";
+import GitHubClient, { type IPullRequest, MergeMethod } from "./client.js";
 
-const run = async (): Promise<void> => {
+async function run(): Promise<void> {
   const errHandler = (error: unknown) => {
     if (error instanceof GraphqlResponseError) {
       core.error(
@@ -46,7 +46,7 @@ const run = async (): Promise<void> => {
       number: pullRequestNumber,
     });
 
-    const { id, state } = resp || ({} as IPullRequest);
+    const { id, state } = resp ?? ({} as IPullRequest);
     if (state !== "OPEN") {
       core.warning(`target pull request state: ${state}`);
       return;
@@ -67,7 +67,7 @@ const run = async (): Promise<void> => {
   } catch (error) {
     errHandler(error);
   }
-};
+}
 
 Promise.resolve(run()).catch((error: Error) => {
   core.error(error.stack ? error.stack?.toString() : error);
