@@ -57,6 +57,7 @@ class GitHubClient implements IGitHubClient {
   constructor(token: string) {
     this.token = token;
   }
+
   async findPullRequestId({
     owner,
     repo,
