@@ -134,7 +134,6 @@ jobs:
           delete-branch: true
 
       - name: Delete base branch
-        
         env:
           BASE_BRANCH_NAME: ${{ steps.create-base-input.outputs.BASE_BRANCH_NAME }}
         run: git push --delete origin ${BASE_BRANCH_NAME}

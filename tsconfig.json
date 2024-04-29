@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "commonjs",
+    "module": "NodeNext",
     "lib": [
       "esnext",
       "DOM"
     ],
     "strict": true,
-    "moduleResolution": "node",
+    "moduleResolution": "NodeNext",
     "outDir": "./dist",
     "rootDir": "./src",
     "esModuleInterop": true,
@@ -16,5 +16,5 @@
     "forceConsistentCasingInFileNames": true,
     "inlineSourceMap": true
   },
-  "exclude": ["node_modules", "**/*.test.ts"]
+  "exclude": ["node_modules", "**/*.test.ts", "vite.config.ts"]
 }
