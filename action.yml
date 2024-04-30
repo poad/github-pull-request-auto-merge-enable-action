@@ -8,7 +8,8 @@ inputs:
   pull_request_number:
     description: number of Pull Request
   github_token:
-    required: true
+    required: false
+    default: ${{ secrets.GITHUB_TOKEN }}
   owner:
     description: repository owner
     required: true

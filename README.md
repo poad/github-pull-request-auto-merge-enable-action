@@ -10,17 +10,28 @@ Enables auto merge to Pull Request by [octokit/graphql.js](https://github.com/oc
 
 ```$yaml
 - name: Enables auto merge to Pull Request
-  uses: poad/github-pull-request-auto-merge-enable-action@v2.0.1
+  uses: poad/github-pull-request-auto-merge-enable-action@v2.1.0
   with:
       pull_request_number: { number of GitHub Pull Request }
       github_token: { GitHub token for Pull Request creation }
       owner: { name of repository owner }
       merge_method: { merge method }
+      with_approve: { true or false }
 ```
+
+| **Input**                | **Require** | **Description**                                                                                                                               | **default value**              |
+|--------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
+| `pull_request_number`    | Y           | number of GitHub Pull Request                                                                                                                 | \-                             |
+| `github_token`           | Y           | GitHub token for Pull Request creation                                                                                                        | `${{ secrets.GITHUB_TOKEN }}`  |
+| `owner`                  | Y           | name of repository owner                                                                                                                      | \-                             |
+| `merge_method`           | Y           | merge method. see [GitHub API Docs](https://docs.github.com/en/graphql/reference/mutations#enablepullrequestautomerge)                        | \-                             |
+| `with_approve`           | Y           | true if the Pull Request is approved. see [GitHub API Docs](https://docs.github.com/en/graphql/reference/mutations#submitpullrequestreview)   | \-                             |
+
 
 ### Reference Information
 
-[GitHub API](https://docs.github.com/en/graphql/reference/mutations#enablepullrequestautomerge)
+[Auto Merge](https://docs.github.com/en/graphql/reference/mutations#enablepullrequestautomerge)
+[Approve](https://docs.github.com/en/graphql/reference/mutations#submitpullrequestreview)
 
 #### The following parameters are not supported
 
