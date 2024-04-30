@@ -59,10 +59,33 @@ jobs:
         run: |
           echo "URL=https://${{ github.actor }}:${GITHUB_TOKEN}@github.com/${{ github.repository }}" >> "$GITHUB_OUTPUT"
 
+      - name: Generate branch suffix
+        id: gen-suffix
+        env:
+          medhod: ${{ matrix.options.merge-method }}
+          approve: ${{ matrix.options.with-approve }}
+        run: |
+          SUFFIX=""
+          if [ "${medhod}" != "" ]; then
+            if [ "${approve}" != "" ]; then
+              SUFFIX="-${medhod}-${approve}"
+            else
+              SUFFIX="-${medhod}"
+            fi
+          else
+            if [ "${approve}" != "" ]; then
+              SUFFIX="-${approve}"
+            fi
+          fi
+          echo "SUFFIX=${SUFFIX}" >> "$GITHUB_OUTPUT"
+
       - name: Create base branch
         id: create-base-input
+        env:
+          suffix: ${{ steps.gen-suffix.outputs.SUFFIX }}
         run: |
-          BASE_BRANCH_NAME="test-base-$(date "+%Y%m%d-%H%M%S%3N")"
+
+          BASE_BRANCH_NAME="test-base-$(date "+%Y%m%d-%H%M%S%3N")${suffix}"
           git switch -c "${BASE_BRANCH_NAME}"
           touch test.txt
           git add test.txt
@@ -76,8 +99,10 @@ jobs:
 
       - name: Create head branch
         id: create-head-input
+        env:
+          suffix: ${{ steps.gen-suffix.outputs.SUFFIX }}
         run: |
-          BRANCH_NAME="test-$(date "+%Y%m%d-%H%M%S%3N")"
+          BRANCH_NAME="test-$(date "+%Y%m%d-%H%M%S%3N")$suffix"
           git switch -c "${BRANCH_NAME}"
           touch test1.txt
           git add test1.txt
@@ -114,6 +139,41 @@ jobs:
 
       - name: sleep
         run: sleep 5
+
+      - name: Enable auto merge test (for Pull request target) without method
+        env:
+          GITHUB: $${{ toJSON(github) }}
+        uses: ./
+        if: ${{ matrix.options.merge-method == '' }}
+        with:
+          pull_request_number: ${{ steps.create-response.outputs.PULL_REQUEST_NUMBER }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repository:  ${{ github.event.repository.name }}
+          owner: ${{ github.repository_owner }}
+          with_approve: ${{ matrix.options.with-approve }}
+
+      - name: Enable auto merge test (for Pull request target) without approve
+        env:
+          GITHUB: $${{ toJSON(github) }}
+        uses: ./
+        if: ${{ matrix.options.with-approve == '' }}
+        with:
+          pull_request_number: ${{ steps.create-response.outputs.PULL_REQUEST_NUMBER }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repository:  ${{ github.event.repository.name }}
+          owner: ${{ github.repository_owner }}
+          merge_method: ${{ matrix.options.merge-method }}
+
+      - name: Enable auto merge test (for Pull request target) without method, approve
+        env:
+          GITHUB: $${{ toJSON(github) }}
+        uses: ./
+        if: ${{ matrix.options.merge-method == '' && matrix.options.with-approve == '' }}
+        with:
+          pull_request_number: ${{ steps.create-response.outputs.PULL_REQUEST_NUMBER }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repository:  ${{ github.event.repository.name }}
+          owner: ${{ github.repository_owner }}
 
       - name: Enable auto merge test (for Pull request target)
         env:
