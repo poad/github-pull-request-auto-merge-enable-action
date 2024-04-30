@@ -23,26 +23,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v3
-        name: Install pnpm
-        id: pnpm-install
-        with:
-          version: latest
-          run_install: |
-            - recursive: true
-              args: [--no-frozen-lockfile, --strict-peer-dependencies]
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
+      - uses: oven-sh/setup-bun@v1
 
       - name: Build and lint
         run: |
-          pnpm build
-          pnpm package
-          pnpm test
+          bun install
+          bun build
+          bun package
+          bun test
 
   lint:
     strategy:
@@ -54,20 +42,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v3
-        name: Install pnpm
-        id: pnpm-install
-        with:
-          version: latest
-          run_install: |
-            - recursive: true
-              args: [--no-frozen-lockfile, --strict-peer-dependencies]
+
+      - uses: oven-sh/setup-bun@v1
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
+
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: latest
+          run_install: false
 
       - name: Build and lint
-        run: pnpm lint
+        run: |
+          bun install
+          pnpm lint
