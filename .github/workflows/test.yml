@@ -2,7 +2,7 @@ name: CI (test)
 
 on:
   pull_request:
-    branches: 
+    branches:
       - 'main'
       - '!test-base-*'
   push:
@@ -14,20 +14,22 @@ on:
 permissions:
   pull-requests: write
   contents: write
-      
+
 jobs:
   test:
     strategy:
       matrix:
         node-version: [20.x]
-    
+        merge-method: [ '', MERGE, SQUASH, REBASE ]
+        with-approve: [ '', true, false ]
+
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
+
       - uses: oven-sh/setup-bun@v1
 
       - name: Build and lint
@@ -79,7 +81,7 @@ jobs:
 
       - name: Create pull request
         id: create-pull-request
-        uses: poad/github-pull-requester@v2.0.1
+        uses: poad/github-pull-requester@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           head_branch: ${{ steps.create-head-input.outputs.BRANCH_NAME }}
@@ -103,7 +105,7 @@ jobs:
         run: sleep 5
 
       - name: Enable auto merge test (for Pull request target)
-        env: 
+        env:
           GITHUB: $${{ toJSON(github) }}
         uses: ./
         with:
@@ -111,7 +113,8 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           repository:  ${{ github.event.repository.name }}
           owner: ${{ github.repository_owner }}
-          merge_method: SQUASH
+          merge_method: ${{ matrix.merge-method }}
+          with_approve: ${{ matrix.with-approve }}
 
       - name: sleep
         run: sleep 5
