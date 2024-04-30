@@ -19,13 +19,13 @@ Enables auto merge to Pull Request by [octokit/graphql.js](https://github.com/oc
       with_approve: { true or false }
 ```
 
-| **Input**                | **Require** | **Description**                                                                                                                               | **default value**              |
-|--------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| `pull_request_number`    | Y           | number of GitHub Pull Request                                                                                                                 | \-                             |
-| `github_token`           | Y           | GitHub token for Pull Request creation                                                                                                        | `${{ secrets.GITHUB_TOKEN }}`  |
-| `owner`                  | Y           | name of repository owner                                                                                                                      | \-                             |
-| `merge_method`           | Y           | merge method. see [GitHub API Docs](https://docs.github.com/en/graphql/reference/mutations#enablepullrequestautomerge)                        | \-                             |
-| `with_approve`           | Y           | true if the Pull Request is approved. see [GitHub API Docs](https://docs.github.com/en/graphql/reference/mutations#submitpullrequestreview)   | \-                             |
+| **Input**                | **Require** | **Description**                                                                                                                               |
+|--------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| `pull_request_number`    | Y           | number of GitHub Pull Request                                                                                                                 |
+| `github_token`           | N           | GitHub token for Pull Request creation                                                                                                        |
+| `owner`                  | Y           | name of repository owner                                                                                                                      |
+| `merge_method`           | N           | merge method. see [GitHub API Docs](https://docs.github.com/en/graphql/reference/mutations#enablepullrequestautomerge)                        |
+| `with_approve`           | N           | true if the Pull Request is approved. see [GitHub API Docs](https://docs.github.com/en/graphql/reference/mutations#submitpullrequestreview)   |
 
 
 ### Reference Information

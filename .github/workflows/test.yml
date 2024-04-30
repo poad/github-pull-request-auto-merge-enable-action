@@ -59,10 +59,33 @@ jobs:
         run: |
           echo "URL=https://${{ github.actor }}:${GITHUB_TOKEN}@github.com/${{ github.repository }}" >> "$GITHUB_OUTPUT"
 
+      - name: Generate branch suffix
+        id: gen-suffix
+        env:
+          medhod: ${{ matrix.options.merge-method }}
+          approve: ${{ matrix.options.with-approve }}
+        run: |
+          SUFFIX=""
+          if [ "${medhod}" != "" ]; then
+            if [ "${approve}" != "" ]; then
+              SUFFIX="-${medhod}-${approve}"
+            else
+              SUFFIX="-${medhod}"
+            fi
+          else
+            if [ "${approve}" != "" ]; then
+              SUFFIX="-${approve}"
+            fi
+          fi
+          echo "SUFFIX=${SUFFIX}" >> "$GITHUB_OUTPUT"
+
       - name: Create base branch
         id: create-base-input
+        env:
+          suffix: ${{ steps.gen-suffix.outputs.SUFFIX }}
         run: |
-          BASE_BRANCH_NAME="test-base-$(date "+%Y%m%d-%H%M%S%3N")"
+
+          BASE_BRANCH_NAME="test-base-$(date "+%Y%m%d-%H%M%S%3N")${suffix}"
           git switch -c "${BASE_BRANCH_NAME}"
           touch test.txt
           git add test.txt
@@ -76,8 +99,10 @@ jobs:
 
       - name: Create head branch
         id: create-head-input
+        env:
+          suffix: ${{ steps.gen-suffix.outputs.SUFFIX }}
         run: |
-          BRANCH_NAME="test-$(date "+%Y%m%d-%H%M%S%3N")"
+          BRANCH_NAME="test-$(date "+%Y%m%d-%H%M%S%3N")$suffix"
           git switch -c "${BRANCH_NAME}"
           touch test1.txt
           git add test1.txt
