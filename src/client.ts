@@ -2,25 +2,7 @@ import * as core from "@actions/core";
 import { graphql } from "@octokit/graphql";
 import "source-map-support/register";
 
-export enum MergeMethod {
-  MERGE = "MERGE",
-  REBASE = "REBASE",
-  SQUASH = "SQUASH",
-}
-
-export namespace MergeMethod {
-  const reverseMap = new Map<string, MergeMethod>();
-  // biome-ignore lint/complexity/noForEach: reason
-  Object.keys(MergeMethod).forEach((s: string) => {
-    // biome-ignore lint/suspicious/noExplicitAny: reason
-    const e = (<any>MergeMethod)[s];
-    reverseMap.set(e.toString(), e);
-  });
-  // biome-ignore lint/suspicious/noShadowRestrictedNames: reason
-  export function valueOf(str: string): MergeMethod | undefined {
-    return reverseMap.get(str);
-  }
-}
+export type MergeMethod = "MERGE" | "REBASE" | "SQUASH";
 
 export interface FindPullRequestIdParam {
   owner: string;
@@ -30,13 +12,18 @@ export interface FindPullRequestIdParam {
 
 export interface IPullRequestResponse {
   repository?: {
-    pullRequest?: IPullRequest;
+    pullRequest: IPullRequest;
   };
 }
 
 export interface IPullRequest {
   id?: string;
   state?: "OPEN" | "CLOSED" | "MERGED";
+  reviews: {
+    nodes: {
+      id: string;
+    }[];
+  };
 }
 
 export interface EnableAutoMergeParam {
@@ -44,11 +31,17 @@ export interface EnableAutoMergeParam {
   mergeMethod?: MergeMethod;
 }
 
-interface IGitHubClient {
+export interface ApprovePullRequestReviewParam {
+  pullRequestId: string;
+  reviewId: string;
+}
+
+export interface IGitHubClient {
   findPullRequestId(
     params: FindPullRequestIdParam,
   ): Promise<IPullRequest | undefined>;
   enableAutoMerge(param: EnableAutoMergeParam): Promise<void>;
+  approvePullRequestReview(param: ApprovePullRequestReviewParam): Promise<void>;
 }
 
 class GitHubClient implements IGitHubClient {
@@ -56,6 +49,33 @@ class GitHubClient implements IGitHubClient {
 
   constructor(token: string) {
     this.token = token;
+  }
+
+  async approvePullRequestReview({
+    pullRequestId,
+    reviewId,
+  }: ApprovePullRequestReviewParam) {
+    const query = `
+      mutation  {
+        enablePullRequestAutoMerge(input: {
+          pullRequestId: "${pullRequestId}",
+          mergeMethod: "${reviewId}"
+        }) {
+          clientMutationId
+          pullRequestReview
+        }
+      }
+      `;
+
+    core.debug(`execute graphql mutation ${query}`);
+    await graphql(query, {
+      headers: {
+        authorization: `token ${this.token}`,
+      },
+      request: {
+        fetch,
+      },
+    });
   }
 
   async findPullRequestId({
@@ -69,6 +89,11 @@ class GitHubClient implements IGitHubClient {
         pullRequest(number: ${number}) {
           id
           state
+          reviews(last: 1) {
+            nodes {
+              id
+            }
+          }
         }
       }
     }
@@ -84,7 +109,7 @@ class GitHubClient implements IGitHubClient {
 
     core.debug(`response: ${response ? JSON.stringify(response) : undefined}`);
 
-    return response.repository?.pullRequest;
+    return response?.repository?.pullRequest;
   }
 
   async enableAutoMerge({
