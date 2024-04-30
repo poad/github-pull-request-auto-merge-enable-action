@@ -19,9 +19,20 @@ jobs:
   test:
     strategy:
       matrix:
-        node-version: [20.x]
-        merge-method: [ '', MERGE, SQUASH, REBASE ]
-        with-approve: [ '', true, false ]
+        options: [
+          { merge-method: '', with-approve: '' },
+          { merge-method: 'MERGE', with-approve: '' },
+          { merge-method: 'SQUASH', with-approve: '' },
+          { merge-method: 'REBASE', with-approve: '' },
+          { merge-method: '', with-approve: true },
+          { merge-method: 'MERGE', with-approve: true },
+          { merge-method: 'SQUASH', with-approve: true },
+          { merge-method: 'REBASE', with-approve: true },
+          { merge-method: '', with-approve: false },
+          { merge-method: 'MERGE', with-approve: false },
+          { merge-method: 'SQUASH', with-approve: false },
+          { merge-method: 'REBASE', with-approve: false }
+        ]
 
     runs-on: ubuntu-latest
 
@@ -113,8 +124,8 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           repository:  ${{ github.event.repository.name }}
           owner: ${{ github.repository_owner }}
-          merge_method: ${{ matrix.merge-method }}
-          with_approve: ${{ matrix.with-approve }}
+          merge_method: ${{ matrix.options.merge-method }}
+          with_approve: ${{ matrix.options.with-approve }}
 
       - name: sleep
         run: sleep 5
@@ -128,6 +139,7 @@ jobs:
           delete-branch: true
 
       - name: Delete base branch
+        if: ${{ always() }}
         env:
           BASE_BRANCH_NAME: ${{ steps.create-base-input.outputs.BASE_BRANCH_NAME }}
         run: git push --delete origin ${BASE_BRANCH_NAME}
