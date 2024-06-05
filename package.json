@@ -20,7 +20,7 @@
     "all": "bun run build && bun run package && pnpm lint-fix && bun run test"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.7.3",
+    "@biomejs/biome": "^1.8.0",
     "@types/node": "^20.14.1",
     "@vercel/ncc": "^0.36.1",
     "@vitest/coverage-v8": "^1.6.0",
