@@ -16,13 +16,13 @@ describe("run()", () => {
 
   it("unsupported merge method", async () => {
     vi.mock("../src/client.ts", async () => {
-      const _default = vi.fn<[string], IGitHubClient>(() => ({
+      const _default = vi.fn(() => ({
         findPullRequestId: vi
-          .fn<[FindPullRequestIdParam], Promise<IPullRequest | undefined>>()
+          .fn()
           .mockRejectedValue(new Error()),
-        enableAutoMerge: vi.fn<[EnableAutoMergeParam]>(),
+        enableAutoMerge: vi.fn(),
         approvePullRequestReview: vi
-          .fn<[ApprovePullRequestReviewParam]>()
+          .fn()
           .mockRejectedValue(new Error()),
       }));
       return { default: _default };
@@ -43,17 +43,17 @@ describe("run()", () => {
 
   it("no state", async () => {
     vi.mock("../src/client.ts", () => {
-      const _default = vi.fn<[string], IGitHubClient>(() => ({
+      const _default = vi.fn(() => ({
         findPullRequestId: vi
-          .fn<[FindPullRequestIdParam], Promise<IPullRequest | undefined>>()
+          .fn()
           .mockResolvedValue({
             id: "100",
             reviews: {
               nodes: [{ id: "test" }, { id: "test2" }],
             },
           }),
-        enableAutoMerge: vi.fn<[EnableAutoMergeParam]>(),
-        approvePullRequestReview: vi.fn<[ApprovePullRequestReviewParam]>(),
+        enableAutoMerge: vi.fn(),
+        approvePullRequestReview: vi.fn(),
       }));
       return { default: _default };
     });
@@ -70,9 +70,9 @@ describe("run()", () => {
 
   it("merge", async () => {
     vi.mock("../src/client.ts", async () => {
-      const _default = vi.fn<[string], IGitHubClient>(() => ({
+      const _default = vi.fn(() => ({
         findPullRequestId: vi
-          .fn<[FindPullRequestIdParam], Promise<IPullRequest | undefined>>()
+          .fn()
           .mockResolvedValue({
             id: "100",
             state: "OPEN",
@@ -80,9 +80,9 @@ describe("run()", () => {
               nodes: [{ id: "test" }],
             },
           }),
-        enableAutoMerge: vi.fn<[EnableAutoMergeParam]>(),
+        enableAutoMerge: vi.fn(),
         approvePullRequestReview: vi
-          .fn<[ApprovePullRequestReviewParam]>()
+          .fn()
           .mockRejectedValue(new Error()),
       }));
       return { default: _default };
@@ -101,9 +101,9 @@ describe("run()", () => {
 
   it("squash", async () => {
     vi.mock("../src/client.ts", async () => {
-      const _default = vi.fn<[string], IGitHubClient>(() => ({
+      const _default = vi.fn(() => ({
         findPullRequestId: vi
-          .fn<[FindPullRequestIdParam], Promise<IPullRequest | undefined>>()
+          .fn()
           .mockResolvedValue({
             id: "100",
             state: "OPEN",
@@ -111,9 +111,9 @@ describe("run()", () => {
               nodes: [{ id: "test" }],
             },
           }),
-        enableAutoMerge: vi.fn<[EnableAutoMergeParam]>(),
+        enableAutoMerge: vi.fn(),
         approvePullRequestReview: vi
-          .fn<[ApprovePullRequestReviewParam]>()
+          .fn()
           .mockRejectedValue(new Error()),
       }));
       return { default: _default };
@@ -132,9 +132,9 @@ describe("run()", () => {
 
   it("rebase", async () => {
     vi.mock("../src/client.ts", async () => {
-      const _default = vi.fn<[string], IGitHubClient>(() => ({
+      const _default = vi.fn(() => ({
         findPullRequestId: vi
-          .fn<[FindPullRequestIdParam], Promise<IPullRequest | undefined>>()
+          .fn()
           .mockResolvedValue({
             id: "100",
             state: "OPEN",
@@ -142,9 +142,9 @@ describe("run()", () => {
               nodes: [{ id: "test" }],
             },
           }),
-        enableAutoMerge: vi.fn<[EnableAutoMergeParam]>(),
+        enableAutoMerge: vi.fn(),
         approvePullRequestReview: vi
-          .fn<[ApprovePullRequestReviewParam]>()
+          .fn()
           .mockRejectedValue(new Error()),
       }));
       return { default: _default };
@@ -163,9 +163,9 @@ describe("run()", () => {
 
   it("normal", async () => {
     vi.mock("../src/client.ts", () => {
-      const _default = vi.fn<[string], IGitHubClient>(() => ({
+      const _default = vi.fn(() => ({
         findPullRequestId: vi
-          .fn<[FindPullRequestIdParam], Promise<IPullRequest | undefined>>()
+          .fn()
           .mockResolvedValue({
             id: "100",
             state: "OPEN",
@@ -173,9 +173,9 @@ describe("run()", () => {
               nodes: [{ id: "test" }],
             },
           }),
-        enableAutoMerge: vi.fn<[EnableAutoMergeParam]>(),
+        enableAutoMerge: vi.fn(),
         approvePullRequestReview: vi
-          .fn<[ApprovePullRequestReviewParam]>()
+          .fn()
           .mockRejectedValue(new Error()),
       }));
       return { default: _default };
@@ -193,9 +193,9 @@ describe("run()", () => {
 
   it("with approve", async () => {
     vi.mock("../src/client.ts", () => {
-      const _default = vi.fn<[string], IGitHubClient>(() => ({
+      const _default = vi.fn(() => ({
         findPullRequestId: vi
-          .fn<[FindPullRequestIdParam], Promise<IPullRequest | undefined>>()
+          .fn()
           .mockResolvedValue({
             id: "100",
             state: "OPEN",
@@ -203,8 +203,8 @@ describe("run()", () => {
               nodes: [{ id: "test" }],
             },
           }),
-        enableAutoMerge: vi.fn<[EnableAutoMergeParam]>(),
-        approvePullRequestReview: vi.fn<[ApprovePullRequestReviewParam]>(),
+        enableAutoMerge: vi.fn(),
+        approvePullRequestReview: vi.fn(),
       }));
       return { default: _default };
     });
@@ -221,15 +221,15 @@ describe("run()", () => {
 
   it("cannot resolve pull request", async () => {
     vi.mock("../src/client.ts", () => {
-      const _default = vi.fn<[string], IGitHubClient>(() => ({
+      const _default = vi.fn(() => ({
         findPullRequestId: vi
-          .fn<[FindPullRequestIdParam], Promise<IPullRequest | undefined>>()
+          .fn()
           .mockResolvedValue(undefined),
         enableAutoMerge: vi
-          .fn<[EnableAutoMergeParam]>()
+          .fn()
           .mockRejectedValue(new Error()),
         approvePullRequestReview: vi
-          .fn<[ApprovePullRequestReviewParam]>()
+          .fn()
           .mockRejectedValue(new Error()),
       }));
       return { default: _default };
@@ -249,9 +249,9 @@ describe("run()", () => {
 
   it("pull request was not open", async () => {
     vi.mock("../src/client.ts", () => {
-      const _default = vi.fn<[string], IGitHubClient>(() => ({
+      const _default = vi.fn(() => ({
         findPullRequestId: vi
-          .fn<[FindPullRequestIdParam], Promise<IPullRequest | undefined>>()
+          .fn()
           .mockResolvedValue({
             id: "100",
             state: "CLOSED",
@@ -259,9 +259,9 @@ describe("run()", () => {
               nodes: [],
             },
           }),
-        enableAutoMerge: vi.fn<[EnableAutoMergeParam]>(),
+        enableAutoMerge: vi.fn(),
         approvePullRequestReview: vi
-          .fn<[ApprovePullRequestReviewParam]>()
+          .fn()
           .mockRejectedValue(new Error()),
       }));
       return { default: _default };
@@ -279,9 +279,9 @@ describe("run()", () => {
 
   it("no revirews", async () => {
     vi.mock("../src/client.ts", () => {
-      const _default = vi.fn<[string], IGitHubClient>(() => ({
+      const _default = vi.fn(() => ({
         findPullRequestId: vi
-          .fn<[FindPullRequestIdParam], Promise<IPullRequest | undefined>>()
+          .fn()
           .mockResolvedValue({
             id: "100",
             state: "OPEN",
@@ -289,9 +289,9 @@ describe("run()", () => {
               nodes: [],
             },
           }),
-        enableAutoMerge: vi.fn<[EnableAutoMergeParam]>(),
+        enableAutoMerge: vi.fn(),
         approvePullRequestReview: vi
-          .fn<[ApprovePullRequestReviewParam]>()
+          .fn()
           .mockRejectedValue(new Error()),
       }));
       return { default: _default };
@@ -309,9 +309,9 @@ describe("run()", () => {
 
   it("no revirews with approve", async () => {
     vi.mock("../src/client.ts", () => {
-      const _default = vi.fn<[string], IGitHubClient>(() => ({
+      const _default = vi.fn(() => ({
         findPullRequestId: vi
-          .fn<[FindPullRequestIdParam], Promise<IPullRequest | undefined>>()
+          .fn()
           .mockResolvedValue({
             id: "100",
             state: "OPEN",
@@ -319,9 +319,9 @@ describe("run()", () => {
               nodes: [],
             },
           }),
-        enableAutoMerge: vi.fn<[EnableAutoMergeParam]>(),
+        enableAutoMerge: vi.fn(),
         approvePullRequestReview: vi
-          .fn<[ApprovePullRequestReviewParam]>()
+          .fn()
           .mockRejectedValue(new Error()),
       }));
       return { default: _default };
@@ -339,9 +339,9 @@ describe("run()", () => {
 
   it("multipule reviews", async () => {
     vi.mock("../src/client.ts", () => {
-      const _default = vi.fn<[string], IGitHubClient>(() => ({
+      const _default = vi.fn(() => ({
         findPullRequestId: vi
-          .fn<[FindPullRequestIdParam], Promise<IPullRequest | undefined>>()
+          .fn()
           .mockResolvedValue({
             id: "100",
             state: "OPEN",
@@ -349,8 +349,8 @@ describe("run()", () => {
               nodes: [{ id: "test" }, { id: "test2" }],
             },
           }),
-        enableAutoMerge: vi.fn<[EnableAutoMergeParam]>(),
-        approvePullRequestReview: vi.fn<[ApprovePullRequestReviewParam]>(),
+        enableAutoMerge: vi.fn(),
+        approvePullRequestReview: vi.fn(),
       }));
       return { default: _default };
     });
