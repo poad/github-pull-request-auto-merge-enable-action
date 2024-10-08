@@ -20,10 +20,6 @@ jobs:
     strategy:
       matrix:
         options: [
-          { merge-method: '', with-approve: '' },
-          { merge-method: 'MERGE', with-approve: '' },
-          { merge-method: 'SQUASH', with-approve: '' },
-          { merge-method: 'REBASE', with-approve: '' },
           { merge-method: '', with-approve: true },
           { merge-method: 'MERGE', with-approve: true },
           { merge-method: 'SQUASH', with-approve: true },
