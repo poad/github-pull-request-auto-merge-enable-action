@@ -4,15 +4,16 @@
   "repository": "https://github.com/poad/github-pull-request-auto-merge-enable-action.git",
   "author": "Kenji Saito <ken-yo@mbr.nifty.com>",
   "license": "MIT",
-  "main": "./dist/main.js",
+  "main": "./dist/index.js",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "lint-fix": "eslint src/**/*.ts --fix",
     "lint": "eslint src/**/*.ts",
     "test": "vitest run --silent=false --coverage",
-    "pack": "bunx @vercel/ncc build -o dist --source-map --license licenses.txt -m -q",
+    "pack": "bunx @vercel/ncc build -o dist --source-map --license licenses.txt -q --target es2023",
     "clean": "rm -rf dist",
-    "package": "bunx @vercel/ncc build -o dist --source-map --license licenses.txt -m -q",
+    "package": "bunx @vercel/ncc build -o dist --source-map --license licenses.txt -q --target es2023",
     "all": "bun run build && bun run package && pnpm lint-fix && bun run test"
   },
   "devDependencies": {
