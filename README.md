@@ -25,7 +25,7 @@ Enables auto merge to Pull Request by [octokit/graphql.js](https://github.com/oc
 | `github_token`           | N           | GitHub token for Pull Request creation                                                                                                        |
 | `owner`                  | Y           | name of repository owner                                                                                                                      |
 | `merge_method`           | N           | merge method. see [GitHub API Docs](https://docs.github.com/en/graphql/reference/mutations#enablepullrequestautomerge)                        |
-| `with_approve`           | N           | true if the Pull Request is approved. see [GitHub API Docs](https://docs.github.com/en/graphql/reference/mutations#submitpullrequestreview)   |
+| `with_approve`           | Y           | true if the Pull Request is approved. see [GitHub API Docs](https://docs.github.com/en/graphql/reference/mutations#submitpullrequestreview)   |
 
 
 ### Reference Information
