@@ -1,6 +1,5 @@
-import * as core from "@actions/core";
-import "source-map-support/register";
-import GitHubClient, { type IPullRequest, type MergeMethod } from "./client.js";
+import * as core from '@actions/core';
+import GitHubClient, { type MergeMethod } from './client.js';
 
 export interface Params {
   token: string;
@@ -22,9 +21,9 @@ export async function run({
 }: Params): Promise<void> {
   if (mergeMethod) {
     switch (mergeMethod) {
-      case "MERGE":
-      case "REBASE":
-      case "SQUASH":
+      case 'MERGE':
+      case 'REBASE':
+      case 'SQUASH':
         // OK
         break;
       default:
@@ -43,7 +42,7 @@ export async function run({
 
   if (resp) {
     const { id, state, reviews } = resp;
-    if (state !== "OPEN") {
+    if (state !== 'OPEN') {
       core.warning(`target pull request state: ${state}`);
       return;
     }
@@ -54,22 +53,24 @@ export async function run({
       const approver =
         withApprove && reviews.nodes.length > 0
           ? async () => {
-              const reviewId = reviews.nodes[0].id;
-              client.approvePullRequestReview({
-                pullRequestId: id,
-                reviewId,
-              });
-            }
-          : async () => {};
+            const reviewId = reviews.nodes[0].id;
+            client.approvePullRequestReview({
+              pullRequestId: id,
+              reviewId,
+            });
+          }
+          : async () => {
+            // pass
+          };
 
       await approver().then(
         async () =>
           await client.enableAutoMerge(
             mergeMethod
               ? {
-                  pullRequestId: id,
-                  mergeMethod: mergeMethod as MergeMethod,
-                }
+                pullRequestId: id,
+                mergeMethod: mergeMethod as MergeMethod,
+              }
               : { pullRequestId: id },
           ),
       );
