@@ -1,8 +1,7 @@
-import * as core from "@actions/core";
-import { graphql } from "@octokit/graphql";
-import "source-map-support/register";
+import * as core from '@actions/core';
+import { graphql } from '@octokit/graphql';
 
-export type MergeMethod = "MERGE" | "REBASE" | "SQUASH";
+export type MergeMethod = 'MERGE' | 'REBASE' | 'SQUASH';
 
 export interface FindPullRequestIdParam {
   owner: string;
@@ -18,7 +17,7 @@ export interface IPullRequestResponse {
 
 export interface IPullRequest {
   id?: string;
-  state?: "OPEN" | "CLOSED" | "MERGED";
+  state?: 'OPEN' | 'CLOSED' | 'MERGED';
   reviews: {
     nodes: {
       id: string;
@@ -120,7 +119,7 @@ class GitHubClient implements IGitHubClient {
       mutation  {
         enablePullRequestAutoMerge(input: {
           pullRequestId: "${pullRequestId}",
-          ${mergeMethod ? `mergeMethod: ${mergeMethod.toString()}` : ""}
+          ${mergeMethod ? `mergeMethod: ${mergeMethod.toString()}` : ''}
         }) {
           clientMutationId
         }
