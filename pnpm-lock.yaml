@@ -756,8 +756,8 @@ packages:
   caniuse-lite@1.0.30001667:
     resolution: {integrity: sha512-7LTwJjcRkzKFmtqGsibMeuXmvFDfZq/nzIjnmgCGzKKRVzjD72selLDK1oPF/Oxzmt4fNcPvTDvGqSDG4tCALw==}
 
-  chai@5.1.1:
-    resolution: {integrity: sha512-pT1ZgP8rPNqUgieVaEY+ryQr6Q4HXNg8Ei9UnLUrjN4IA7dvQC5JB+/kxVcPNDHyBcc/26CXPkbNzq3qwrOEKA==}
+  chai@5.1.2:
+    resolution: {integrity: sha512-aGtmf24DW6MLHHG5gCx4zaI3uBq3KRtxeVs0DjFH6Z0rDNbsvTxFASFvdj79pxjxZ8/5u3PIiN3IwEIQkiiuPw==}
     engines: {node: '>=12'}
 
   chalk@4.1.2:
@@ -2422,7 +2422,7 @@ snapshots:
     dependencies:
       '@vitest/spy': 2.1.2
       '@vitest/utils': 2.1.2
-      chai: 5.1.1
+      chai: 5.1.2
       tinyrainbow: 1.2.0
 
   '@vitest/mocker@2.1.2(@vitest/spy@2.1.2)(vite@5.4.8(@types/node@22.7.5))':
@@ -2595,7 +2595,7 @@ snapshots:
 
   caniuse-lite@1.0.30001667: {}
 
-  chai@5.1.1:
+  chai@5.1.2:
     dependencies:
       assertion-error: 2.0.1
       check-error: 2.1.1
@@ -3904,7 +3904,7 @@ snapshots:
       '@vitest/snapshot': 2.1.2
       '@vitest/spy': 2.1.2
       '@vitest/utils': 2.1.2
-      chai: 5.1.1
+      chai: 5.1.2
       debug: 4.3.7
       magic-string: 0.30.11
       pathe: 1.1.2
