@@ -31,8 +31,8 @@ importers:
         specifier: ^2.11.0
         version: 2.11.0(eslint@9.16.0)
       '@stylistic/eslint-plugin-plus':
-        specifier: ^2.11.0
-        version: 2.11.0(eslint@9.16.0)
+        specifier: ^2.12.0
+        version: 2.12.0(eslint@9.16.0)
       '@stylistic/eslint-plugin-ts':
         specifier: ^2.11.0
         version: 2.11.0(eslint@9.16.0)(typescript@5.7.2)
@@ -656,8 +656,8 @@ packages:
     peerDependencies:
       eslint: '>=8.40.0'
 
-  '@stylistic/eslint-plugin-plus@2.11.0':
-    resolution: {integrity: sha512-m8dkgJWdLMdVyZRo7+AlZ6sBPhoxn9N3I3QftfODLHkCOpF9o2K7rN0J2yX2e1lbmFKnSb/SaLrNsiqm6l4HAw==}
+  '@stylistic/eslint-plugin-plus@2.12.0':
+    resolution: {integrity: sha512-90X/B58m7TMotKFW/+UE1ETULAT5ja3XyVyMcIt5p+T5tYcZw1HtM6dJc78lEdPLewiMJ0894EURpITldpgRJw==}
     peerDependencies:
       eslint: '*'
 
@@ -2568,7 +2568,7 @@ snapshots:
       eslint-visitor-keys: 4.2.0
       espree: 10.3.0
 
-  '@stylistic/eslint-plugin-plus@2.11.0(eslint@9.16.0)':
+  '@stylistic/eslint-plugin-plus@2.12.0(eslint@9.16.0)':
     dependencies:
       eslint: 9.16.0
 
