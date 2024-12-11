@@ -28,8 +28,8 @@ importers:
         specifier: ^2.12.0
         version: 2.12.0(eslint@9.16.0)(typescript@5.7.2)
       '@stylistic/eslint-plugin-js':
-        specifier: ^2.12.0
-        version: 2.12.0(eslint@9.16.0)
+        specifier: ^2.12.1
+        version: 2.12.1(eslint@9.16.0)
       '@stylistic/eslint-plugin-plus':
         specifier: ^2.12.0
         version: 2.12.0(eslint@9.16.0)
@@ -650,8 +650,8 @@ packages:
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
 
-  '@stylistic/eslint-plugin-js@2.12.0':
-    resolution: {integrity: sha512-HMA+qhlDLmLiYC0nyLPEJT4CBq3BP9ri51WECRKmEjO6RZm41MVZCJl+IfUcp2sUvGSl3/FSK5gzgBKcVv8S3w==}
+  '@stylistic/eslint-plugin-js@2.12.1':
+    resolution: {integrity: sha512-5ybogtEgWIGCR6dMnaabztbWyVdAPDsf/5XOk6jBonWug875Q9/a6gm9QxnU3rhdyDEnckWKX7dduwYJMOWrVA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: '>=8.40.0'
@@ -2544,7 +2544,7 @@ snapshots:
 
   '@rtsao/scc@1.1.0': {}
 
-  '@stylistic/eslint-plugin-js@2.12.0(eslint@9.16.0)':
+  '@stylistic/eslint-plugin-js@2.12.1(eslint@9.16.0)':
     dependencies:
       eslint: 9.16.0
       eslint-visitor-keys: 4.2.0
