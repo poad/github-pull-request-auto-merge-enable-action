@@ -13,7 +13,7 @@
     "test": "vitest run --silent=false --coverage",
     "package": "bunx @vercel/ncc build -o dist --source-map --license licenses.txt -q --target es2023",
     "clean": "rm -rf dist",
-    "all": "bun run clean && bun run build && bun run package && pnpm lint-fix && bun run test"
+    "all": "bun run --run clean && bun run --run build && bun run --run package && pnpm --run lint-fix && bun run --vitest test"
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^2.12.1",
