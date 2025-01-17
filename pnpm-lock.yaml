@@ -1552,8 +1552,8 @@ packages:
     resolution: {integrity: sha512-Xa4Nw17FS9ApQFJ9umLiJS4orGjm7ZzwUrwamcGQuHSzDyth9boKDaycYdDcZDuqYATXw4HFXgaqWTctW/v1HA==}
     engines: {node: '>=16 || 14 >=14.18'}
 
-  pathe@2.0.1:
-    resolution: {integrity: sha512-6jpjMpOth5S9ITVu5clZ7NOgHNsv5vRQdheL9ztp2vZmM6fRbLvyua1tiBIL4lk8SAe3ARzeXEly6siXCjDHDw==}
+  pathe@2.0.2:
+    resolution: {integrity: sha512-15Ztpk+nov8DR524R4BF7uEuzESgzUEAV4Ah7CUMNGXdE5ELuvxElxGXndBl32vMSsWa1jpNf22Z+Er3sKwq+w==}
 
   pathval@2.0.0:
     resolution: {integrity: sha512-vE7JKRyES09KiunauX7nd2Q9/L7lhok4smP9RZTDeD4MVs72Dp2qNFVz39Nz5a0FVEW0BJR6C0DYrq6unoziZA==}
@@ -2524,13 +2524,13 @@ snapshots:
   '@vitest/runner@3.0.1':
     dependencies:
       '@vitest/utils': 3.0.1
-      pathe: 2.0.1
+      pathe: 2.0.2
 
   '@vitest/snapshot@3.0.1':
     dependencies:
       '@vitest/pretty-format': 3.0.1
       magic-string: 0.30.17
-      pathe: 2.0.1
+      pathe: 2.0.2
 
   '@vitest/spy@3.0.1':
     dependencies:
@@ -3590,7 +3590,7 @@ snapshots:
       lru-cache: 10.4.3
       minipass: 7.1.2
 
-  pathe@2.0.1: {}
+  pathe@2.0.2: {}
 
   pathval@2.0.0: {}
 
@@ -3983,7 +3983,7 @@ snapshots:
       cac: 6.7.14
       debug: 4.4.0
       es-module-lexer: 1.6.0
-      pathe: 2.0.1
+      pathe: 2.0.2
       vite: 6.0.7(@types/node@22.10.7)
     transitivePeerDependencies:
       - '@types/node'
@@ -4032,7 +4032,7 @@ snapshots:
       debug: 4.4.0
       expect-type: 1.1.0
       magic-string: 0.30.17
-      pathe: 2.0.1
+      pathe: 2.0.2
       std-env: 3.8.0
       tinybench: 2.9.0
       tinyexec: 0.3.2
