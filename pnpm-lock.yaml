@@ -49,8 +49,8 @@ importers:
         specifier: ^9.19.0
         version: 9.19.0
       eslint-plugin-github:
-        specifier: ^5.1.6
-        version: 5.1.6(eslint@9.19.0)(typescript@5.7.3)
+        specifier: ^5.1.7
+        version: 5.1.7(eslint@9.19.0)(typescript@5.7.3)
       fetch-mock:
         specifier: ^12.2.1
         version: 12.2.1
@@ -992,8 +992,8 @@ packages:
     peerDependencies:
       eslint: '*'
 
-  eslint-plugin-github@5.1.6:
-    resolution: {integrity: sha512-7DY92UOUoapfxR0iYTEb1FaEajcRBY33UB8z+DEtbpak4jEJhSremjXHDAevKCdEztnUVZbS6ZbbK11Tqs8bpA==}
+  eslint-plugin-github@5.1.7:
+    resolution: {integrity: sha512-P3S5TwvHy8u1QadfcI/tZ2uNFMTHv+mT/YmEdLEgEzp08mA3iK02kg/IhoWOz0SnbTyUi1qrq0a6SwC3uQSkpQ==}
     hasBin: true
     peerDependencies:
       eslint: ^8 || ^9
@@ -1109,8 +1109,8 @@ packages:
   fast-levenshtein@2.0.6:
     resolution: {integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==}
 
-  fastq@1.18.0:
-    resolution: {integrity: sha512-QKHXPW0hD8g4UET03SdOdunzSouc9N4AuHdsX8XNcTsuz+yYFILVNIX4l9yHABMhiEI9Db0JTTIpu0wB+Y1QQw==}
+  fastq@1.19.0:
+    resolution: {integrity: sha512-7SFSRCNjBQIZH/xZR3iy5iQYR8aGBE0h3VG6/cwlbrpdciNYBMotQav8c1XI3HjHH+NikUpP53nPdlZSdWmFzA==}
 
   fetch-mock@12.2.1:
     resolution: {integrity: sha512-ZUEDYDCr/qeZ3paYVyt6VkmuV/3HhZFVsih1Mt8hAAT34Gsc6HUv2qaFd5nh82BMhOaFjYL2yZbYi5VMuIhXKw==}
@@ -2250,7 +2250,7 @@ snapshots:
   '@nodelib/fs.walk@1.2.8':
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
-      fastq: 1.18.0
+      fastq: 1.19.0
 
   '@octokit/auth-token@5.1.2': {}
 
@@ -2948,7 +2948,7 @@ snapshots:
       lodash.snakecase: 4.1.1
       lodash.upperfirst: 4.3.1
 
-  eslint-plugin-github@5.1.6(eslint@9.19.0)(typescript@5.7.3):
+  eslint-plugin-github@5.1.7(eslint@9.19.0)(typescript@5.7.3):
     dependencies:
       '@eslint/compat': 1.2.5(eslint@9.19.0)
       '@eslint/eslintrc': 3.2.0
@@ -3135,7 +3135,7 @@ snapshots:
 
   fast-levenshtein@2.0.6: {}
 
-  fastq@1.18.0:
+  fastq@1.19.0:
     dependencies:
       reusify: 1.0.4
 
