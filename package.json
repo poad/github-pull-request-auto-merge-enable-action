@@ -24,7 +24,7 @@
     "@vercel/ncc": "^0.38.3",
     "@vitest/coverage-v8": "^3.0.4",
     "eslint": "^9.19.0",
-    "eslint-plugin-github": "^5.1.6",
+    "eslint-plugin-github": "^5.1.7",
     "fetch-mock": "^12.2.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3",
