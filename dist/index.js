@@ -28203,7 +28203,7 @@ function dist_bundle_withDefaults(oldEndpoint, newDefaults) {
 var request = dist_bundle_withDefaults(endpoint, defaults_default);
 
 
-;// CONCATENATED MODULE: ./node_modules/.pnpm/@octokit+graphql@8.1.2/node_modules/@octokit/graphql/dist-bundle/index.js
+;// CONCATENATED MODULE: ./node_modules/.pnpm/@octokit+graphql@8.2.0/node_modules/@octokit/graphql/dist-bundle/index.js
 // pkg/dist-src/index.js
 
 
@@ -28247,7 +28247,8 @@ var NON_VARIABLE_OPTIONS = [
   "headers",
   "request",
   "query",
-  "mediaType"
+  "mediaType",
+  "operationName"
 ];
 var FORBIDDEN_VARIABLE_OPTIONS = ["query", "method", "url"];
 var GHES_V3_SUFFIX_REGEX = /\/api\/v3\/?$/;
