@@ -16,6 +16,7 @@
     "all": "bun run --run clean && bun run --run build && bun run --run package && pnpm --run lint-fix && bun run --vitest test"
   },
   "devDependencies": {
+    "@eslint/js": "^9.20.0",
     "@stylistic/eslint-plugin": "^3.1.0",
     "@stylistic/eslint-plugin-js": "^3.1.0",
     "@stylistic/eslint-plugin-plus": "^3.1.0",
@@ -37,7 +38,7 @@
   "dependencies": {
     "@actions/core": "^1.11.1",
     "@octokit/core": "^6.1.4",
-    "@octokit/graphql": "^8.2.0",
+    "@octokit/graphql": "^8.2.1",
     "@octokit/plugin-request-log": "^5.3.1",
     "source-map-support": "^0.5.21"
   },
