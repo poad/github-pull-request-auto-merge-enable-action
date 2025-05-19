@@ -16,7 +16,7 @@
     "all": "bun run --run clean && bun run --run build && bun run --run package && pnpm --run lint-fix && bun run --vitest test"
   },
   "devDependencies": {
-    "@eslint/js": "^9.26.0",
+    "@eslint/js": "^9.27.0",
     "@stylistic/eslint-plugin": "^4.2.0",
     "@stylistic/eslint-plugin-js": "^4.2.0",
     "@stylistic/eslint-plugin-plus": "^4.2.0",
