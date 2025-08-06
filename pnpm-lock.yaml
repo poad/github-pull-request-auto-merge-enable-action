@@ -629,10 +629,6 @@ packages:
       eslint: ^8.57.0 || ^9.0.0
       typescript: '>=4.8.4 <6.0.0'
 
-  '@typescript-eslint/types@8.38.0':
-    resolution: {integrity: sha512-wzkUfX3plUqij4YwWaJyqhiPE5UCRVlFpKn1oCRn2O1bJ592XxWJj8ROQ3JD5MYXLORW84063z3tZTb/cs4Tyw==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
   '@typescript-eslint/types@8.39.0':
     resolution: {integrity: sha512-ArDdaOllnCj3yn/lzKn9s0pBQYmmyme/v1HbGIGB0GB/knFI3fWMHloC+oYTJW46tVbYnGKTMDK4ah1sC2v0Kg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -931,8 +927,8 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  electron-to-chromium@1.5.195:
-    resolution: {integrity: sha512-URclP0iIaDUzqcAyV1v2PgduJ9N0IdXmWsnPzPfelvBmjmZzEy6xJcjb1cXj+TbYqXgtLrjHEoaSIdTYhw4ezg==}
+  electron-to-chromium@1.5.197:
+    resolution: {integrity: sha512-m1xWB3g7vJ6asIFz+2pBUbq3uGmfmln1M9SSvBe4QIFWYrRHylP73zL/3nMjDmwz8V+1xAXQDfBd6+HPW0WvDQ==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -1065,8 +1061,8 @@ packages:
     resolution: {integrity: sha512-brcKcxGnISN2CcVhXJ/kEQlNa0MEfGRtwKtWA16SkqXHKitaKIMrfemJKLKX1YqDU5C/5JY3PvZXd5jEW04e0Q==}
     engines: {node: '>=5.0.0'}
 
-  eslint-plugin-prettier@5.5.3:
-    resolution: {integrity: sha512-NAdMYww51ehKfDyDhv59/eIItUVzU0Io9H2E8nHNGKEeeqlnci+1gCvrHib6EmZdf6GxF+LCV5K7UC65Ezvw7w==}
+  eslint-plugin-prettier@5.5.4:
+    resolution: {integrity: sha512-swNtI95SToIz05YINMA6Ox5R057IMAmWZ26GqPxusAp1TZzj+IdY9tXNWWD3vkF/wEqydCONcwjTFpxybBqZsg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       '@types/eslint': '>=8.0.0'
@@ -2457,7 +2453,7 @@ snapshots:
   '@stylistic/eslint-plugin@5.2.2(eslint@9.32.0)':
     dependencies:
       '@eslint-community/eslint-utils': 4.7.0(eslint@9.32.0)
-      '@typescript-eslint/types': 8.38.0
+      '@typescript-eslint/types': 8.39.0
       eslint: 9.32.0
       eslint-visitor-keys: 4.2.1
       espree: 10.4.0
@@ -2548,8 +2544,6 @@ snapshots:
       typescript: 5.9.2
     transitivePeerDependencies:
       - supports-color
-
-  '@typescript-eslint/types@8.38.0': {}
 
   '@typescript-eslint/types@8.39.0': {}
 
@@ -2771,7 +2765,7 @@ snapshots:
   browserslist@4.25.1:
     dependencies:
       caniuse-lite: 1.0.30001731
-      electron-to-chromium: 1.5.195
+      electron-to-chromium: 1.5.197
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.25.1)
 
@@ -2891,7 +2885,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  electron-to-chromium@1.5.195: {}
+  electron-to-chromium@1.5.197: {}
 
   emoji-regex@8.0.0: {}
 
@@ -3075,7 +3069,7 @@ snapshots:
       eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.39.0(eslint@9.32.0)(typescript@5.9.2))(eslint@9.32.0)
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.32.0)
       eslint-plugin-no-only-tests: 3.3.0
-      eslint-plugin-prettier: 5.5.3(eslint-config-prettier@10.1.8(eslint@9.32.0))(eslint@9.32.0)(prettier@3.6.2)
+      eslint-plugin-prettier: 5.5.4(eslint-config-prettier@10.1.8(eslint@9.32.0))(eslint@9.32.0)(prettier@3.6.2)
       eslint-rule-documentation: 1.0.23
       globals: 16.3.0
       jsx-ast-utils: 3.3.5
@@ -3143,7 +3137,7 @@ snapshots:
 
   eslint-plugin-no-only-tests@3.3.0: {}
 
-  eslint-plugin-prettier@5.5.3(eslint-config-prettier@10.1.8(eslint@9.32.0))(eslint@9.32.0)(prettier@3.6.2):
+  eslint-plugin-prettier@5.5.4(eslint-config-prettier@10.1.8(eslint@9.32.0))(eslint@9.32.0)(prettier@3.6.2):
     dependencies:
       eslint: 9.32.0
       prettier: 3.6.2
