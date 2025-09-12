@@ -27,7 +27,7 @@
     "eslint": "^9.35.0",
     "eslint-plugin-github": "^6.0.0",
     "fetch-mock": "^12.5.4",
-    "pnpm": "^10.15.1",
+    "pnpm": "^10.16.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.43.0",
@@ -55,5 +55,5 @@
     "pnpm": ">=8.7.1",
     "node": ">=20"
   },
-  "packageManager": "pnpm@10.15.1"
+  "packageManager": "pnpm@10.16.0"
 }
