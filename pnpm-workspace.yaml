@@ -4,8 +4,11 @@ packages:
 onlyBuiltDependencies:
   - esbuild
 
-auto-install-peers: true
-enable-pre-post-scripts: true
-legacy-peer-deps: true
-strict-peer-dependencies: false
+autoInstallPeers: true
+legacyPeerDeps: true
+strictPeerDependencies: false
 
+# one day
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+ - pnpm
