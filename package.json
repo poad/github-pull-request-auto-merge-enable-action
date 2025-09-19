@@ -7,27 +7,26 @@
   "main": "./dist/entry-point.js",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig-build.json",
     "lint-fix": "eslint src/**/*.ts --fix",
     "lint": "eslint src/**/*.ts",
     "test": "vitest run --silent=false --coverage",
     "package": "bunx @vercel/ncc build -o dist --source-map --license licenses.txt -q --target es2023",
-    "clean": "rm -rf dist",
+    "clean": "rimraf dist",
     "all": "bun run --run clean && bun run --run build && bun run --run package && pnpm --run lint-fix && bun run --vitest test"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
     "@stylistic/eslint-plugin": "^5.3.1",
-    "@stylistic/eslint-plugin-js": "^4.4.1",
-    "@stylistic/eslint-plugin-plus": "^4.4.1",
-    "@stylistic/eslint-plugin-ts": "^4.4.1",
     "@types/node": "^24.5.2",
     "@vercel/ncc": "^0.38.4",
     "@vitest/coverage-v8": "^3.2.4",
     "eslint": "^9.35.0",
     "eslint-plugin-github": "^6.0.0",
     "fetch-mock": "^12.5.4",
+    "jiti": "^2.5.1",
     "pnpm": "^10.17.0",
+    "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.44.0",
@@ -52,8 +51,8 @@
   "engines": {
     "npm": "use pnpm please!",
     "yarn": "use pnpm please!",
-    "pnpm": ">=8.7.1",
+    "pnpm": ">=10.17.0",
     "node": ">=20"
   },
-  "packageManager": "pnpm@10.16.1"
+  "packageManager": "pnpm@10.17.0"
 }

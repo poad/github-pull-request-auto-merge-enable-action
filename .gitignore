@@ -108,3 +108,6 @@ node_modules
 
 coverage
 .DS_Store
+
+eslint.config.js
+vitest.config.js
