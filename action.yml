@@ -22,5 +22,5 @@ inputs:
     description: true if the Pull Request is approved. see [GitHub API Docs](https://docs.github.com/en/graphql/reference/mutations#submitpullrequestreview)
     required: false
 runs:
-  using: 'node20'
+  using: 'node24'
   main: 'dist/index.js'
