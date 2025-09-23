@@ -30,7 +30,10 @@ async function main(): Promise<void> {
     const owner: string = core.getInput('owner');
     const repo: string = core.getInput('repository');
     const mergeMethod: string = core.getInput('merge_method');
-    const withApprove: boolean = core.getBooleanInput('with_approve');
+    const withApprove: boolean = core.getBooleanInput('with_approve', {
+      required: false,
+      trimWhitespace: true,
+    });
 
     core.info(`owner: ${owner}`);
     core.info(`repository: ${repo}`);
