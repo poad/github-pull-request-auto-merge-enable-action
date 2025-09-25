@@ -27,7 +27,6 @@ Enables auto merge to Pull Request by [octokit/graphql.js](https://github.com/oc
 | `merge_method`           | N           | merge method. see [GitHub API Docs](https://docs.github.com/en/graphql/reference/mutations#enablepullrequestautomerge)                        |
 | `with_approve`           | Y           | true if the Pull Request is approved. see [GitHub API Docs](https://docs.github.com/en/graphql/reference/mutations#submitpullrequestreview)   |
 
-
 ### Reference Information
 
 [Auto Merge](https://docs.github.com/en/graphql/reference/mutations#enablepullrequestautomerge)
