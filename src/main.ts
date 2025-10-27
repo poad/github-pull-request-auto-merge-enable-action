@@ -50,30 +50,19 @@ export async function run({
     core.info(`target pull request id: ${id}`);
 
     if (id) {
-      const approver =
-        withApprove && reviews.nodes.length > 0
-          ? async () => {
-            const reviewId = reviews.nodes[0].id;
-            client.approvePullRequestReview({
-              pullRequestId: id,
-              reviewId,
-            });
-          }
-          : async () => {
-            // pass
-          };
-
-      await approver().then(
-        async () =>
-          await client.enableAutoMerge(
-            mergeMethod
-              ? {
-                pullRequestId: id,
-                mergeMethod: mergeMethod as MergeMethod,
-              }
-              : { pullRequestId: id },
-          ),
-      );
+      if (withApprove && reviews.nodes.length > 0) {
+        const reviewId = reviews.nodes[0].id;
+        client.approvePullRequestReview({
+          pullRequestId: id,
+          reviewId,
+        });
+        await client.enableAutoMerge(
+          {
+            pullRequestId: id,
+            ...(mergeMethod ? { mergeMethod: mergeMethod as MergeMethod } : {}),
+          },
+        );
+      }
     }
   }
 }
