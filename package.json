@@ -10,7 +10,7 @@
     "build": "tsc -p tsconfig-build.json",
     "lint-fix": "eslint src/**/*.ts --fix",
     "lint": "eslint src/**/*.ts",
-    "test": "vitest run --silent=false --coverage",
+    "test": "vitest run --silent=true --coverage --max-workers=1",
     "package": "bunx @vercel/ncc build -o dist --source-map --license licenses.txt -q --target es2023",
     "clean": "rimraf dist",
     "all": "bun run --run clean && bun run --run build && bun run --run package && pnpm --run lint-fix && bun run --vitest test"
@@ -20,19 +20,19 @@
     "@stylistic/eslint-plugin": "^5.5.0",
     "@types/node": "^24.9.1",
     "@vercel/ncc": "^0.38.4",
-    "@vitest/coverage-v8": "^3.2.4",
+    "@vitest/coverage-v8": "^4.0.3",
     "eslint": "^9.38.0",
     "eslint-plugin-github": "^6.0.0",
-    "fetch-mock": "^12.5.4",
+    "fetch-mock": "^12.5.5",
     "jiti": "^2.6.1",
     "pnpm": "^10.19.0",
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.2",
-    "vite": "^7.1.11",
+    "vite": "^7.1.12",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.2.4"
+    "vitest": "^4.0.3"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
