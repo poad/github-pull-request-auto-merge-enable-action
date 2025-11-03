@@ -28,6 +28,11 @@ export default defineConfig(
       '@stylistic': stylistic,
       github,
     },
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig-eslint.json'],
+      },
+    },
     rules: {
       '@stylistic/semi': ['error', 'always'],
       '@stylistic/indent': ['error', 2],
