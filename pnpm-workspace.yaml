@@ -12,3 +12,7 @@ strictPeerDependencies: false
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
  - pnpm
+
+overrides:
+  eslint@=9.39.0: 9.38.0
+  '@eslint/js@=9.39.0': 9.38.0
