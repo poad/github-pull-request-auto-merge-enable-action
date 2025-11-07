@@ -16,12 +16,12 @@
     "all": "bun run --run clean && bun run --run build && bun run --run package && pnpm --run lint-fix && bun run --vitest test"
   },
   "devDependencies": {
-    "@eslint/js": "9.38.0",
+    "@eslint/js": "9.39.1",
     "@stylistic/eslint-plugin": "^5.5.0",
-    "@types/node": "^24.9.2",
+    "@types/node": "^24.10.0",
     "@vercel/ncc": "^0.38.4",
     "@vitest/coverage-v8": "^4.0.6",
-    "eslint": "9.38.0",
+    "eslint": "9.39.1",
     "eslint-plugin-github": "^6.0.0",
     "fetch-mock": "^12.6.0",
     "jiti": "^2.6.1",
@@ -29,7 +29,7 @@
     "rimraf": "^6.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.2",
+    "typescript-eslint": "^8.46.3",
     "vite": "^7.1.12",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^4.0.6"
