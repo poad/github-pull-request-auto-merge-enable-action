@@ -25,7 +25,7 @@
     "eslint-plugin-github": "^6.0.0",
     "fetch-mock": "^12.6.0",
     "jiti": "^2.6.1",
-    "pnpm": "^10.21.0",
+    "pnpm": "^10.22.0",
     "rimraf": "^6.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
