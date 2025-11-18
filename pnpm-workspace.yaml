@@ -8,11 +8,10 @@ autoInstallPeers: true
 legacyPeerDeps: true
 strictPeerDependencies: false
 
+overrides:
+  glob@>=10.3.7 <=11.0.3: '>=11.1.0'
+
 # one day
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
  - pnpm
-
-overrides:
-  eslint@=9.39.0: 9.38.0
-  '@eslint/js@=9.39.0': 9.38.0
