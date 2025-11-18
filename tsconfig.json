@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "esnext",
+    "module": "nodenext",
     "lib": [
       "esnext",
       "DOM"
     ],
     "strict": true,
-    "moduleResolution": "bundler",
+    "moduleResolution": "nodenext",
     "outDir": "./dist",
     "esModuleInterop": true,
     "skipLibCheck": true,

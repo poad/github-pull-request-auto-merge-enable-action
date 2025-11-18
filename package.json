@@ -12,7 +12,7 @@
     "lint": "eslint src/**/*.ts",
     "test": "vitest run --silent=true --coverage --max-workers=1",
     "package": "bunx @vercel/ncc build -o dist --source-map --license licenses.txt -q --target es2023",
-    "clean": "rimraf dist",
+    "clean": "rm -rf dist",
     "all": "bun run --run clean && bun run --run build && bun run --run package && pnpm --run lint-fix && bun run --vitest test"
   },
   "devDependencies": {
@@ -26,7 +26,6 @@
     "fetch-mock": "^12.6.0",
     "jiti": "^2.6.1",
     "pnpm": "^10.22.0",
-    "rimraf": "^6.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.4",
@@ -54,5 +53,5 @@
     "pnpm": ">=10.17.0",
     "node": ">=24"
   },
-  "packageManager": "pnpm@10.17.1"
+  "packageManager": "pnpm@10.22.0"
 }
