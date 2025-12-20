@@ -70,8 +70,8 @@ importers:
         specifier: ^7.3.0
         version: 7.3.0(@types/node@25.0.3)(jiti@2.6.1)
       vite-tsconfig-paths:
-        specifier: ^6.0.1
-        version: 6.0.1(typescript@5.9.3)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1))
+        specifier: ^6.0.3
+        version: 6.0.3(typescript@5.9.3)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1))
       vitest:
         specifier: ^4.0.16
         version: 4.0.16(@types/node@25.0.3)(jiti@2.6.1)
@@ -745,8 +745,8 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  baseline-browser-mapping@2.9.8:
-    resolution: {integrity: sha512-Y1fOuNDowLfgKOypdc9SPABfoWXuZHBOyCS4cD52IeZBhr4Md6CLLs6atcxVrzRmQ06E7hSlm5bHHApPKR/byA==}
+  baseline-browser-mapping@2.9.10:
+    resolution: {integrity: sha512-2VIKvDx8Z1a9rTB2eCkdPE5nSe28XnA+qivGnWHoB40hMMt/h1hSz0960Zqsn6ZyxWXUie0EBdElKv8may20AA==}
     hasBin: true
 
   before-after-hook@4.0.0:
@@ -1795,8 +1795,8 @@ packages:
   v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
 
-  vite-tsconfig-paths@6.0.1:
-    resolution: {integrity: sha512-OQuYkfCQhc2T+n//0N7/oogTosgiSyZQ7dydrpUlH5SbnFTtplpekdY4GMi6jDwEpiwWlqeUJMyPfC2ePM1+2A==}
+  vite-tsconfig-paths@6.0.3:
+    resolution: {integrity: sha512-7bL7FPX/DSviaZGYUKowWF1AiDVWjMjxNbE8lyaVGDezkedWqfGhlnQ4BZXre0ZN5P4kAgIJfAlgFDVyjrCIyg==}
     peerDependencies:
       vite: '*'
     peerDependenciesMeta:
@@ -2513,7 +2513,7 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  baseline-browser-mapping@2.9.8: {}
+  baseline-browser-mapping@2.9.10: {}
 
   before-after-hook@4.0.0: {}
 
@@ -2528,7 +2528,7 @@ snapshots:
 
   browserslist@4.28.1:
     dependencies:
-      baseline-browser-mapping: 2.9.8
+      baseline-browser-mapping: 2.9.10
       caniuse-lite: 1.0.30001760
       electron-to-chromium: 1.5.267
       node-releases: 2.0.27
@@ -3754,7 +3754,7 @@ snapshots:
 
   v8-compile-cache-lib@3.0.1: {}
 
-  vite-tsconfig-paths@6.0.1(typescript@5.9.3)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)):
+  vite-tsconfig-paths@6.0.3(typescript@5.9.3)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)):
     dependencies:
       debug: 4.4.3
       globrex: 0.1.2
