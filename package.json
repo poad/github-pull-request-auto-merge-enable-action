@@ -28,7 +28,7 @@
     "pnpm": "^10.27.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.51.0",
+    "typescript-eslint": "^8.52.0",
     "vite": "^7.3.0",
     "vite-tsconfig-paths": "^6.0.3",
     "vitest": "^4.0.16"
