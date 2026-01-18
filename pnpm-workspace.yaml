@@ -1,17 +1,21 @@
 packages:
   - .
 
+autoInstallPeers: true
+
+legacyPeerDeps: true
+
+minimumReleaseAge: 1440
+
+minimumReleaseAgeExclude:
+  - pnpm
+
 onlyBuiltDependencies:
   - esbuild
 
-autoInstallPeers: true
-legacyPeerDeps: true
-strictPeerDependencies: false
-
 overrides:
+  diff@<8.0.3: '>=8.0.3'
   glob@>=10.3.7 <=11.0.3: '>=11.1.0'
+  undici@<6.23.0: '>=6.23.0'
 
-# one day
-minimumReleaseAge: 1440
-minimumReleaseAgeExclude:
- - pnpm
+strictPeerDependencies: false
