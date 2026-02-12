@@ -21,11 +21,12 @@
     "@types/node": "^25.2.2",
     "@vercel/ncc": "^0.38.4",
     "@vitest/coverage-v8": "^4.0.18",
-    "eslint": "^9.39.2",
+    "baseline-browser-mapping": "^2.9.19",
+    "eslint": "^10.0.0",
     "eslint-plugin-github": "^6.0.0",
     "fetch-mock": "^12.6.0",
     "jiti": "^2.6.1",
-    "pnpm": "^10.29.2",
+    "pnpm": "^10.29.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.54.0",
@@ -53,5 +54,5 @@
     "pnpm": ">=10.17.0",
     "node": ">=24"
   },
-  "packageManager": "pnpm@10.29.2"
+  "packageManager": "pnpm@10.29.3"
 }
