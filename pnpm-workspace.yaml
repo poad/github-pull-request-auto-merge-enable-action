@@ -18,6 +18,7 @@ overrides:
   diff@<8.0.3: '>=8.0.3'
   glob@>=10.3.7 <=11.0.3: '>=11.1.0'
   undici@<6.23.0: '>=6.23.0'
+  '@types/node': '^24'
   '@eslint/js': "^9"
   'eslint': "^9"
 
