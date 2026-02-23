@@ -41,9 +41,6 @@
     "@octokit/plugin-request-log": "^6.0.0",
     "source-map-support": "^0.5.21"
   },
-  "overrides": {
-    "@types/node": "^24"
-  },
   "exports": {
     ".": {
       "node": "./dist/main.js",
@@ -56,6 +53,10 @@
     "yarn": "use pnpm please!",
     "pnpm": ">=10.17.0",
     "node": ">=24"
+  },
+  "overrides": {
+    "@types/node": "^24",
+    "baseline-browser-mapping": "^2.10.0"
   },
   "packageManager": "pnpm@10.30.1"
 }
