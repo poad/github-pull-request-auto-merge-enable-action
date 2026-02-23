@@ -6,6 +6,7 @@ settings:
 
 overrides:
   minimatch@<10.2.1: '>=10.2.1'
+  '@types/node': ^24
 
 importers:
 
@@ -34,7 +35,7 @@ importers:
         specifier: ^5.9.0
         version: 5.9.0(eslint@10.0.1(jiti@2.6.1))
       '@types/node':
-        specifier: ^24.10.13
+        specifier: ^24
         version: 24.10.13
       '@vercel/ncc':
         specifier: ^0.38.4
@@ -1727,7 +1728,7 @@ packages:
     peerDependencies:
       '@swc/core': '>=1.2.50'
       '@swc/wasm': '>=1.2.50'
-      '@types/node': '*'
+      '@types/node': ^24
       typescript: '>=2.7'
     peerDependenciesMeta:
       '@swc/core':
@@ -1820,7 +1821,7 @@ packages:
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
-      '@types/node': ^20.19.0 || >=22.12.0
+      '@types/node': ^24
       jiti: '>=1.21.0'
       less: ^4.0.0
       lightningcss: ^1.21.0
@@ -1862,7 +1863,7 @@ packages:
     peerDependencies:
       '@edge-runtime/vm': '*'
       '@opentelemetry/api': ^1.9.0
-      '@types/node': ^20.0.0 || ^22.0.0 || >=24.0.0
+      '@types/node': ^24
       '@vitest/browser-playwright': 4.0.18
       '@vitest/browser-preview': 4.0.18
       '@vitest/browser-webdriverio': 4.0.18
