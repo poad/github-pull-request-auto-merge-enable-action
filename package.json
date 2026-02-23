@@ -41,6 +41,9 @@
     "@octokit/plugin-request-log": "^6.0.0",
     "source-map-support": "^0.5.21"
   },
+  "overrides": {
+    "@types/node": "^24"
+  },
   "exports": {
     ".": {
       "node": "./dist/main.js",
