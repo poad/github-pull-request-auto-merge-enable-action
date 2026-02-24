@@ -59,8 +59,8 @@ importers:
         specifier: ^2.6.1
         version: 2.6.1
       pnpm:
-        specifier: ^10.30.1
-        version: 10.30.1
+        specifier: ^10.30.2
+        version: 10.30.2
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@24.10.13)(typescript@5.9.3)
@@ -1525,8 +1525,8 @@ packages:
     resolution: {integrity: sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==}
     engines: {node: '>=12'}
 
-  pnpm@10.30.1:
-    resolution: {integrity: sha512-NZDlUNU4TKo5vVx8c59yJwI0svYFnhMBj5dcMTseuf78wJcUBIdl1Nnv6WE4LDEuYkVywEIHYr3F1ZQM35vnOg==}
+  pnpm@10.30.2:
+    resolution: {integrity: sha512-Ns3HB+e3lAqYjJwez4jQhPhRS1w/CF9TouJEwpIdOyVFvCDdTr4fwkX+7EY7spiuzqemPtH3aAuHfcY3nY0MtA==}
     engines: {node: '>=18.12'}
     hasBin: true
 
@@ -3409,7 +3409,7 @@ snapshots:
 
   picomatch@4.0.3: {}
 
-  pnpm@10.30.1: {}
+  pnpm@10.30.2: {}
 
   possible-typed-array-names@1.1.0: {}
 
