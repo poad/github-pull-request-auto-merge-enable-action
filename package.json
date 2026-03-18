@@ -21,7 +21,7 @@
     "@types/node": "^25.5.0",
     "@vercel/ncc": "^0.38.4",
     "@vitest/coverage-v8": "^4.1.0",
-    "baseline-browser-mapping": "^2.10.7",
+    "baseline-browser-mapping": "^2.10.8",
     "eslint": "^10.0.3",
     "eslint-plugin-github": "^6.0.0",
     "fetch-mock": "^12.6.0",
