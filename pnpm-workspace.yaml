@@ -16,5 +16,6 @@ onlyBuiltDependencies:
 overrides:
   minimatch@<10.2.1: '>=10.2.1'
   '@types/node': ^24
+  flatted: '>=3.4.2'
 
 strictPeerDependencies: false
