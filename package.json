@@ -20,7 +20,7 @@
     "@stylistic/eslint-plugin": "^5.10.0",
     "@types/node": "^25.5.0",
     "@vercel/ncc": "^0.38.4",
-    "@vitest/coverage-v8": "^4.1.0",
+    "@vitest/coverage-v8": "^4.1.1",
     "baseline-browser-mapping": "^2.10.10",
     "eslint": "^10.1.0",
     "eslint-plugin-github": "^6.0.0",
@@ -28,11 +28,11 @@
     "jiti": "^2.6.1",
     "pnpm": "^10.33.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.57.1",
-    "vite": "^8.0.1",
+    "typescript": "^6.0.2",
+    "typescript-eslint": "^8.57.2",
+    "vite": "^8.0.2",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.1"
   },
   "dependencies": {
     "@actions/core": "^3.0.0",
