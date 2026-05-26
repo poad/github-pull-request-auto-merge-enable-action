@@ -21,7 +21,7 @@ jobs:
       name: releaseNewActionVersion
     runs-on: ubuntu-24.04-arm
     steps:
-      - name: Update the ${{ env.TAG_NAME }} tag
-        uses: actions/publish-action@23f4c6f12633a2da8f44938b71fde9afec138fb4 #v0.4.0
-        with:
-          source-tag: ${{ env.TAG_NAME }}
+    - name: Update the ${{ env.TAG_NAME }} tag
+      uses: actions/publish-action@23f4c6f12633a2da8f44938b71fde9afec138fb4 #v0.4.0
+      with:
+        source-tag: ${{ env.TAG_NAME }}
