@@ -30,7 +30,9 @@ export default defineConfig(
     },
     languageOptions: {
       parserOptions: {
-        project: ['./tsconfig-eslint.json'],
+        projectService: {
+          allowDefaultProject: [ 'eslint.config.ts', 'vitest.config.ts' ],
+        },
       },
     },
     rules: {

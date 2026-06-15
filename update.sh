@@ -20,9 +20,8 @@ if [ $result -ne 0 ]; then
 fi
 echo ""
 pwd
-npx -y pnpm@latest self-update && pnpm install && pnpm up  && pnpm audit --fix override && pnpm up && pnpm lint-fix && pnpm clean && pnpm build && pnpm package && bun install
-result=$?
-if [ $result -ne 0 ]; then
+
+if ! (pnx -y pnpm@latest self-update && pnpm install && pnpm up  && pnpm audit --fix override && pnpm up && pnpm lint-fix && pnpm clean && pnpm build && pnpm package && bun install); then
   cd "${CUR}" || exit
   exit $result
 fi
@@ -33,9 +32,8 @@ if [ $result -ne 0 ]; then
   cd "${CUR}" || exit
   exit $result
 fi
-git commit -am "Bumps node modules" && git push
-result=$?
-if [ $result -ne 0 ]; then
+
+if ! (git commit -am "Bumps node modules" && git push); then
   cd "${CUR}" || exit
   exit $result
 fi
