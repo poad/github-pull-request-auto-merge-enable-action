@@ -18,19 +18,19 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "@types/node": "^24.13.1",
+    "@types/node": "^24.13.2",
     "@vercel/ncc": "^0.38.4",
-    "@vitest/coverage-v8": "^4.1.8",
-    "baseline-browser-mapping": "^2.10.34",
-    "eslint": "^10.4.1",
+    "@vitest/coverage-v8": "^4.1.9",
+    "baseline-browser-mapping": "^2.10.38",
+    "eslint": "^10.5.0",
     "eslint-plugin-github": "^6.0.0",
     "fetch-mock": "^12.6.0",
     "jiti": "^2.7.0",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.60.1",
-    "vite": "^8.0.16",
-    "vitest": "^4.1.8"
+    "typescript-eslint": "^8.62.0",
+    "vite": "^8.1.0",
+    "vitest": "^4.1.9"
   },
   "dependencies": {
     "@actions/core": "^3.0.1",
@@ -54,7 +54,7 @@
     },
     "runtime": {
       "name": "node",
-      "version": "^24.16.0",
+      "version": "^24.18.0",
       "onFail": "download"
     }
   }
