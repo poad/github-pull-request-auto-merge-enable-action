@@ -56,12 +56,10 @@ export async function run({
           pullRequestId: id,
           reviewId,
         });
-        await client.enableAutoMerge(
-          {
-            pullRequestId: id,
-            ...(mergeMethod ? { mergeMethod: mergeMethod as MergeMethod } : {}),
-          },
-        );
+        await client.enableAutoMerge({
+          pullRequestId: id,
+          ...(mergeMethod ? { mergeMethod: mergeMethod as MergeMethod } : {}),
+        });
       }
     }
   }
