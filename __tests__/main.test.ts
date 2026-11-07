@@ -246,7 +246,7 @@ describe("run()", () => {
     });
 
     const { run } = await import("../src/main");
-    expect(
+    await expect(
       run({
         token: "",
         pullRequestNumber: 0,
@@ -254,7 +254,7 @@ describe("run()", () => {
         repo: "",
         withApprove: false,
       }),
-    ).resolves;
+    ).resolves.toBeUndefined();
   });
 
   it("pull request was not open", async () => {

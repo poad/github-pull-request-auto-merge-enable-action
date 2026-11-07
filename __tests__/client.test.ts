@@ -1,5 +1,5 @@
 import "source-map-support/register";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 describe("graphql()", () => {
   afterEach(() => {
@@ -125,7 +125,7 @@ describe("graphql()", () => {
     const result = client.enableAutoMerge({
       pullRequestId: "test",
     });
-    expect(result).resolves;
+    await expect(result).resolves.toBeUndefined();
   });
 
   it("enableAutoMerge pull request (squash)", async () => {
@@ -135,7 +135,7 @@ describe("graphql()", () => {
       pullRequestId: "test",
       mergeMethod: "SQUASH",
     });
-    expect(result).resolves;
+    await expect(result).resolves.toBeUndefined();
   });
 
   it("enableAutoMerge pull request (rebase)", async () => {
@@ -145,7 +145,7 @@ describe("graphql()", () => {
       pullRequestId: "test",
       mergeMethod: "REBASE",
     });
-    expect(result).resolves;
+    await expect(result).resolves.toBeUndefined();
   });
 
   it("enableAutoMerge pull request (merge)", async () => {
@@ -155,6 +155,6 @@ describe("graphql()", () => {
       pullRequestId: "test",
       mergeMethod: "MERGE",
     });
-    expect(result).resolves;
+    await expect(result).resolves.toBeUndefined();
   });
 });
