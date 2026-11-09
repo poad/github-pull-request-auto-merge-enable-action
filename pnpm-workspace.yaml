@@ -3,12 +3,9 @@ packages:
 
 minimumReleaseAge: 10080 # 7 days in minutes
 minimumReleaseAgeExclude:
-  - pnpm@11.7.0
-  - esbuild@0.28.1
+  - pnpm@12.18.0
 
 overrides:
   minimatch@<10.2.1: '>=10.2.1'
-  '@types/node': ^24
-  flatted: '>=3.4.2'
 
 strictPeerDependencies: false
