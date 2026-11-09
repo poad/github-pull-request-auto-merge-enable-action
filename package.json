@@ -1,35 +1,26 @@
 {
   "name": "github-pull-request-auto-merge-enable-action",
   "version": "1.0.5",
-  "repository": "https://github.com/poad/github-pull-request-auto-merge-enable-action.git",
-  "author": "Kenji Saito <ken-yo@mbr.nifty.com>",
   "license": "MIT",
-  "main": "./dist/entry-point.js",
+  "author": "Kenji Saito <ken-yo@mbr.nifty.com>",
+  "repository": "https://github.com/poad/github-pull-request-auto-merge-enable-action.git",
   "type": "module",
+  "main": "./dist/entry-point.js",
+  "exports": {
+    ".": {
+      "node": "./dist/main.js",
+      "require": "./dist/main.cjs",
+      "default": "./dist/main.js"
+    }
+  },
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
-    "lint-fix": "oxlint --fix src/**/*.ts",
-    "lint": "oxlint src/**/*.ts",
-    "format": "oxfmt",
-    "format:check": "oxfmt --check",
+    "lint-fix": "oxfmt && oxlint --fix",
+    "lint": "oxfmt --check && oxlint",
     "test": "vitest run --silent=true --coverage --max-workers=1",
     "package": "bunx @vercel/ncc build -o dist --source-map --license licenses.txt -q --target es2023",
     "clean": "rm -rf dist",
-    "all": "bun run --run clean && bun run --run build && bun run --run package && pnpm --run lint-fix && bun run --vitest test"
-  },
-  "devDependencies": {
-    "@types/node": "^24.13.3",
-    "@vercel/ncc": "^0.38.4",
-    "@vitest/coverage-v8": "^4.1.12",
-    "baseline-browser-mapping": "^2.11.34",
-    "fetch-mock": "^12.6.0",
-    "jiti": "^2.7.0",
-    "oxfmt": "^0.75.0",
-    "oxlint": "^0.13.2",
-    "ts-node": "^10.9.2",
-    "typescript": "^6.0.3",
-    "vite": "^8.3.5",
-    "vitest": "^4.1.12"
+    "all": "bun run --bun clean && bun run --bun build && bun run --bun package && pnpm lint-fix && bun run --vitest test"
   },
   "dependencies": {
     "@actions/core": "^3.0.1",
@@ -38,22 +29,29 @@
     "@octokit/plugin-request-log": "^6.0.0",
     "source-map-support": "^0.5.21"
   },
-  "exports": {
-    ".": {
-      "node": "./dist/main.js",
-      "require": "./dist/main.cjs",
-      "default": "./dist/main.js"
-    }
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@vercel/ncc": "^0.45.0",
+    "@vitest/coverage-v8": "^5.0.5",
+    "baseline-browser-mapping": "^2.11.34",
+    "fetch-mock": "^12.6.0",
+    "jiti": "^2.7.0",
+    "oxfmt": "^0.75.0",
+    "oxlint": "^1.90.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
   },
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "^12.18.0",
+      "version": "12.18.0",
       "onFail": "download"
     },
     "runtime": {
       "name": "node",
-      "version": "^24.22.2",
+      "version": "^26.13.0",
       "onFail": "download"
     }
   }

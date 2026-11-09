@@ -1,94 +1,98 @@
-import "source-map-support/register";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import 'source-map-support/register';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-describe("graphql()", () => {
+describe('graphql()', () => {
+  beforeEach(() => {
+    vi.resetModules();
+  });
+
   afterEach(() => {
-    vi.doUnmock("@octokit/graphql");
+    vi.doUnmock('@octokit/graphql');
     vi.resetAllMocks();
   });
 
-  it("find pull request id", async () => {
+  it('find pull request id', async () => {
     const graphql = vi.fn().mockReturnValue({
       data: {
         repository: {
           pullRequest: {
-            id: "100",
-            state: "OPEN",
+            id: '100',
+            state: 'OPEN',
             reviews: {
-              nodes: [{ id: "test" }],
+              nodes: [{ id: 'test' }],
             },
           },
         },
       },
     });
-    vi.doMock("@octokit/graphql", () => ({
+    vi.doMock('@octokit/graphql', () => ({
       graphql,
     }));
 
-    const GitHubClient = (await import("../src/client")).default;
-    const client = new GitHubClient("");
+    const GitHubClient = (await import('../src/client')).default;
+    const client = new GitHubClient('');
     const pullRequest = await client.findPullRequestId({
-      owner: "poad",
-      repo: "test",
+      owner: 'poad',
+      repo: 'test',
       number: 0,
     });
     expect(pullRequest?.id).not.toBeNull();
-    vi.unmock("@octokit/graphql");
+    vi.doUnmock('@octokit/graphql');
   });
 
-  it("find pull request failed", async () => {
+  it('find pull request failed', async () => {
     const graphql = vi.fn().mockReturnValue(undefined);
-    vi.mock("@octokit/graphql", () => ({
+    vi.doMock('@octokit/graphql', () => ({
       graphql,
     }));
 
-    const GitHubClient = (await import("../src/client")).default;
-    const client = new GitHubClient("");
+    const GitHubClient = (await import('../src/client')).default;
+    const client = new GitHubClient('');
     const pullRequest = await client.findPullRequestId({
-      owner: "poad",
-      repo: "test",
+      owner: 'poad',
+      repo: 'test',
       number: 0,
     });
     expect(pullRequest?.id).toBeUndefined();
   });
 
-  it("find pull request failed (no repository)", async () => {
+  it('find pull request failed (no repository)', async () => {
     const graphql = vi.fn().mockReturnValue({ data: {} });
-    vi.mock("@octokit/graphql", () => ({
+    vi.doMock('@octokit/graphql', () => ({
       graphql,
     }));
 
-    const GitHubClient = (await import("../src/client")).default;
-    const client = new GitHubClient("");
+    const GitHubClient = (await import('../src/client')).default;
+    const client = new GitHubClient('');
     const pullRequest = await client.findPullRequestId({
-      owner: "poad",
-      repo: "test",
+      owner: 'poad',
+      repo: 'test',
       number: 0,
     });
     expect(pullRequest?.id).toBeUndefined();
   });
 
-  it("find pull request failed (no pull request)", async () => {
+  it('find pull request failed (no pull request)', async () => {
     const graphql = vi.fn().mockReturnValue({
       data: {
         repository: {},
       },
     });
-    vi.mock("@octokit/graphql", () => ({
+    vi.doMock('@octokit/graphql', () => ({
       graphql,
     }));
 
-    const GitHubClient = (await import("../src/client")).default;
-    const client = new GitHubClient("");
+    const GitHubClient = (await import('../src/client')).default;
+    const client = new GitHubClient('');
     const pullRequest = await client.findPullRequestId({
-      owner: "poad",
-      repo: "test",
+      owner: 'poad',
+      repo: 'test',
       number: 0,
     });
     expect(pullRequest?.id).toBeUndefined();
   });
 
-  it("find pull request failed (empty pull request)", async () => {
+  it('find pull request failed (empty pull request)', async () => {
     const graphql = vi.fn().mockReturnValue({
       data: {
         repository: {
@@ -96,64 +100,79 @@ describe("graphql()", () => {
         },
       },
     });
-    vi.mock("@octokit/graphql", () => ({
+    vi.doMock('@octokit/graphql', () => ({
       graphql,
     }));
 
-    const GitHubClient = (await import("../src/client")).default;
-    const client = new GitHubClient("");
+    const GitHubClient = (await import('../src/client')).default;
+    const client = new GitHubClient('');
     const pullRequest = await client.findPullRequestId({
-      owner: "poad",
-      repo: "test",
+      owner: 'poad',
+      repo: 'test',
       number: 0,
     });
     expect(pullRequest?.id).toBeUndefined();
   });
 
-  it("approvePullRequestReview pull request", async () => {
-    const GitHubClient = (await import("../src/client")).default;
-    const client = new GitHubClient("");
+  it('approvePullRequestReview pull request', async () => {
+    const graphql = vi.fn().mockReturnValue(undefined);
+    vi.doMock('@octokit/graphql', () => ({ graphql }));
+
+    const GitHubClient = (await import('../src/client')).default;
+    const client = new GitHubClient('');
     await client.approvePullRequestReview({
-      pullRequestId: "test",
-      reviewId: "test2",
+      pullRequestId: 'test',
+      reviewId: 'test2',
     });
   });
 
-  it("enableAutoMerge pull request", async () => {
-    const GitHubClient = (await import("../src/client")).default;
-    const client = new GitHubClient("");
-    const result = client.enableAutoMerge({
-      pullRequestId: "test",
-    });
-    await expect(result).resolves.toBeUndefined();
-  });
+  it('enableAutoMerge pull request', async () => {
+    const graphql = vi.fn().mockReturnValue(undefined);
+    vi.doMock('@octokit/graphql', () => ({ graphql }));
 
-  it("enableAutoMerge pull request (squash)", async () => {
-    const GitHubClient = (await import("../src/client")).default;
-    const client = new GitHubClient("");
+    const GitHubClient = (await import('../src/client')).default;
+    const client = new GitHubClient('');
     const result = client.enableAutoMerge({
-      pullRequestId: "test",
-      mergeMethod: "SQUASH",
+      pullRequestId: 'test',
     });
     await expect(result).resolves.toBeUndefined();
   });
 
-  it("enableAutoMerge pull request (rebase)", async () => {
-    const GitHubClient = (await import("../src/client")).default;
-    const client = new GitHubClient("");
+  it('enableAutoMerge pull request (squash)', async () => {
+    const graphql = vi.fn().mockReturnValue(undefined);
+    vi.doMock('@octokit/graphql', () => ({ graphql }));
+
+    const GitHubClient = (await import('../src/client')).default;
+    const client = new GitHubClient('');
     const result = client.enableAutoMerge({
-      pullRequestId: "test",
-      mergeMethod: "REBASE",
+      pullRequestId: 'test',
+      mergeMethod: 'SQUASH',
     });
     await expect(result).resolves.toBeUndefined();
   });
 
-  it("enableAutoMerge pull request (merge)", async () => {
-    const GitHubClient = (await import("../src/client")).default;
-    const client = new GitHubClient("");
+  it('enableAutoMerge pull request (rebase)', async () => {
+    const graphql = vi.fn().mockReturnValue(undefined);
+    vi.doMock('@octokit/graphql', () => ({ graphql }));
+
+    const GitHubClient = (await import('../src/client')).default;
+    const client = new GitHubClient('');
     const result = client.enableAutoMerge({
-      pullRequestId: "test",
-      mergeMethod: "MERGE",
+      pullRequestId: 'test',
+      mergeMethod: 'REBASE',
+    });
+    await expect(result).resolves.toBeUndefined();
+  });
+
+  it('enableAutoMerge pull request (merge)', async () => {
+    const graphql = vi.fn().mockReturnValue(undefined);
+    vi.doMock('@octokit/graphql', () => ({ graphql }));
+
+    const GitHubClient = (await import('../src/client')).default;
+    const client = new GitHubClient('');
+    const result = client.enableAutoMerge({
+      pullRequestId: 'test',
+      mergeMethod: 'MERGE',
     });
     await expect(result).resolves.toBeUndefined();
   });
