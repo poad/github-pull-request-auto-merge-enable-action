@@ -1,20 +1,13 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": [
-    "typescript"
-  ],
+  "plugins": ["typescript"],
   "categories": {
     "correctness": "off"
   },
   "env": {
     "builtin": true
   },
-  "ignorePatterns": [
-    "**/*.d.ts",
-    "*.{js,jsx}",
-    "node_modules/**/*",
-    "dist"
-  ],
+  "ignorePatterns": ["**/*.d.ts", "*.{js,jsx}", "node_modules/**/*", "dist"],
   "rules": {
     "constructor-super": "error",
     "for-direction": "error",
@@ -124,12 +117,7 @@
   },
   "overrides": [
     {
-      "files": [
-        "**/*.ts",
-        "**/*.tsx",
-        "**/*.mts",
-        "**/*.cts"
-      ],
+      "files": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
       "rules": {
         "constructor-super": "off",
         "getter-return": "off",
@@ -154,10 +142,7 @@
       }
     },
     {
-      "files": [
-        "src/**/*.ts",
-        "app/**/*.{js,jsx,ts,tsx}"
-      ],
+      "files": ["src/**/*.ts", "app/**/*.{js,jsx,ts,tsx}"],
       "rules": {
         "typescript/ban-ts-comment": [
           "error",

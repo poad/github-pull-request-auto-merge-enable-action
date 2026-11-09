@@ -2,10 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "nodenext",
-    "lib": [
-      "esnext",
-      "DOM"
-    ],
+    "lib": ["esnext", "DOM"],
     "strict": true,
     "moduleResolution": "nodenext",
     "rootDir": "./src",
@@ -16,5 +13,5 @@
     "forceConsistentCasingInFileNames": true,
     "inlineSourceMap": true
   },
-  "exclude": ["node_modules", "**/*.test.ts", "vitest.config.ts", "dist" ]
+  "exclude": ["node_modules", "**/*.test.ts", "vitest.config.ts", "dist"]
 }
