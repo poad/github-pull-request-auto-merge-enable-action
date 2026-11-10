@@ -32,8 +32,8 @@
   "devDependencies": {
     "@types/node": "^26.6.6",
     "@vercel/ncc": "^0.45.0",
-    "@vitest/coverage-v8": "^5.0.5",
-    "baseline-browser-mapping": "^2.11.34",
+    "@vitest/coverage-v8": "^5.1.0",
+    "baseline-browser-mapping": "^2.11.35",
     "fetch-mock": "^12.6.0",
     "jiti": "^2.7.0",
     "oxfmt": "^0.75.0",
@@ -41,7 +41,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^7.0.2",
     "vite": "^8.3.5",
-    "vitest": "^5.0.5"
+    "vitest": "^5.1.0"
   },
   "devEngines": {
     "packageManager": {
