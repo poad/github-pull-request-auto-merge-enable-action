@@ -3,7 +3,7 @@ packages:
 
 minimumReleaseAge: 10080 # 7 days in minutes
 minimumReleaseAgeExclude:
-  - pnpm@12.18.0
+  - pnpm@12.20.0
 
 overrides:
   minimatch@<10.2.1: '>=10.2.1'
