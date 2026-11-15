@@ -19,8 +19,8 @@
     "lint": "oxfmt --check && oxlint",
     "test": "vitest run --silent=true --coverage --max-workers=1",
     "package": "bunx @vercel/ncc build -o dist --source-map --license licenses.txt -q --target es2023",
-    "clean": "rm -rf dist",
-    "all": "bun run --bun clean && bun run --bun build && bun run --bun package && pnpm lint-fix && bun run --vitest test"
+    "build:clean": "rm -rf dist",
+    "all": "bun run --bun build:clean && bun run --bun build && bun run --bun package && pnpm lint-fix && bun run --vitest test"
   },
   "dependencies": {
     "@actions/core": "^3.0.1",
@@ -46,7 +46,7 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "12.20.0",
+      "version": "12.21.0",
       "onFail": "download"
     },
     "runtime": {
